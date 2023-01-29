@@ -109,5 +109,5 @@ class Imoveis(models.Model):
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
     
-    # def __str__(self):
-    #     return self.proprietario
+    def __str__(self):
+        return self.endereco

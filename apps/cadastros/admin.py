@@ -11,7 +11,7 @@ class ClientesAdmin(admin.ModelAdmin):
 
 @admin.register(Imoveis)
 class ImoveisAdmin(admin.ModelAdmin):
-    # list_display = ('tipo', 'cep', 'proprietario')
+    list_display = ('endereco', 'tipo', 'cep', 'proprietario')
     # search_fields = ('tipo',)
     # list_filter = ('tipo', )
     list_per_page = 20
