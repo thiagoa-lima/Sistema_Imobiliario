@@ -93,7 +93,7 @@ class Imoveis(models.Model):
     ]
 
     # dados básicos
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='proprietario', limit_choices_to={'qualificacao': 'PROPRIETARIO'})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='proprietario', limit_choices_to={'qualificacao': 2})
     tipo = models.CharField('Tipo de Imóvel', max_length=20, null=False, blank=False, choices=tipo_imovel_choices)
     
     # Endereço do imóvel

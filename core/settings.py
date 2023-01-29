@@ -15,11 +15,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'apps.cadastros',
-    'apps.contratos',
+    # 'apps.contratos',
 ]
 
 MIDDLEWARE = [
