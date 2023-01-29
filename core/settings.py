@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # My apps
     'apps.cadastros',
-    # 'apps.contratos',
+    'apps.contratos',
 ]
 
 MIDDLEWARE = [

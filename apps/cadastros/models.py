@@ -1,6 +1,6 @@
 from django.db import models
 
-class Qualificacao_Cliente(models.Model):
+class Qualificacao(models.Model):
     qualificacao = models.CharField('Qualificação', max_length=100)
 
     class Meta:
@@ -31,8 +31,7 @@ class Clientes(models.Model):
     # informações iniciais
     cpf = models.CharField('CPF', max_length=20, blank=True)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
-    # qualificacao = models.CharField('Qualificação', max_length=12, choices=qualificacao_choices, null=False, blank=False)
-    qualificacao = models.ManyToManyField(Qualificacao_Cliente)
+    qualificacao = models.ManyToManyField(Qualificacao)
 
     # informações pessoais
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
@@ -98,7 +97,7 @@ class Imoveis(models.Model):
     
     # Endereço do imóvel
     cep = models.CharField('CEP', max_length=8, null=False, blank=False)
-    endereco = models.CharField('Endereço', max_length=200, null=True, blank=True)
+    endereco = models.CharField('Endereço', max_length=200, default='', null=False, blank=False)
     numero = models.CharField('Número', max_length=10, null=True, blank=True)
     complemento = models.CharField('Número', max_length=10, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
@@ -109,3 +108,6 @@ class Imoveis(models.Model):
     class Meta:
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
+    
+    # def __str__(self):
+    #     return self.proprietario
