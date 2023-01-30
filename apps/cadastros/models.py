@@ -98,11 +98,11 @@ class Imoveis(models.Model):
     # Endereço do imóvel
     cep = models.CharField('CEP', max_length=8, null=False, blank=False)
     endereco = models.CharField('Endereço', max_length=200, default='', null=False, blank=False)
-    numero = models.CharField('Número', max_length=10, null=True, blank=True)
-    complemento = models.CharField('Número', max_length=10, null=True, blank=True)
+    numero = models.CharField('Número', max_length=10, null=False, blank=False)
+    complemento = models.CharField('Complemento', max_length=10, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
-    cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
-    uf = models.CharField('UF', max_length=2, null=True, blank=True)
+    cidade = models.CharField('Cidade', max_length=100, null=False, blank=False)
+    uf = models.CharField('UF', max_length=2, null=False, blank=False)
 
 
     class Meta:
@@ -110,4 +110,9 @@ class Imoveis(models.Model):
         verbose_name_plural = 'Imóveis'
     
     def __str__(self):
-        return self.endereco
+        if self.complemento == None:
+            endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.cidade + '/' + self.uf 
+        else:
+            endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.cidade + '/' + self.uf
+
+        return endereco_completo
