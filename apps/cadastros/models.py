@@ -37,7 +37,7 @@ class Clientes(models.Model):
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
 
     # CONTATO
-    telefone = models.CharField('Telefone Residencial', max_length=10, blank=True)
+    telefone = models.CharField('Telefone', max_length=10, blank=True)
     celular = models.CharField('Celular', max_length=11, blank=True)
     email = models.EmailField('E-mail', max_length=50, null=False, blank=False)
 
@@ -48,10 +48,10 @@ class Clientes(models.Model):
     # MAIS OPÇÕES
     rg = models.CharField('RG', max_length=20, blank=True)
     orgao_expedidor = models.CharField('Orgão Expedidor', max_length=20, blank=True, null=True)
-    data_expedicao = models.DateField('Nascimento', max_length=10, blank=True, null=True)
+    data_expedicao = models.DateField('Data de Expedição', max_length=10, blank=True, null=True)
     sexo = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
     nascimento = models.DateField('Nascimento', max_length=10, null=True, blank=True)
-    estado_civil = models.IntegerField('Estado civil', choices=estado_civil_choices, null=True, blank=True)
+    estado_civil = models.IntegerField('Estado Civil', choices=estado_civil_choices, null=True, blank=True)
     nacionalidade = models.CharField('Nacionalidade', max_length=50, null=True, blank=True)
     naturalidade = models.CharField('Naturalidade', max_length=50, null=True, blank=True)
 
@@ -60,7 +60,7 @@ class Clientes(models.Model):
     cpf_conjuge = models.CharField('CPF', max_length=20, null=True, blank=True)
     rg_conjuge = models.CharField('RG', max_length=20, null=True, blank=True)
     orgao_expedidor_conjuge = models.CharField('Orgão Expedidor', max_length=20, null=True, blank=True)
-    data_expedicao_conjuge = models.DateField('Nascimento', max_length=10, null=True, blank=True)
+    data_expedicao_conjuge = models.DateField('Data de Expedição', max_length=10, null=True, blank=True)
     sexo_conjuge = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
     profissao_conjuge = models.CharField('Profissão', max_length=20, null=True, blank=True)
     telefone_conjuge = models.CharField('Telefone Residencial', max_length=10, null=True, blank=True)

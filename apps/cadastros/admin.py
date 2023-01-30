@@ -4,7 +4,7 @@ from apps.cadastros.models import Clientes, Imoveis, Qualificacao
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'tipo_cliente')
+    list_display = ('nome', 'tipo_cliente', 'telefone',  'celular', 'email',)
     search_fields = ('nome', 'email')
     list_filter = ('qualificacao', )
     list_per_page = 20
@@ -22,3 +22,4 @@ class QualificacaoAdmin(admin.ModelAdmin):
     search_fields = ('qualificacao',)
     list_filter = ('qualificacao', )
     list_per_page = 20
+    
