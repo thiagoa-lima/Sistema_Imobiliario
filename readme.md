@@ -9,7 +9,7 @@ O objetivo deste projeto foi desenvolver um sistema que possa ser utilizado para
 ## Instalação
 
 #### No terminal é necessário realizar o seguinte comando:
-pipenv shell
+1. pipenv shell
 
 ## Construído com:
 
