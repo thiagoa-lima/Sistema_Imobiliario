@@ -8,7 +8,8 @@ O objetivo deste projeto foi desenvolver um sistema que possa ser utilizado para
 
 ## Instalação
 
-1. pipenv shell
+#### No terminal é necessário realizar o seguinte comando:
+pipenv shell
 
 ## Construído com:
 
