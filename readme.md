@@ -10,9 +10,6 @@ O objetivo deste projeto foi desenvolver um sistema que possa ser utilizado para
 
 1. pipenv shell
 
-
-O objetivo deste projeto foi desenvolver um sistema que possa ser utilizado para ajudar na gestão de contratos de qualquer imobiliária.
-
 ## Construído com:
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
