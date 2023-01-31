@@ -45,6 +45,6 @@ class Administracao(models.Model):
         endereco = str(self.imovel)
         return endereco
         
-@receiver(pre_save, sender=Imoveis)
+@receiver(pre_save, sender=Administracao)
 def callback_Administracao(sender, instance, *args, **kwargs):
     instance.data_final = (instance.data_inicial + relativedelta(months=+1))
