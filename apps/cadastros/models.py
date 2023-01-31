@@ -1,17 +1,14 @@
 from django.db import models
 
-class Qualificacao(models.Model):
-    qualificacao = models.CharField('Qualificação', max_length=100)
-
-    class Meta:
-        verbose_name = 'Qualificação'
-        verbose_name_plural = 'Qualificação'
-
-    def __str__(self):
-        return self.qualificacao
-
 class Clientes(models.Model):
+
     # choices
+    qualificacao_choices = (
+        ('1', 'Fiador'), 
+        ('2', 'Locatário'),
+        ('3', 'Proprietário'),
+    )
+    
     sexo_choices = (
         ('M', 'Masculino'), 
         ('F', 'Feminino'),
@@ -31,8 +28,8 @@ class Clientes(models.Model):
     # informações iniciais
     cpf = models.CharField('CPF', max_length=20, blank=True)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
-    qualificacao = models.ManyToManyField(Qualificacao)
-
+    qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)
+   
     # informações pessoais
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
 
@@ -84,6 +81,7 @@ class Clientes(models.Model):
         return self.nome
 
 class Imoveis(models.Model):
+    
     # choices
     tipo_imovel_choices = [
         ('CASA', 'Casa'),
@@ -92,17 +90,17 @@ class Imoveis(models.Model):
     ]
 
     # dados básicos
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='proprietario', limit_choices_to={'qualificacao': 2})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='cliente_proprietario', limit_choices_to={'qualificacao':'3'})
     tipo = models.CharField('Tipo de Imóvel', max_length=20, null=False, blank=False, choices=tipo_imovel_choices)
     
     # Endereço do imóvel
     cep = models.CharField('CEP', max_length=8, null=False, blank=False)
-    endereco = models.CharField('Endereço', max_length=200, default='', null=False, blank=False)
-    numero = models.CharField('Número', max_length=10, null=False, blank=False)
+    endereco = models.CharField('Endereço', max_length=200, default=None, null=False, blank=False)
+    numero = models.CharField('Número', max_length=10, default=None, null=False, blank=False)
     complemento = models.CharField('Complemento', max_length=10, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
-    cidade = models.CharField('Cidade', max_length=100, null=False, blank=False)
-    uf = models.CharField('UF', max_length=2, null=False, blank=False)
+    cidade = models.CharField('Cidade', max_length=100, default=None, null=False, blank=False)
+    uf = models.CharField('UF', max_length=2, default=None, null=False, blank=False)
 
 
     class Meta:

@@ -1,12 +1,11 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, Imoveis, Qualificacao
-
+from apps.cadastros.models import Clientes, Imoveis
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'tipo_cliente', 'telefone',  'celular', 'email',)
+    list_display = ('nome', 'tipo_cliente', 'qualificacao', 'telefone',  'celular', 'email',)
     search_fields = ('nome', 'email')
-    list_filter = ('qualificacao', )
+    # list_filter = ('qualificacao', )
     list_per_page = 20
 
 @admin.register(Imoveis)
@@ -15,11 +14,3 @@ class ImoveisAdmin(admin.ModelAdmin):
     # search_fields = ('tipo',)
     # list_filter = ('tipo', )
     list_per_page = 20
-
-@admin.register(Qualificacao)
-class QualificacaoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'qualificacao',)
-    search_fields = ('qualificacao',)
-    list_filter = ('qualificacao', )
-    list_per_page = 20
-    
