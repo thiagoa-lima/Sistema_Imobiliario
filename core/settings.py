@@ -19,12 +19,15 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'smart_selects',
+    # 'input_mask',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     # My apps
     'apps.cadastros',
     'apps.contratos',
