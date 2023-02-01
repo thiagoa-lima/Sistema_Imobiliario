@@ -8,7 +8,6 @@ class Clientes(models.Model):
         ('2', 'Locatário'),
         ('3', 'Proprietário'),
     )
-    
     sexo_choices = (
         ('M', 'Masculino'), 
         ('F', 'Feminino'),

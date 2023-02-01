@@ -29,7 +29,7 @@ class Administracao(models.Model):
     taxa_admin_mensal = models.DecimalField("Tx Adm Mensal", decimal_places=2, max_digits=5, default=10,validators=[MinValueValidator(0), MaxValueValidator(100)])
     taxa_admin_anual = models.DecimalField("Tx Adm Anual", decimal_places=2, max_digits=5, default=50,validators=[MinValueValidator(0), MaxValueValidator(100)])
     data_inicial = models.DateField("Data Inicial", max_length=10, null=False, blank=False, default=None)
-    data_final = models.DateField("Data Final", max_length=10, null=False, blank=False, default=None)
+    data_final = models.DateField("Data Final", max_length=10, null=False, blank=False)
     
 
     # Dados do repasse
@@ -44,7 +44,7 @@ class Administracao(models.Model):
     def __str__(self) -> str:
         endereco = str(self.imovel)
         return endereco
-        
+       
 @receiver(pre_save, sender=Administracao)
 def callback_Administracao(sender, instance, *args, **kwargs):
     instance.data_final = (instance.data_inicial + relativedelta(months=+1))
