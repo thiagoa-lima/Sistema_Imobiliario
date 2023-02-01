@@ -24,22 +24,20 @@ class Clientes(models.Model):
         ('5', 'Viúvo(a)')
     )
     
-    # informações iniciais
+    # INFORMAÇÕES INICIAIS
     cpf = models.CharField('CPF', max_length=20, blank=True)
+    nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
     qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)
-   
-    # informações pessoais
-    nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
 
     # CONTATO
     telefone = models.CharField('Telefone', max_length=10, blank=True)
     celular = models.CharField('Celular', max_length=11, blank=True)
-    email = models.EmailField('E-mail', max_length=50, null=False, blank=False)
+    email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # FILIAÇÃO
-    pai_cliente = models.CharField('Nome do pai', max_length=120, blank=True)
-    mae_cliente = models.CharField('Nome da mãe', max_length=120, blank=True)
+    pai = models.CharField('Nome do pai', max_length=120, blank=True)
+    mae = models.CharField('Nome da mãe', max_length=120, blank=True)
     
     # MAIS OPÇÕES
     rg = models.CharField('RG', max_length=20, blank=True)
@@ -61,7 +59,7 @@ class Clientes(models.Model):
     profissao_conjuge = models.CharField('Profissão', max_length=20, null=True, blank=True)
     telefone_conjuge = models.CharField('Telefone Residencial', max_length=10, null=True, blank=True)
     celular_conjuge = models.CharField('Celular', max_length=11, null=True, blank=True)
-    email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
+    email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # ENDEREÇO
     cep = models.CharField('CEP', max_length=10, null=True, blank=True)

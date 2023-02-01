@@ -31,7 +31,6 @@ class Administracao(models.Model):
     prazo_contrato = models.IntegerField("Prazo de Aluguel", default=36,validators=[MinValueValidator(0)])
     data_final = models.DateField("Data Final", max_length=10, null=False, blank=False)
     
-
     # Dados do repasse
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=False, blank=False)
     dia_do_repasse = models.CharField("Dia do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
