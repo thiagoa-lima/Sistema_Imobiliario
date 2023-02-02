@@ -1,8 +1,15 @@
 from django.contrib import admin
 from apps.cadastros.models import Clientes, Imoveis
+from apps.cadastros.forms import ClientesFormAdmin
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
+
+    form = ClientesFormAdmin
+
+    class Media:
+        js = ('jquery.mask.min.js', "custom.js")
+
     list_display = ('nome', 'tipo_cliente', 'qualificacao', 'telefone',  'celular', 'email',)
     search_fields = ('nome', 'email')
     # list_filter = ('qualificacao', )

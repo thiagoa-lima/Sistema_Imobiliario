@@ -26,13 +26,13 @@ class Clientes(models.Model):
     )
     
     # INFORMAÇÕES INICIAIS
-    cpf = models.CharField('CPF', max_length=20, blank=True)
+    cpf = models.CharField('CPF', max_length=11, blank=True)
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
     qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)
 
     # CONTATO
-    telefone = models.CharField('Telefone', max_length=10, blank=True)
+    telefone = models.CharField('Telefone', max_length=11, blank=True)
     celular = models.CharField('Celular', max_length=11, blank=True)
     email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
