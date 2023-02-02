@@ -8,8 +8,6 @@ var SPMaskBehavior = function (val) {
       }
 };
   
-
-
 django.jQuery(function(){
   // Incluir aqui abaixo as máscaras de entrada do formulário no Admin do Django
   django.jQuery('.mask-telefone').mask(SPMaskBehavior, spOptions);
@@ -21,6 +19,11 @@ django.jQuery(function(){
   // Permitir que a máscara fucione apenas no formulário e não deixar que vá para o banco de dados após salvar
   django.jQuery('#clientes_form').submit(function(){
     django.jQuery('#clientes_form').find(":input[class*='mask-']").unmask();
+  });
+
+  // Permitir que a máscara fucione apenas no formulário e não deixar que vá para o banco de dados após salvar
+  django.jQuery('#imoveis_form').submit(function(){
+    django.jQuery('#imoveis_form').find(":input[class*='mask-']").unmask();
   });
 
 });

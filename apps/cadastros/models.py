@@ -58,7 +58,7 @@ class Clientes(models.Model):
     data_expedicao_conjuge = models.DateField('Data de Expedição', max_length=10, null=True, blank=True)
     sexo_conjuge = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
     profissao_conjuge = models.CharField('Profissão', max_length=20, null=True, blank=True)
-    telefone_conjuge = models.CharField('Telefone Residencial', max_length=10, null=True, blank=True)
+    telefone_conjuge = models.CharField('Telefone Comercial', max_length=11, null=True, blank=True)
     celular_conjuge = models.CharField('Celular', max_length=11, null=True, blank=True)
     email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
@@ -66,7 +66,7 @@ class Clientes(models.Model):
     cep = models.CharField('CEP', max_length=10, null=True, blank=True)
     endereco = models.CharField('Endereço', max_length=200, null=True, blank=True)
     numero = models.CharField('Número', max_length=10, null=True, blank=True)
-    complemento = models.CharField('Número', max_length=10, null=True, blank=True)
+    complemento = models.CharField('Complemento', max_length=100, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
     cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
     uf = models.CharField('UF', max_length=2, null=True, blank=True)

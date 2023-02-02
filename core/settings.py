@@ -136,7 +136,7 @@ JAZZMIN_SETTINGS = {
     # - vertical_tabs
     # - collapsible
     # - carousel
-    "changeform_format": "collapsible",
+    "changeform_format": "carousel",
 
     #################
     # Related Modal #
