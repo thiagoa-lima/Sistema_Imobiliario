@@ -3,6 +3,7 @@ from apps.cadastros.models import Clientes, Imoveis
 from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
 
+
 # Módulos importados para alteração automática de datas
 from dateutil.relativedelta import relativedelta
 from django.db.models.signals import pre_save

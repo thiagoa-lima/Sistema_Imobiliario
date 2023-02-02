@@ -19,8 +19,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
     'smart_selects',
+    'jazzmin',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -119,12 +119,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_DJANGO_JQUERY = True
 
-
 JAZZMIN_SETTINGS = {
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Teste",
     # Welcome text on the login screen
-    "welcome_sign": "Bem indo ao sistema imobiliário",
+    "welcome_sign": "Bem vindo ao sistema imobiliário",
     # Copyright on the footer
     "copyright": "Thiago Lima",
 
@@ -156,5 +155,4 @@ JAZZMIN_SETTINGS = {
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "cadastros"}, {"app": "contratos"},
     ],
-
 }
