@@ -12,7 +12,7 @@ class ClientesAdmin(admin.ModelAdmin):
     form = ClientesFormAdmin
 
     class Media:
-        js = ('jquery.mask.min.js', "custom.js")
+        js = ('jquery.mask.min.js', "mask.js")
 
     # ----------------------------------------------------------------
     # Edita informaçõe da tela inicial do cadastro de clientes (ADMIN)
