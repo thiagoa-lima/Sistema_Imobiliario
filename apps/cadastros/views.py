@@ -10,6 +10,11 @@ class SobreView(TemplateView):
 class BootView(TemplateView):
     template_name = 'boot.html'
 
+class BootView(TemplateView):
+    template_name = 'base.html'
+
+class ClientesView(TemplateView):
+    template_name = 'cadastros/clientes.html'
 
 # class IndexView(TemplateView):
 #     template_name = 'index.html'
