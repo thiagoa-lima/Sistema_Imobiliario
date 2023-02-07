@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     
     # My apps
     'apps.cadastros.apps.CadastrosConfig',
@@ -122,6 +123,16 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 USE_DJANGO_JQUERY = True
+
+
+# --------------------------------------------
+# AJUSTE DE FORMULÁRIO ATRAVES DO CRISPY_FORMS
+# --------------------------------------------
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# --------------------------------------------
+
 
 JAZZMIN_SETTINGS = {
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
