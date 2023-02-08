@@ -19,7 +19,13 @@ class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Clientes
-    fields = ['cpf', 'nome', 'tipo_cliente', 'qualificacao',]
+    fields = [
+        'cpf', 'nome', 'tipo_cliente', 'qualificacao', 'telefone', 'celular', 'email', 'pai', 'mae',
+        'rg', 'orgao_expedidor', 'data_expedicao', 'sexo', 'nascimento', 'estado_civil', 'nacionalidade',
+        'naturalidade', 'nome_conjunge', 'cpf_conjuge', 'rg_conjuge', 'orgao_expedidor_conjuge', 
+        'data_expedicao_conjuge', 'sexo_conjuge', 'profissao_conjuge', 'telefone_conjuge', 'celular_conjuge',
+        'email_conjuge', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf',
+    ]
     template_name = 'padrao/form.html'
     success_url = reverse_lazy('listar-clientes')
 
@@ -47,7 +53,13 @@ class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Clientes
-    fields = ['cpf', 'nome', 'tipo_cliente', 'qualificacao',]
+    fields = [
+        'cpf', 'nome', 'tipo_cliente', 'qualificacao', 'telefone', 'celular', 'email', 'pai', 'mae',
+        'rg', 'orgao_expedidor', 'data_expedicao', 'sexo', 'nascimento', 'estado_civil', 'nacionalidade',
+        'naturalidade', 'nome_conjunge', 'cpf_conjuge', 'rg_conjuge', 'orgao_expedidor_conjuge', 
+        'data_expedicao_conjuge', 'sexo_conjuge', 'profissao_conjuge', 'telefone_conjuge', 'celular_conjuge',
+        'email_conjuge', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf',
+    ]
     template_name = 'padrao/form.html'
     success_url = reverse_lazy('listar-clientes')
 
