@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'smart_selects',
     'jazzmin',
+    'crispy_forms',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,11 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
     
     # My apps
     'apps.cadastros.apps.CadastrosConfig',
     'apps.contratos.apps.ContratosConfig',
+    'apps.usuarios.apps.UsuariosConfig',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,17 @@ USE_DJANGO_JQUERY = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # --------------------------------------------
+
+# --------------------------------------------
+# AUTENTICAÇÃO - LOGIN
+# --------------------------------------------
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
+
+# --------------------------------------------
+
 
 
 JAZZMIN_SETTINGS = {

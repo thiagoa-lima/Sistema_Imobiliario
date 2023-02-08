@@ -9,12 +9,15 @@
 {% block conteudo %}
 
 <div class="container">
-    <h1 class="mt-4">Clientes
-        <p>
-            <a href="{% url 'cadastrar-cliente' %}" class="btn btn-primary btn-sm" >Cadastrar Cliente</a>
-        </p>
-        <hr>
-    </h1>
+
+    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+        <h2>Clientes</h2> 
+        
+        <a href="{% url 'cadastrar-cliente' %}" class="btn btn-primary btn-bg">Cadastrar Cliente</a>
+
+    </div>
+
+    <hr>
 
     <div class="table-resposive">
         
