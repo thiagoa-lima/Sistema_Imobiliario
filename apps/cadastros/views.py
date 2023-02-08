@@ -20,7 +20,7 @@ class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     group_required = u'administrador'
     model = Clientes
     fields = ['cpf', 'nome', 'tipo_cliente', 'qualificacao',]
-    template_name = 'cadastros/form.html'
+    template_name = 'padrao/form.html'
     success_url = reverse_lazy('listar-clientes')
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
@@ -36,7 +36,7 @@ class ImoveisCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Imoveis
     fields = ['proprietario', 'tipo', 'cep',]
-    template_name = 'cadastros/form.html'
+    template_name = 'padrao/form.html'
     success_url = reverse_lazy('index')
 
 # ===================================================================================
@@ -48,7 +48,7 @@ class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     group_required = u'administrador'
     model = Clientes
     fields = ['cpf', 'nome', 'tipo_cliente', 'qualificacao',]
-    template_name = 'cadastros/form.html'
+    template_name = 'padrao/form.html'
     success_url = reverse_lazy('listar-clientes')
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
@@ -65,7 +65,7 @@ class ImoveisUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Imoveis
     fields = ['proprietario', 'tipo', 'cep',]
-    template_name = 'cadastros/form.html'
+    template_name = 'padrao/form.html'
     success_url = reverse_lazy('index')
 
 # ===================================================================================
@@ -76,14 +76,14 @@ class ClientesDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Clientes
-    template_name = 'cadastros/form-excluir.html'
+    template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('listar-clientes')
 
 class ImoveisDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Imoveis
-    template_name = 'cadastros/form-excluir.html'
+    template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('index')
 
 
@@ -113,4 +113,4 @@ class BootView(TemplateView):
     template_name = 'boot.html'
 
 class ClientesView(TemplateView):
-    template_name = 'cadastro/form.html'
+    template_name = 'padrao/form.html'
