@@ -5,9 +5,9 @@ class Clientes(models.Model):
 
     # choices
     qualificacao_choices = (
-        ('1', 'Fiador'), 
-        ('2', 'Locatário'),
-        ('3', 'Proprietário'),
+        ('Fiador', 'Fiador'), 
+        ('Locatário', 'Locatário'),
+        ('Proprietário', 'Proprietário'),
     )
     sexo_choices = (
         ('M', 'Masculino'), 

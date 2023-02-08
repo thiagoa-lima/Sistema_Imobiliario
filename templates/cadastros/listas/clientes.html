@@ -26,6 +26,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Tipo</th>
+                <th>Qualificação</th>
                 <th>Opções</th>
             </tr>
 
@@ -34,6 +35,7 @@
                 <td>{{ Clientes.pk }}</td>
                 <td>{{ Clientes.nome }}</td>
                 <td>{{ Clientes.tipo_cliente }}</td>
+                <td>{{ Clientes.qualificacao }}</td>
                 <td>
                     <a href="{% url 'editar-cliente' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
