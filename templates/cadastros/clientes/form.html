@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <h5>Informações Iniciais</h4>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.cpf|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.nome|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.tipo_cliente|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.qualificacao|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.sexo|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Contatos</h4>
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.telefone|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.celular|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.email|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Filiação</h4>
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.pai|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.mae|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Documentos</h4>
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.rg|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.orgao_expedidor|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.data_expedicao|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.nascimento|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.estado_civil|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.nacionalidade|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.naturalidade|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Dados do cônjuge</h4>
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.nome_conjunge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.cpf_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.rg_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.orgao_expedidor_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.data_expedicao_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.sexo_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.profissao_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.telefone_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.celular_conjuge|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.email_conjuge|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div>
+                <h5>Endereço residencial</h4>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.cep|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-5 mb-0">
+                {{ form.endereco|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.numero|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.complemento|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.bairro|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.cidade|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-1 mb-0">
+                {{ form.uf|as_crispy_field }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+    </form>
+</div>
+{% endblock %}

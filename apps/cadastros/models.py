@@ -18,11 +18,11 @@ class Clientes(models.Model):
         ('PJ', 'Pessoa Jurídica'),
     )
     estado_civil_choices = (
-        ('1', 'Casado(a)'), 
-        ('2', 'Divorciado(a)'), 
-        ('3', 'Solteiro(a)'), 
-        ('4', 'União Estável'),
-        ('5', 'Viúvo(a)')
+        (1, 'Casado(a)'), 
+        (2, 'Divorciado(a)'), 
+        (3, 'Solteiro(a)'), 
+        (4, 'União Estável'),
+        (5, 'Viúvo(a)')
     )
     
     # INFORMAÇÕES INICIAIS

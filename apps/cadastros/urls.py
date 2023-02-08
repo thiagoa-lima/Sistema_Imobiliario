@@ -4,7 +4,7 @@ from .views import IndexView, SobreView, BootView
 from .views import ClientesCreate, ImoveisCreate
 from .views import ClientesUpdate
 from .views import ClientesDelete
-from .views import ClientesList
+from .views import ClientesList, ImoveisList
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -36,5 +36,6 @@ urlpatterns = [
     # ==================================================================================
 
     path('listar/clientes/', ClientesList.as_view(), name='listar-clientes'),
+    path('listar/imoveis/', ImoveisList.as_view(), name='listar-imoveis'),
 
 ]
