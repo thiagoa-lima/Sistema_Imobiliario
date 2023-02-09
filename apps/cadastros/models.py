@@ -100,7 +100,6 @@ class Imoveis(models.Model):
     cidade = models.CharField('Cidade', max_length=100, default=None, null=False, blank=False)
     uf = models.CharField('UF', max_length=2, default=None, null=False, blank=False)
 
-
     class Meta:
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
@@ -110,5 +109,4 @@ class Imoveis(models.Model):
             endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.cidade + '/' + self.uf 
         else:
             endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.cidade + '/' + self.uf
-
         return endereco_completo
