@@ -14,8 +14,8 @@ class Administracao(models.Model):
 
     # Choices
     repasse_garantido_choices = (
-        ('NAO POSSUI', 'Não possui'), 
-        ('TODO CONTRATO', 'Garantir por todo contrato'),
+        ('Não possui', 'Não possui'), 
+        ('Todo contrato', 'Garantir por todo contrato'),
     )
     dia_do_repasse_choices = (
         ('DIAS UTEIS', 'Dias úteis após o vencimento do aluguel') ,
@@ -23,7 +23,7 @@ class Administracao(models.Model):
     )
 
     # Dados iniciais
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'3'})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
     imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
     valor_aluguel = models.IntegerField("Valor do aluguel", default=0,validators=[MinValueValidator(0)])
     taxa_admin_mensal = models.DecimalField("Tx Adm Mensal", decimal_places=2, max_digits=5, default=10,validators=[MinValueValidator(0), MaxValueValidator(100)])
@@ -34,8 +34,8 @@ class Administracao(models.Model):
     
     # Dados do repasse
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=False, blank=False)
-    dia_do_repasse = models.CharField("Dia do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
-    dias_para_repasse = models.IntegerField
+    regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
+    dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
 
     class Meta():
         verbose_name = 'Contrato de Administração'

@@ -29,13 +29,4 @@ urlpatterns = [
     path('imoveis/editar/<int:pk>', ImoveisUpdate.as_view(), name='editar-imoveis'),
     path('imoveis/excluir/<int:pk>', ImoveisDelete.as_view(), name='excluir-imoveis'),
     
-    # ==================================================================================
-    # DELETE ('D' - CRUD)
-    # ==================================================================================
-
-
-
-
-  
-
 ]

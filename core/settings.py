@@ -122,16 +122,17 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-USE_DJANGO_JQUERY = True
+# --------------------------------------------
+# CONFIGURAÇÃO PARA USAR O SMART-SELECTS
+# --------------------------------------------
 
+USE_DJANGO_JQUERY = True
 
 # --------------------------------------------
 # AJUSTE DE FORMULÁRIO ATRAVES DO CRISPY_FORMS
 # --------------------------------------------
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-# --------------------------------------------
 
 # --------------------------------------------
 # AUTENTICAÇÃO - LOGIN
@@ -142,43 +143,3 @@ LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
 # --------------------------------------------
-
-
-
-JAZZMIN_SETTINGS = {
-    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Teste",
-    # Welcome text on the login screen
-    "welcome_sign": "Bem vindo ao sistema imobiliário",
-    # Copyright on the footer
-    "copyright": "Thiago Lima",
-
-    ###############
-    # Change view #
-    ###############
-    # Render out the change view as a single form, or in tabs, current options are
-    # - single
-    # - horizontal_tabs (default)
-    # - vertical_tabs
-    # - collapsible
-    # - carousel
-    "changeform_format": "carousel",
-
-    #################
-    # Related Modal #
-    #################
-    # Use modals instead of popups
-    "related_modal_active": False,
-
-    # Links to put along the top menu
-    "topmenu_links": [
-        # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
-        
-        # model admin to link to (Permissions checked against model)
-        {"model": "auth.User"},
-
-        # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "cadastros"}, {"app": "contratos"},
-    ],
-}

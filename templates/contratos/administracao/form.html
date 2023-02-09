@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        
+      
+       
+
+        <div class="row">
+            <h5>Informações do proprietário e imóvel</h5>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.proprietario|as_crispy_field }}
+            </div>
+            <div thiago class="form-group col-md-6 mb-0">
+                {{ form.imovel|as_crispy_field }}
+                <script>
+                    $('div thiago').remove()
+                </script>
+            </div>
+           
+        </div>
+        
+        <div class="row mt-4">
+            <h5>Informações do contrato</h5>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.valor_aluguel|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.taxa_admin_mensal|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.taxa_admin_anual|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.data_inicial|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.prazo_contrato|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.data_final|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <h5>Informações do repasse</h5>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.repasse_garantido|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-5 mb-0">
+                {{ form.regra_do_repasse|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.dias_para_repasse|as_crispy_field }}
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+    </form>
+</div>
+{% endblock %}

@@ -10,7 +10,6 @@
 </title>
 {% endblock %}
 
-
 {% block conteudo %}
 <div class="container">
     <h1 class="mt-4">
@@ -29,19 +28,19 @@
             <div>
                 <h5>Informações Iniciais</h4>
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.cpf|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-6 mb-0">
                 {{ form.nome|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.tipo_cliente|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3  mb-0">
                 {{ form.qualificacao|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.sexo|as_crispy_field }}
             </div>
         </div>
@@ -65,10 +64,10 @@
             <div>
                 <h5>Filiação</h4>
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-6 mb-0">
                 {{ form.pai|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-6 mb-0">
                 {{ form.mae|as_crispy_field }}
             </div>
         </div>
@@ -77,19 +76,19 @@
             <div>
                 <h5>Documentos</h4>
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.rg|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.orgao_expedidor|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.data_expedicao|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.nascimento|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-4 mb-0">
                 {{ form.estado_civil|as_crispy_field }}
             </div>
             <div class="form-group col-md-4 mb-0">
@@ -104,19 +103,19 @@
             <div>
                 <h5>Dados do cônjuge</h4>
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-6 mb-0">
                 {{ form.nome_conjunge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.cpf_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.rg_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.orgao_expedidor_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.data_expedicao_conjuge|as_crispy_field }}
             </div>
             <div class="form-group col-md-2 mb-0">
@@ -131,7 +130,7 @@
             <div class="form-group col-md-3 mb-0">
                 {{ form.celular_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-6 mb-0">
                 {{ form.email_conjuge|as_crispy_field }}
             </div>
         </div>
@@ -139,16 +138,16 @@
             <div>
                 <h5>Endereço residencial</h4>
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-3 mb-0">
                 {{ form.cep|as_crispy_field }}
             </div>
-            <div class="form-group col-md-5 mb-0">
+            <div class="form-group col-md-7 mb-0">
                 {{ form.endereco|as_crispy_field }}
             </div>
             <div class="form-group col-md-2 mb-0">
                 {{ form.numero|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-4 mb-0">
                 {{ form.complemento|as_crispy_field }}
             </div>
             <div class="form-group col-md-4 mb-0">
@@ -157,7 +156,7 @@
             <div class="form-group col-md-2 mb-0">
                 {{ form.cidade|as_crispy_field }}
             </div>
-            <div class="form-group col-md-1 mb-0">
+            <div class="form-group col-md-2 mb-0">
                 {{ form.uf|as_crispy_field }}
             </div>
         </div>
@@ -165,7 +164,35 @@
         <button type="submit" class="btn btn-primary mt-4">
             {{ botao }}
         </button>
-
     </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'jquery.mask.min.js' %}"></script>
+<script>
+
+    var SPMaskBehavior = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+    onKeyPress: function(val, e, field, options) {
+        field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $(document).ready(function () {    
+        $('#id_cpf').mask('000.000.000-00', {reverse: true});
+        $('#id_telefone').mask(SPMaskBehavior, spOptions);
+        $('#id_celular').mask(SPMaskBehavior, spOptions);
+        $('#id_data_expedicao').mask('00/00/0000');
+        $('#id_nascimento').mask('00/00/0000');
+        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true});
+        $('#id_data_expedicao_conjuge').mask('00/00/0000');
+        $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
+        $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
+        $('#id_cep').mask('00000-000');
+ 
+    });
+</script>
 {% endblock %}

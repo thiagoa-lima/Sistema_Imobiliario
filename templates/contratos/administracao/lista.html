@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Lista de Clientes</title>
+<title>Contratos de administração</title>
 {% endblock %}
 
 {% block conteudo %}
@@ -11,8 +11,8 @@
 <div class="container">
 
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Imóveis</h2> 
-        <a href="{% url 'cadastrar-imoveis' %}" class="btn btn-primary btn-bg">Cadastrar imóvel</a>
+        <h2>Contratos de administração</h2> 
+        <a href="{% url 'contrato-administracao-cadastrar' %}" class="btn btn-primary btn-bg">Novo contrato</a>
     </div>
 
     <hr>
@@ -21,25 +21,28 @@
         <table class="table table-striped">
             <tr>
                 <th>ID</th>
-                <th>Endereço</th>
-                <th>Bairro</th>
-                <th>Tipo</th>
+                <th>Imóvel</th>
                 <th>Proprietário</th>
+                <th>Data inicial</th>
+                <th>Data final</th>
+                <th>Repasse garantido</th>
                 <th>Opções</th>
             </tr>
 
-            {% for Imoveis in object_list %}
+            {% for Administração in object_list %}
+            
             <tr>
-                <td>{{ Imoveis.pk }}</td>
-                <td>{{ Imoveis }}</td>
-                <td>{{ Imoveis.bairro }}</td>
-                <td>{{ Imoveis.tipo }}</td>
-                <td>{{ Imoveis.proprietario }}</td>
+                <td>{{ Administração.pk }}</td>
+                <td>{{ Administração }}</td>
+                <td>{{ Administração.proprietario }}</td>
+                <td>{{ Administração.data_inicial|date:"d/m/Y" }}</td>
+                <td>{{ Administração.data_final|date:"d/m/Y" }}</td>
+                <td>{{ Administração.repasse_garantido }}</td>
                 <td>
-                    <a href="{% url 'editar-imoveis' Imoveis.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <a href="" class="btn btn-warning btn-sm" title="Editar">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a> 
-                    <a href="{% url 'excluir-imoveis' Imoveis.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <a href="" class="btn btn-danger btn-sm" title="Excluir">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>
@@ -56,14 +59,4 @@
         </table>
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-
-    $(document).ready(function () {
-        alert("importação OK!")
-    });
-
-</script>
 {% endblock %}
