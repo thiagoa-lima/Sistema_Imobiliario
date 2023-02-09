@@ -26,14 +26,14 @@ class Clientes(models.Model):
     )
     
     # INFORMAÇÕES INICIAIS
-    cpf = models.CharField('CPF', max_length=11, blank=True)
+    cpf = models.CharField('CPF', max_length=14, blank=True)
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
     qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)
 
     # CONTATO
-    telefone = models.CharField('Telefone', max_length=11, blank=True)
-    celular = models.CharField('Celular', max_length=11, blank=True)
+    telefone = models.CharField('Telefone', max_length=15, blank=True)
+    celular = models.CharField('Celular', max_length=15, blank=True)
     email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # FILIAÇÃO
@@ -58,8 +58,8 @@ class Clientes(models.Model):
     data_expedicao_conjuge = models.DateField('Data de Expedição', max_length=10, null=True, blank=True)
     sexo_conjuge = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
     profissao_conjuge = models.CharField('Profissão', max_length=20, null=True, blank=True)
-    telefone_conjuge = models.CharField('Telefone Comercial', max_length=11, null=True, blank=True)
-    celular_conjuge = models.CharField('Celular', max_length=11, null=True, blank=True)
+    telefone_conjuge = models.CharField('Telefone Comercial', max_length=15, null=True, blank=True)
+    celular_conjuge = models.CharField('Celular', max_length=15, null=True, blank=True)
     email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # ENDEREÇO
@@ -92,7 +92,7 @@ class Imoveis(models.Model):
     tipo = models.CharField('Tipo de Imóvel', max_length=20, null=False, blank=False, choices=tipo_imovel_choices)
     
     # Endereço do imóvel
-    cep = models.CharField('CEP', max_length=8, null=False, blank=False)
+    cep = models.CharField('CEP', max_length=9, null=False, blank=False)
     endereco = models.CharField('Endereço', max_length=200, default=None, null=False, blank=False)
     numero = models.CharField('Número', max_length=10, default=None, null=False, blank=False)
     complemento = models.CharField('Complemento', max_length=10, null=True, blank=True)
