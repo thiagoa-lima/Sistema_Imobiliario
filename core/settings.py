@@ -20,7 +20,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'smart_selects',
-    'jazzmin',
     'crispy_forms',
 
     'django.contrib.admin',
