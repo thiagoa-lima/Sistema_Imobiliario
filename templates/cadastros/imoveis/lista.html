@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<title>Lista de Clientes</title>
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container">
+
+    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+        <h2>Imóveis</h2> 
+        <a href="{% url 'cadastrar-cliente' %}" class="btn btn-primary btn-bg">Cadastrar imóvel</a>
+    </div>
+
+    <hr>
+
+    <div class="table-resposive">  
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Endereço</th>
+                <th>Bairro</th>
+                <th>Tipo</th>
+                <th>Proprietário</th>
+                <th>Opções</th>
+            </tr>
+
+            {% for Imoveis in object_list %}
+            <tr>
+                <td>{{ Imoveis.pk }}</td>
+                <td>{{ Imoveis }}</td>
+                <td>{{ Imoveis.bairro }}</td>
+                <td>{{ Imoveis.tipo }}</td>
+                <td>{{ Imoveis.proprietario }}</td>
+                <td>
+                    <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a> 
+                    <a href="#" class="btn btn-danger btn-sm" title="Excluir">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+
+            <tr>
+                <td colspan="3">
+                    Nenhum cliente registrado
+                </td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

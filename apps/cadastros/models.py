@@ -82,9 +82,9 @@ class Imoveis(models.Model):
     
     # choices
     tipo_imovel_choices = [
-        ('CASA', 'Casa'),
-        ('APARTAMENTO', 'Apartamento'),
-        ('SALA COMERCIAL', 'Sala comercial'),
+        ('Casa', 'Casa'),
+        ('Apartamento', 'Apartamento'),
+        ('Sala comercial', 'Sala comercial'),
     ]
 
     # dados básicos

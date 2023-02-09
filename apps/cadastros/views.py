@@ -10,7 +10,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin 
 
-
 # ===================================================================================
 # CREATE ('C' - CRUD)
 # ===================================================================================
@@ -19,7 +18,6 @@ class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Clientes
-    
    
     fields = [
         'cpf', 'nome', 'tipo_cliente', 'qualificacao', 'telefone', 'celular', 'email', 'pai', 'mae',
@@ -114,7 +112,7 @@ class ClientesList(LoginRequiredMixin, ListView):
 class ImoveisList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Imoveis
-    template_name = 'cadastros/listas/imoveis.html'
+    template_name = 'cadastros/imoveis/lista.html'
 
 
 
