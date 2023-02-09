@@ -13,7 +13,7 @@
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>Clientes</h2> 
         
-        <a href="{% url 'cadastrar-cliente' %}" class="btn btn-primary btn-bg">Cadastrar Cliente</a>
+        <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Cadastrar Cliente</a>
 
     </div>
 
@@ -39,10 +39,10 @@
                 <td>{{ Clientes.tipo_cliente }}</td>
                 <td>{{ Clientes.qualificacao }}</td>
                 <td>
-                    <a href="{% url 'editar-cliente' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <a href="{% url 'editar-clientes' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a> 
-                    <a href="{% url 'excluir-cliente' Clientes.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                    <a href="{% url 'excluir-clientes' Clientes.pk %}" class="btn btn-danger btn-sm" title="Excluir">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>

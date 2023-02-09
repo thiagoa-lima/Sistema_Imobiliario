@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <h5>Informações Iniciais</h4>
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.proprietario|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.tipo|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Endereço</h4>
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.cep|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-8 mb-0">
+                {{ form.endereco|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.numero|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.complemento|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.bairro|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.cidade|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-1 mb-0">
+                {{ form.uf|as_crispy_field }}
+            </div>   
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+    </form>
+</div>
+{% endblock %}

@@ -2,8 +2,8 @@ from django.urls import path
 from .views import IndexView, SobreView, BootView
 
 from .views import ClientesCreate, ImoveisCreate
-from .views import ClientesUpdate
-from .views import ClientesDelete
+from .views import ClientesUpdate, ImoveisUpdate
+from .views import ClientesDelete, ImoveisDelete
 from .views import ClientesList, ImoveisList
 
 urlpatterns = [
@@ -12,30 +12,30 @@ urlpatterns = [
     path('bootstrap/', BootView.as_view(), name='boot'),
     
     # ==================================================================================
-    # CREATE ('C' - CRUD)
+    # ------ CLIENTES ------------------------------------------------------------------
     # ==================================================================================
 
-    path('cadastrar/cliente/', ClientesCreate.as_view(), name='cadastrar-cliente'),
-    path('cadastrar/imovel/', ImoveisCreate.as_view(), name='cadastrar-imovel'),
-
+    path('clientes/listar/', ClientesList.as_view(), name='listar-clientes'),
+    path('clientes/cadastrar/', ClientesCreate.as_view(), name='cadastrar-clientes'),
+    path('clientes/editar/<int:pk>', ClientesUpdate.as_view(), name='editar-clientes'),
+    path('clientes/excluir/<int:pk>', ClientesDelete.as_view(), name='excluir-clientes'),
+    
     # ==================================================================================
-    # UPDATE ('U' - CRUD)
+    # ------ IMÓVEIS -------------------------------------------------------------------
     # ==================================================================================
 
-    path('editar/cliente/<int:pk>', ClientesUpdate.as_view(), name='editar-cliente'),
-
-
+    path('imoveis/listar/', ImoveisList.as_view(), name='listar-imoveis'),
+    path('imoveis/cadastrar/', ImoveisCreate.as_view(), name='cadastrar-imoveis'),
+    path('imoveis/editar/<int:pk>', ImoveisUpdate.as_view(), name='editar-imoveis'),
+    path('imoveis/excluir/<int:pk>', ImoveisDelete.as_view(), name='excluir-imoveis'),
+    
     # ==================================================================================
     # DELETE ('D' - CRUD)
     # ==================================================================================
 
-    path('excluir/cliente/<int:pk>', ClientesDelete.as_view(), name='excluir-cliente'),
 
-    # ==================================================================================
-    # LIST
-    # ==================================================================================
 
-    path('listar/clientes/', ClientesList.as_view(), name='listar-clientes'),
-    path('listar/imoveis/', ImoveisList.as_view(), name='listar-imoveis'),
+
+  
 
 ]

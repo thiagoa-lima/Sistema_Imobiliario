@@ -1,9 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-
 from .models import Clientes, Imoveis
-
 from django.urls import reverse_lazy
 
 # CONTROLE DE LOGIN e USÁRIOS
@@ -38,12 +36,21 @@ class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         
         return context    
 
-class ImoveisCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+class ImoveisCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Imoveis
-    fields = ['proprietario', 'tipo', 'cep',]
-    template_name = 'padrao/form.html'
-    success_url = reverse_lazy('index')
+    fields = ['proprietario', 'tipo', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf']
+    template_name = 'cadastros/imoveis/form.html'
+    success_url = reverse_lazy('listar-imoveis')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Cadastro de imóveis"
+        context['botao'] = "Cadastrar"
+        
+        return context 
+    
 
 # ===================================================================================
 # UPDATE ('U' - CRUD)
@@ -72,33 +79,38 @@ class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 
         return context 
     
-
-class ImoveisUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+class ImoveisUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Imoveis
-    fields = ['proprietario', 'tipo', 'cep',]
-    template_name = 'cadastros/clientes/form.html'
-    success_url = reverse_lazy('index')
+    fields = ['proprietario', 'tipo', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf']
+    template_name = 'cadastros/imoveis/form.html'
+    success_url = reverse_lazy('listar-imoveis')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Editar cadastro de imóveis"
+        context['botao'] = "Salvar"
+        
+        return context 
+    
 # ===================================================================================
-# DELETE ('D' - CRUD)
+# ------ DELETE ---------------------------------------------------------------------
 # ===================================================================================
 
-class ClientesDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
+class ClientesDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Clientes
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('listar-clientes')
 
-class ImoveisDelete(GroupRequiredMixin, LoginRequiredMixin, DeleteView):
+class ImoveisDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Imoveis
     template_name = 'padrao/form-excluir.html'
-    success_url = reverse_lazy('index')
-
-
+    success_url = reverse_lazy('listar-imoveis')
 
 # ===================================================================================
 # LIST
