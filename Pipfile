@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 django-jazzmin = "*"
+django-smart-selects = "*"
+django-crispy-forms = "*"
+python-dateutil = "*"
+django-braces = "*"
 
 [dev-packages]
 
