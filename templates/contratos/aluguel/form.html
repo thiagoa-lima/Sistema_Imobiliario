@@ -27,6 +27,7 @@
     <form action="" method="post">
 
         {% csrf_token %}
+        {{ form.media.js }}
         <div class="row">
             <h5>Informações do imóvel</h5>
             <div class="form-group col-md-5 mb-0">

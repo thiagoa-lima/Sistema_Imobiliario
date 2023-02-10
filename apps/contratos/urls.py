@@ -4,6 +4,7 @@ from .views import AdministracaoList, AluguelList
 from .views import AluguelDelete
 from .views import AluguelUpdate
 
+# app_name = 'contratos'
 
 urlpatterns = [
     path('contratos-administracao/listar', AdministracaoList.as_view(), name='contrato-administracao-listar'),

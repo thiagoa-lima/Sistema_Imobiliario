@@ -24,7 +24,9 @@
 
     <form action="" method="post">
 
-        {% csrf_token %}
+        {% csrf_token %}        
+        <!-- {{ form.media.js }} -->
+
         <div class="row">
             <h5>Informações do proprietário e imóvel</h5>
             <div class="form-group col-md-6 mb-0">
@@ -80,4 +82,16 @@
 
     </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap-5'
+            });
+            
+            
+        });
+    </script>
 {% endblock %}

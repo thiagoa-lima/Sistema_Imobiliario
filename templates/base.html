@@ -13,11 +13,16 @@
         <title>Dashboard - SB Admin</title>
         {% endblock%}
 
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href={% static "css/styles.css" %} rel="stylesheet" />
+        <!-- Importação do Select2 -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        
         <!-- Importação do data-tables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css"/>         
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css"/> 
+                        
+        <link href={% static "css/styles.css" %} rel="stylesheet" />
     </head>
 
     <body class="sb-nav-fixed">
@@ -327,6 +332,12 @@
 
         <script src={% static "js/jquery-3.6.3.min.js" %}></script>
         <script src={% static "js/scripts.js" %}></script>
+<<<<<<< HEAD
+=======
+
+        <script src="{% static 'js/jquery.mask.js' %}"></script>
+        <script src="{% static 'js/jquery.mask.min.js' %}"></script>
+>>>>>>> f59aae8 (Adição do Select2 na Administração)
 
         <script src={% static "js/datatables-simple-demo.js" %}></script>
 
@@ -334,6 +345,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> 
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+=======
+
+        <!-- Adição do smart-select -->
+        <script src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+        <script src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+
+        <!-- Adição do Select2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+>>>>>>> f59aae8 (Adição do Select2 na Administração)
         <!-- Bloco destinado aos scripts para cada página -->
         {% block scripts %}
 

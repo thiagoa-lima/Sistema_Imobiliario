@@ -10,6 +10,7 @@ django-smart-selects = "*"
 django-crispy-forms = "*"
 python-dateutil = "*"
 django-braces = "*"
+django-select2 = "*"
 
 [dev-packages]
 
