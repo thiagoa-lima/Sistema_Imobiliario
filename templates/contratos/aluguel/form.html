@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    Contrato de Aluguel
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        Contrato de Aluguel
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        <div class="row">
+            <h5>Informações do proprietário e imóvel</h5>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.locatario|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.tipo_fianca|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.imovel|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.finalidade|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.data_inicial|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.periodo_meses|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.data_final|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.valor_contrato|as_crispy_field }}
+            </div>
+            
+        </div>
+        
+        <div class="row mt-4">
+            <h5>Informações do contrato</h5>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-4">
+            Cadastrar
+        </button>
+
+        <button type="reset" class="btn btn-danger mt-4">
+            Cancelar         
+        </button>
+
+    </form>
+</div>
+{% endblock %}

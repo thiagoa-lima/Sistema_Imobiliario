@@ -4,13 +4,11 @@
 
 {% load crispy_forms_tags %}
 
-
 {% block titulo %}
 <title>
     {{ titulo }}
 </title>
 {% endblock %}
-
 
 {% block conteudo %}
 <div class="container">
@@ -27,10 +25,6 @@
     <form action="" method="post">
 
         {% csrf_token %}
-        
-      
-       
-
         <div class="row">
             <h5>Informações do proprietário e imóvel</h5>
             <div class="form-group col-md-6 mb-0">
@@ -38,11 +32,7 @@
             </div>
             <div thiago class="form-group col-md-6 mb-0">
                 {{ form.imovel|as_crispy_field }}
-                <script>
-                    $('div thiago').remove()
-                </script>
-            </div>
-           
+            </div>    
         </div>
         
         <div class="row mt-4">
@@ -81,7 +71,11 @@
         </div>
     
         <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
+            Cadastrar
+        </button>
+
+        <button type="reset" class="btn btn-danger mt-4">
+            Cancelar         
         </button>
 
     </form>
