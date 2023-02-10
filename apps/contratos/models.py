@@ -52,12 +52,24 @@ def callback_Administracao(sender, instance, *args, **kwargs):
 
 class Aluguel(models.Model):
 
+    # Choices
+    finalidade_choices = (
+        ('Comercial', 'Comercial'),
+        ('Industrial', 'Industrial'),
+        ('Residencial', 'Residencial'), 
+        ('Temporada', 'Temporada'), 
+    )
+
+    garantia_choices =(
+        ('Fiador',),
+    )
+
     # dados do contrato
-    # proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
+    imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
+    garantia = models.CharField('Garantia', max_length=50, blank=True, null=True)
     locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True)  
-    tipo_fianca = models.CharField('Tipo fiança', max_length=50, blank=True, null=True)
-    imovel = models.ForeignKey(Imoveis, on_delete=models.PROTECT, verbose_name='Imóvel', blank=True, null=True)
-    finalidade = models.CharField('Finalidade', max_length=50, blank=True, null=True)
+    finalidade = models.CharField('Finalidade', max_length=50, choices=finalidade_choices, blank=True, null=True)
     data_inicial = models.DateField('Data inicial', blank=True, null=True)
     periodo_meses = models.IntegerField('Período', blank=True, null=True)
     data_final = models.DateField('Data final', blank=True, null=True)

@@ -34,7 +34,7 @@ class AluguelCreate(LoginRequiredMixin, CreateView):
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
     fields = [
-        'locatario', 'tipo_fianca', 'imovel', 'finalidade', 'data_inicial', 'data_final',
+        'proprietario', 'locatario', 'garantia', 'imovel', 'finalidade', 'data_inicial', 'data_final',
         'periodo_meses', 'valor_contrato', 
     ]
 
@@ -58,7 +58,7 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
     fields = [
-        'locatario', 'tipo_fianca', 'imovel', 'finalidade', 'data_inicial', 'data_final',
+        'proprietario', 'locatario', 'garantia', 'imovel', 'finalidade', 'data_inicial', 'data_final',
         'periodo_meses', 'valor_contrato', 
     ]
 
