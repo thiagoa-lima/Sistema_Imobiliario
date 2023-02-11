@@ -9,7 +9,6 @@ class ClientesAdmin(admin.ModelAdmin):
     # Busca informação do forms.py para usar a mascara de entradas cadastradas no formulário em vez de usar as opções do django
     # -------------------------------------------------------------------------------------------------------------------------
     
-    
     form = ClientesFormAdmin
 
     class Media:
