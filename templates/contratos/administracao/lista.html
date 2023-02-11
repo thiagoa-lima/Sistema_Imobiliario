@@ -29,17 +29,17 @@
                 <th>Opções</th>
             </tr>
 
-            {% for Administração in object_list %}
+            {% for Administracao in object_list %}
             
             <tr>
-                <td>{{ Administração.pk }}</td>
-                <td>{{ Administração }}</td>
-                <td>{{ Administração.proprietario }}</td>
-                <td>{{ Administração.data_inicial|date:"d/m/Y" }}</td>
-                <td>{{ Administração.data_final|date:"d/m/Y" }}</td>
-                <td>{{ Administração.repasse_garantido }}</td>
+                <td>{{ Administracao.pk }}</td>
+                <td>{{ Administracao }}</td>
+                <td>{{ Administracao.proprietario }}</td>
+                <td>{{ Administracao.data_inicial|date:"d/m/Y" }}</td>
+                <td>{{ Administracao.data_final|date:"d/m/Y" }}</td>
+                <td>{{ Administracao.repasse_garantido }}</td>
                 <td>
-                    <a href="" class="btn btn-warning btn-sm" title="Editar">
+                    <a href="{% url 'contrato-administracao-editar' Administracao.pk %}" class="btn btn-warning btn-sm" title="Editar">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a> 
                     <a href="" class="btn btn-danger btn-sm" title="Excluir">

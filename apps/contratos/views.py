@@ -65,6 +65,21 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         'periodo_meses', 'valor_contrato', 
     ]
 
+class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Administracao
+    form_class = forms.AdministracaoForm
+    template_name = 'contratos/administracao/form.html'
+    success_url = reverse_lazy('contrato-administracao-listar')
+
+    # Atualizar os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Editar contrato de administração"
+        context['botao'] = "Salvar"
+        
+        return context
 # ===================================================================================
 # ------ LIST -----------------------------------------------------------------------
 # ===================================================================================
