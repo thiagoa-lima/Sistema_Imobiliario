@@ -7,7 +7,7 @@
 
 {% block titulo %}
 <title>
-    Contrato de Aluguel
+    {{ titulo }}
 </title>
 {% endblock %}
 
@@ -15,7 +15,7 @@
 {% block conteudo %}
 <div class="container">
     <h1 class="mt-4">
-        Contrato de Aluguel
+        {{ titulo }}
     </h1>
 
     <p class="lead">
@@ -27,7 +27,7 @@
     <form action="" method="post">
 
         {% csrf_token %}
-        {{ form.media.js }}
+
         <div class="row">
             <h5>Informações do imóvel</h5>
             <div class="form-group col-md-5 mb-0">
@@ -68,7 +68,7 @@
         </div>
         
         <button type="submit" class="btn btn-primary mt-4">
-            Cadastrar
+            {{ botao }}
         </button>
 
         <button type="reset" class="btn btn-danger mt-4">
@@ -77,4 +77,26 @@
 
     </form>
 </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
+            $('.select2').select2({theme: 'bootstrap-5'});
+        
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_valor_contrato').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
+            // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+            
+        });
+    </script>
 {% endblock %}

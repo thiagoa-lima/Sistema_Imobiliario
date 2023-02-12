@@ -33,13 +33,10 @@ class AdministracaoCreate(LoginRequiredMixin, CreateView):
 
 class AluguelCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
+    form_class = forms.AlugueloForm
     model = Aluguel
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
-    fields = [
-        'proprietario', 'locatario', 'garantia', 'imovel', 'finalidade', 'data_inicial', 'data_final',
-        'periodo_meses', 'valor_contrato', 
-    ]
 
 # ===================================================================================
 # ------ DELETE ---------------------------------------------------------------------
@@ -64,12 +61,19 @@ class AdministracaoDelete(LoginRequiredMixin, DeleteView):
 class AluguelUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Aluguel
+    form_class = forms.AlugueloForm
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
-    fields = [
-        'proprietario', 'locatario', 'garantia', 'imovel', 'finalidade', 'data_inicial', 'data_final',
-        'periodo_meses', 'valor_contrato', 
-    ]
+    
+    # Atualizar os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Editar contrato de aluguel"
+        context['botao'] = "Salvar"
+        
+        return context
+    
 
 class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
