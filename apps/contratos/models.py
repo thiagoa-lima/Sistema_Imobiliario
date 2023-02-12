@@ -26,9 +26,9 @@ class Administracao(models.Model):
     # Dados iniciais
     proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
     imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
-    valor_aluguel = models.IntegerField("Valor do aluguel", default=0,validators=[MinValueValidator(0)])
-    taxa_admin_mensal = models.DecimalField("Tx Adm Mensal", decimal_places=2, max_digits=5, default=10,validators=[MinValueValidator(0), MaxValueValidator(100)])
-    taxa_admin_anual = models.DecimalField("Tx Adm Anual", decimal_places=2, max_digits=5, default=50,validators=[MinValueValidator(0), MaxValueValidator(100)])
+    valor_aluguel = models.CharField("Valor do aluguel", default=None, max_length=20)
+    taxa_admin_mensal = models.CharField("Tx Adm Mensal", default=10, max_length=20)
+    taxa_admin_anual = models.CharField("Tx Adm Anual", default=50, max_length=20)
     data_inicial = models.DateField("Data Inicial", max_length=10, null=False, blank=False, default=None)
     prazo_contrato = models.IntegerField("Prazo", default=36,validators=[MinValueValidator(0)])
     data_final = models.DateField("Data Final", max_length=10, null=False, blank=False)
@@ -46,9 +46,9 @@ class Administracao(models.Model):
         endereco = str(self.imovel)
         return endereco
        
-@receiver(pre_save, sender=Administracao)
-def callback_Administracao(sender, instance, *args, **kwargs):
-    instance.data_final = (instance.data_inicial + relativedelta(months=+3))
+# @receiver(pre_save, sender=Administracao)
+# def callback_Administracao(sender, instance, *args, **kwargs):
+#     instance.data_final = (instance.data_inicial + relativedelta(months=+3))
 
 class Aluguel(models.Model):
 

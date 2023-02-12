@@ -87,10 +87,21 @@
 {% block scripts %}
     <script>
         $(document).ready(function() {
-            $('.select2').select2({
-                theme: 'bootstrap-5'
-            });
             
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
+            $('.select2').select2({theme: 'bootstrap-5'});
+        
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_valor_aluguel').mask("000.000.000.000.000,00", {reverse: true});
+            $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
+            $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
             
         });
     </script>

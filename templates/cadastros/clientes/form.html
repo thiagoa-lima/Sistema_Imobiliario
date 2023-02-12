@@ -187,13 +187,13 @@
         // ------ MÁSCARA DE ENTRADA DE DADOS
         // =============================================================
         
-        $('#id_cpf').mask('000.000.000-00', {reverse: true});
+        $('#id_cpf').mask('000.000.000-00', {reverse: true, placeholder: "___.___.___-__"});
         $('#id_telefone').mask(SPMaskBehavior, spOptions);
         $('#id_celular').mask(SPMaskBehavior, spOptions);
-        $('#id_data_expedicao').mask('00/00/0000');
-        $('#id_nascimento').mask('00/00/0000');
-        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true});
-        $('#id_data_expedicao_conjuge').mask('00/00/0000');
+        $('#id_data_expedicao').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
+        $('#id_data_expedicao_conjuge').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_cep').mask('00000-000');
