@@ -51,6 +51,12 @@ class AluguelDelete(LoginRequiredMixin, DeleteView):
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
 
+class AdministracaoDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Administracao
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('contrato-administracao-listar')
+
 # ===================================================================================
 # ------ UPDATE ---------------------------------------------------------------------
 # ===================================================================================
