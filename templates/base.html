@@ -10,18 +10,19 @@
         <meta name="author" content="" />
 
         {% block titulo %}
-        <title>Dashboard - SB Admin</title>
+            <title>Dashboard - SB Admin</title>
         {% endblock%}
 
         <!-- Importação do Select2 -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         
         <!-- Importação do data-tables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css"/> 
-                        
+        <link href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css" rel="stylesheet" type="text/css" /> 
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        
+        <!-- Importação do bootstrap -->
         <link href={% static "css/styles.css" %} rel="stylesheet" />
     </head>
 
@@ -43,8 +44,8 @@
                         <i class="fas fa-user fa-fw"></i>
                         {{ request.user.email }}
                     </a>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        
                         <li>
                             <a class="dropdown-item" href="#!">
                                 <i class="fa fa-user" aria-hidden="True"></i>
@@ -104,38 +105,7 @@
                                 </nav>
                             </div>
 
-
-
-
-
-
-
-
-
-                            
-
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseteste" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                teste
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            
-                            <div class="collapse" id="collapseteste" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'listar-clientes' %}">Clientes</a>
-                                    <a class="nav-link" href="{% url 'listar-imoveis' %}">Imóveis</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Fornecedores</a>
-                                    <a class="nav-link" href="{% url 'listar-usuarios' %}">Usuários</a>
-                                </nav>
-                            </div>
-
-
                             <hr>
-
-
-
-
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -158,11 +128,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="{% url 'contrato-aluguel-listar' %}">Aluguel</a>
                                         </nav>
-                                    </div>
-
-
-
-                                    
+                                    </div>                              
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                         Error
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -325,10 +291,7 @@
             </div>
         </div>
 
-        <!-- 
-            ------ Scripts padrão do Bootstrap ------
-            ---------- NÃO ALTERAR A ORDEM ----------
-        -->
+        <!-- NÃO ALTERAR A ORDEM -->
 
         <!-- Adição do JQuery--> 
         <script src={% static "js/jquery-3.6.3.min.js" %}></script>
@@ -354,9 +317,8 @@
         <!-- Adição do Select2 -->
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <!-- Bloco destinado aos scripts para cada página -->
         {% block scripts %}
-
+            <!-- Bloco destinado aos scripts para cada página -->
         {% endblock %}
     </body>
 </html>

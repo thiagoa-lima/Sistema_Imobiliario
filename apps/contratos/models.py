@@ -98,5 +98,7 @@ class Aluguel(models.Model):
         verbose_name = 'Contrato de Aluguel'
         verbose_name_plural = 'Contrato de Aluguel'
 
-        def __str__(self) -> str:
-            pass
+    def __str__(self):
+        imovel = str(self.imovel)
+        locatario = str(self.locatario)
+        return 'Inquilino: ' + locatario + ', imóvel: ' + imovel
