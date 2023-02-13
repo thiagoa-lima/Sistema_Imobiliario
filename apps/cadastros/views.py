@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada
 from django.views.generic.list import ListView # usada para fazer listas
 from .models import Clientes, Imoveis
 from django.urls import reverse_lazy
+from . import forms
 
 # CONTROLE DE LOGIN e USÁRIOS
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -39,7 +40,7 @@ class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 class ImoveisCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Imoveis
-    fields = ['proprietario', 'tipo', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf']
+    form_class = forms.ImoveisForm
     template_name = 'cadastros/imoveis/form.html'
     success_url = reverse_lazy('listar-imoveis')
 
@@ -82,7 +83,7 @@ class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 class ImoveisUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Imoveis
-    fields = ['proprietario', 'tipo', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf']
+    form_class = forms.ImoveisForm
     template_name = 'cadastros/imoveis/form.html'
     success_url = reverse_lazy('listar-imoveis')
 

@@ -17,10 +17,6 @@ class AdministracaoCreate(LoginRequiredMixin, CreateView):
     form_class = forms.AdministracaoForm
     template_name = 'contratos/administracao/form.html'
     success_url = reverse_lazy('contrato-administracao-listar')
-    # fields = [
-    #     'proprietario', 'imovel', 'valor_aluguel', 'taxa_admin_mensal', 'taxa_admin_anual', 'data_inicial', 'prazo_contrato', 
-    #     'data_final', 'repasse_garantido', 'regra_do_repasse', 'dias_para_repasse',
-    # ]
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
     def get_context_data(self, *args, **kwargs):
@@ -38,6 +34,14 @@ class AluguelCreate(LoginRequiredMixin, CreateView):
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Novo contrato de aluguel"
+        context['botao'] = "Cadastrar"
+        
+        return context
+
 # ===================================================================================
 # ------ DELETE ---------------------------------------------------------------------
 # ===================================================================================
@@ -47,6 +51,7 @@ class AluguelDelete(LoginRequiredMixin, DeleteView):
     model = Aluguel
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
+
 
 class AdministracaoDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
