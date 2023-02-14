@@ -67,9 +67,11 @@
 
 {% block scripts %}
 <!-- Importação da Datatables que serve para formatar a tabela da lista -->
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" 
+<!-- <script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" 
     type="text/javascript" >
-</script>
+</script> -->
+
+<script src={% static "js/datatables-simple-demo.js" %}></script>
 
 <script>
 
@@ -79,7 +81,7 @@
             "bSort": true,
             "language":{
                 "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
-            }
+            },
         });
     });
 

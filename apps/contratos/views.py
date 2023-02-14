@@ -108,3 +108,4 @@ class AluguelList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Aluguel
     template_name = 'contratos/aluguel/lista.html'
+
