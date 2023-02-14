@@ -102,3 +102,19 @@ class Aluguel(models.Model):
         imovel = str(self.imovel)
         locatario = str(self.locatario)
         return 'Inquilino: ' + locatario + ', imóvel: ' + imovel
+
+
+class Financeiro_do_Contrato(models.Model):
+
+    contrato = models.CharField("Contrato", max_length=10, null=True, blank=True)
+    imovel = models.ForeignKey(Aluguel, on_delete=models.PROTECT, related_name='Clientes_proprietario +')
+    vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
+    parcela = models.CharField("Parcela", max_length=10, null=True, blank=True)
+    valor = models.CharField("Valor", max_length=10, null=True, blank=True)
+    multa = models.CharField("Multa", max_length=10, null=True, blank=True)
+    juros = models.CharField("Juros", max_length=10, null=True, blank=True)
+    valor_total = models.CharField("Valor Total", max_length=10, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Financeiro'
+        verbose_name_plural = 'Financeiro do Contrato'

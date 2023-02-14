@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'apps.cadastros.apps.CadastrosConfig',
     'apps.contratos.apps.ContratosConfig',
     'apps.usuarios.apps.UsuariosConfig',
-    'apps.financeiro.apps.FinanceiroConfig',
 ]
 
 MIDDLEWARE = [

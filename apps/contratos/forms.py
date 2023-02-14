@@ -10,7 +10,7 @@ class AdministracaoForm(forms.ModelForm):
             "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'})            
         }
 
-class AlugueloForm(forms.ModelForm):
+class AluguelForm(forms.ModelForm):
     class Meta:
         model = models.Aluguel
         fields = '__all__'

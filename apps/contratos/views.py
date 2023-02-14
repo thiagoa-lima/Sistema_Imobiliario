@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Administracao, Aluguel
+from .models import Administracao, Aluguel, Financeiro_do_Contrato
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -29,7 +29,7 @@ class AdministracaoCreate(LoginRequiredMixin, CreateView):
 
 class AluguelCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
-    form_class = forms.AlugueloForm
+    form_class = forms.AluguelForm
     model = Aluguel
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
@@ -66,7 +66,7 @@ class AdministracaoDelete(LoginRequiredMixin, DeleteView):
 class AluguelUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Aluguel
-    form_class = forms.AlugueloForm
+    form_class = forms.AluguelForm
     template_name = 'contratos/aluguel/form.html'
     success_url = reverse_lazy('contrato-aluguel-listar')
     
@@ -78,7 +78,6 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
         
         return context
-    
 
 class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -95,6 +94,11 @@ class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
         
         return context
+
+# -----------------------------------------------------------------------------------
+
+
+
 # ===================================================================================
 # ------ LIST -----------------------------------------------------------------------
 # ===================================================================================
@@ -109,3 +113,9 @@ class AluguelList(LoginRequiredMixin, ListView):
     model = Aluguel
     template_name = 'contratos/aluguel/lista.html'
 
+class Financeiro_do_ContratoView(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.AluguelForm
+    template_name = 'contratos/financeiro/lista.html'
+    success_url = reverse_lazy('financeiro-do-contrato')

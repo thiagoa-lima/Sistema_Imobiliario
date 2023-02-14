@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Contratos de aluguel</title>
+<title>Financeiro</title>
 {% endblock %}
 
 {% block conteudo %}
@@ -11,8 +11,8 @@
 <div class="container">
 
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Contratos de Aluguel</h2> 
-        <a href="{% url 'contrato-aluguel-cadastrar' %}" class="btn btn-primary btn-bg">
+        <h2>Financeiro</h2> 
+        <a href="" class="btn btn-primary btn-bg">
             Novo contrato</a>
     </div>
 
@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Locatário</th>
+                    <th>Contrato</th>
                     <th>Imóvel</th>
                     <th>Data inicial</th>
                     <th>Data final</th>
@@ -33,22 +33,22 @@
             </thead> 
 
             <tbody>
-                {% for Aluguel in object_list %}
+                {% for Contrato in object_list %}
                 <tr>
-                    <td>{{ Aluguel.pk }}</td>
-                    <td>{{ Aluguel.locatario }}</td>
-                    <td>{{ Aluguel.imovel }}</td>
-                    <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
-                    <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
-                    <td>{{ Aluguel.finalidade }}</td>
+                    <td>{{ Contrato.pk }}</td>
+                    <td>{{ Contrato.locatario }}</td>
+                    <td>{{ Contrato.imovel }}</td>
+                    <td>{{ Contrato.data_inicial|date:'d/m/Y' }}</td>
+                    <td>{{ Contrato.data_final|date:'d/m/Y' }}</td>
+                    <td>{{ Contrato.finalidade }}</td>
                     <td>
-                        <a href="{% url 'financeiro-do-contrato' Aluguel.pk %}" class="btn btn-success btn-sm" title="Financeiro">
+                        <a href="#" class="btn btn-success btn-sm" title="Financeiro">
                             <i class="fas fa-money-bill-wave    "></i>
                         </a>
-                        <a href="{% url 'contrato-aluguel-editar' Aluguel.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                        <a href="#" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a> 
-                        <a href="{% url 'contrato-aluguel-excluir' Aluguel.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                        <a href="#" class="btn btn-danger btn-sm" title="Excluir">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
