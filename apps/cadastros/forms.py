@@ -6,6 +6,7 @@ class ImoveisForm(forms.ModelForm):
     class Meta:
         model = models.Imoveis
         fields = '__all__'
+        exclude = []
         widgets = {
             "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'})            
         }

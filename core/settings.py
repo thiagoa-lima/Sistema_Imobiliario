@@ -20,7 +20,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,6 +111,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+THOUSAND_SEPARATOR='.',
+
+USE_THOUSAND_SEPARATOR=True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -148,3 +151,8 @@ LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
 # --------------------------------------------
+
+# REST_FRAMEWORK = {
+#     'DATE_FORMAT': "%d/%m/%Y",
+#     'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
+# }

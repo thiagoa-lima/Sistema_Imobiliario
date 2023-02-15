@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from datetime import datetime
 
 
 class AdministracaoForm(forms.ModelForm):
@@ -17,6 +18,4 @@ class AluguelForm(forms.ModelForm):
         widgets = {
             "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'}),
             "locatario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um locatário', 'style': 'width: 100%'}),
-
         }
-     

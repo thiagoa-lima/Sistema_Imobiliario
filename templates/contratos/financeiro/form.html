@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        <!-- Preencha todos os campos obrigatórios -->
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+
+        <div class="row">
+            <h5></h5>
+            <div class="form-group col-md-10 mb-3" >
+                {{ form.contrato|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-3">
+                {{ form.parcela|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                Dados Gerais
+                <hr>
+                <div class="row mt-4">                        
+                    <div class="form-group col-md-4 mb-3">
+                        {{ form.vencimento|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        {{ form.vencimento_real|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        {{ form.pagamento|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        {{ form.valor|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
+                        {{ form.multa|as_crispy_field }}
+                    </div> 
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.juros|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                        {{ form.valor_total|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+        <button type="reset" class="btn btn-danger mt-4">
+            Cancelar         
+        </button>
+    </form>
+
+    
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
+
+            $('.select2').select2({theme: 'bootstrap-5'});
+        
+            // =============================================================
+            // ------ HABILITA E DESABILITA CAMPOS -------------------------
+            // =============================================================
+            
+            $('#id_contrato').attr('readonly','readonly')
+            $('#id_parcela').attr('readonly','readonly')
+            $('#id_vencimento').attr('readonly','readonly')
+            $('#id_vencimento_real').attr('readonly','readonly')
+            $('#id_multa').attr('readonly','readonly')
+            $('#id_juros').attr('readonly','readonly')
+            $('#id_valor_total').attr('readonly','readonly')
+            $('#id_valor').attr('readonly','readonly')
+            
+            // =============================================================
+            // ------ CALCULA MULTA E JUROS --------------------------------
+            // =============================================================
+
+            $("#id_pagamento").blur(function() {
+                
+                // FORMATA O VENCIMENTO REAL
+                var vencimento_real = document.querySelector("#id_vencimento").value;
+                var arrvencimento_real = vencimento_real.split('/');
+                var stringFormatada = arrvencimento_real[1] + '-' + arrvencimento_real[0] + '-' +arrvencimento_real[2];
+                var vencimento_real_formatado = new Date(stringFormatada);
+                
+                // FORMATA A DATA DO PAGAMENTO
+                var data_pagamento = document.querySelector("#id_pagamento").value;
+                var arr_data_pagamento = data_pagamento.split('/');
+                var stringFormatada = arr_data_pagamento[1] + '-' + arr_data_pagamento[0] + '-' +arr_data_pagamento[2];
+                var data_pagamento_formatado = new Date(stringFormatada);
+                
+                // VERIFICA SE O PAGAMENTO ESTÁ SENDO EFETUADO COM ATRASO
+                if (data_pagamento_formatado > vencimento_real_formatado){ 
+
+                    // CALCULA QUANTOS DIAS TEM DE ATRASO
+                    let difference = Math.abs(data_pagamento_formatado - vencimento_real_formatado);
+                    dias_de_atraso = difference/(1000 * 3600 * 24)
+
+                    // CALCULA A MULTA E JUROS
+                    let valor = document.querySelector('#id_valor').value
+                    let multa = parseFloat(valor * .1).toFixed(2) 
+                    let juros_por_dia =  0.000333333 * parseFloat(valor)
+                    let juros_total = parseFloat(juros_por_dia).toFixed(2) * dias_de_atraso
+                    let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
+                    
+                    // EDITA OS CAMPOS APÓS ATUALIZAÇÃO
+                    $("#id_multa").val(multa)
+                    $("#id_valor_total").val(valor_total);
+                    $("#id_juros").val(juros_total);
+                } 
+                
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            // $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
+            // $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            // $('#id_valor').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_multa').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_valor_total').mask("000.000.000.000.000,00", {reverse: true});
+            // // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
+            // // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+
+            });
+        });
+    </script>
+{% endblock %}

@@ -7,6 +7,18 @@ from django.views.generic.list import ListView
 
 from . import forms
 
+def pagamento(request):
+    context = {}
+    pagamento_list = Financeiro_do_Contrato.objects.all()
+    aluguel = Aluguel.objects.all()
+    return render(request, 'lista.html', context)
+
+
+
+
+
+
+
 # ===================================================================================
 # ------ CREATE ---------------------------------------------------------------------
 # ===================================================================================
@@ -79,6 +91,24 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         
         return context
 
+class Financeiro_do_ContratoUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    fields = '__all__'
+    template_name = 'contratos/financeiro/form.html'
+    success_url = reverse_lazy('financeiro-do-contrato-listar')
+
+    # Atualizar os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Salvar"
+        
+        return context
+
+# -----------------------------------------------------------------------------------
+
 class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Administracao
@@ -113,9 +143,13 @@ class AluguelList(LoginRequiredMixin, ListView):
     model = Aluguel
     template_name = 'contratos/aluguel/lista.html'
 
-class Financeiro_do_ContratoView(LoginRequiredMixin, ListView):
+class Financeiro_do_ContratoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
-    form_class = forms.AluguelForm
     template_name = 'contratos/financeiro/lista.html'
-    success_url = reverse_lazy('financeiro-do-contrato')
+   
+
+
+
+
+

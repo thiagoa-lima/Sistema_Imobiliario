@@ -24,10 +24,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Contrato</th>
-                    <th>Imóvel</th>
-                    <th>Data inicial</th>
-                    <th>Data final</th>
-                    <th>Finalidade</th>
+                    <th>Parcela</th>
+                    <th>Vencimento</th>
+                    <th>Pagamento</th>
+                    <th>valor</th>
                     <th>Opções</th>
                 </tr>
             </thead> 
@@ -36,16 +36,14 @@
                 {% for Contrato in object_list %}
                 <tr>
                     <td>{{ Contrato.pk }}</td>
-                    <td>{{ Contrato.locatario }}</td>
-                    <td>{{ Contrato.imovel }}</td>
-                    <td>{{ Contrato.data_inicial|date:'d/m/Y' }}</td>
-                    <td>{{ Contrato.data_final|date:'d/m/Y' }}</td>
-                    <td>{{ Contrato.finalidade }}</td>
+                    <td>{{ Contrato.contrato }}</td>
+                    <td>{{ Contrato.parcela }}</td>
+                    <td>{{ Contrato.vencimento|date:'d/m/Y' }}</td>
+                    <td>{{ Contrato.pagamento|date:'d/m/Y' }}</td>
+                    <td>{{ Contrato.valor }}</td>
+                    
                     <td>
-                        <a href="#" class="btn btn-success btn-sm" title="Financeiro">
-                            <i class="fas fa-money-bill-wave    "></i>
-                        </a>
-                        <a href="#" class="btn btn-warning btn-sm" title="Editar">
+                        <a href="{% url 'financeiro-do-contrato-editar' Contrato.pk %}" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a> 
                         <a href="#" class="btn btn-danger btn-sm" title="Excluir">

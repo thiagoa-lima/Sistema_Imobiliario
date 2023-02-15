@@ -2,7 +2,7 @@ from django.db import models
 from apps.cadastros.models import Clientes, Imoveis
 from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
-
+import datetime 
 
 # Módulos importados para alteração automática de datas
 from dateutil.relativedelta import relativedelta
@@ -46,9 +46,9 @@ class Administracao(models.Model):
         endereco = str(self.imovel)
         return endereco
        
-# @receiver(pre_save, sender=Administracao)
-# def callback_Administracao(sender, instance, *args, **kwargs):
-#     instance.data_final = (instance.data_inicial + relativedelta(months=+3))
+@receiver(pre_save, sender=Administracao)
+def callback_Administracao(sender, instance, *args, **kwargs):
+    instance.data_final = (instance.data_inicial + relativedelta(months=+3))
 
 class Aluguel(models.Model):
 
@@ -101,16 +101,17 @@ class Aluguel(models.Model):
     def __str__(self):
         imovel = str(self.imovel)
         locatario = str(self.locatario)
-        return 'Inquilino: ' + locatario + ', imóvel: ' + imovel
+        return locatario + ': ' + imovel
 
 
 class Financeiro_do_Contrato(models.Model):
 
-    contrato = models.CharField("Contrato", max_length=10, null=True, blank=True)
-    imovel = models.ForeignKey(Aluguel, on_delete=models.PROTECT, related_name='Clientes_proprietario +')
-    vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
+    contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
+    vencimento = models.DateField("Vencimento", max_length=10)
+    vencimento_real = models.DateField ("Vencimento Real", max_length=20)
+    pagamento = models.DateField("Data Pagamento", null=True, blank=True)
     parcela = models.CharField("Parcela", max_length=10, null=True, blank=True)
-    valor = models.CharField("Valor", max_length=10, null=True, blank=True)
+    valor = models.DecimalField("Valor", max_digits=50,decimal_places=2, null=True, blank=True)
     multa = models.CharField("Multa", max_length=10, null=True, blank=True)
     juros = models.CharField("Juros", max_length=10, null=True, blank=True)
     valor_total = models.CharField("Valor Total", max_length=10, null=True, blank=True)
@@ -118,3 +119,19 @@ class Financeiro_do_Contrato(models.Model):
     class Meta:
         verbose_name = 'Financeiro'
         verbose_name_plural = 'Financeiro do Contrato'
+
+    def calcula_vencimento_real():
+        vencimento_real = datetime.today.weekday()
+        return vencimento_real
+
+# ------------------------------------------------------------------------------------
+# ------ CALCULA O VENCIMENTO REAL ---------------------------------------------------
+# ------------------------------------------------------------------------------------
+
+@receiver(pre_save, sender=Financeiro_do_Contrato)
+def Calula_rencimento_real(sender, instance, *args, **kwargs):
+    if datetime.date.weekday(instance.vencimento) == 6:
+        instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
+    elif datetime.date.weekday(instance.vencimento) == 5:
+        instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
+  
