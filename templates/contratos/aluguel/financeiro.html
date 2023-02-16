@@ -76,9 +76,13 @@
                 <thead>
                     <tr>
                         <th>Parcela</th>
-                        <th>Vencimento</th>
+                        <th>Vcto</th>
+                        <th>Vcto Real</th>
                         <th>Valor</th>
                         <th>Data Pgto</th>
+                        <th>Multa</th>
+                        <th>Juros</th>
+                        <th>Valor Pago</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -87,8 +91,12 @@
                     <tr>
                         <td>{{ parcela.parcela }}</td>
                         <td>{{ parcela.vencimento|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.vencimento_real|date:'d/m/Y' }}</td>
                         <td>{{ parcela.valor }}</td>
                         <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.multa|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.juros|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.total|date:'d/m/Y' }}</td>
                         <td>
                             <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg" title="Financeiro">
                                 <i class="fas fa-money-bill-wave    "></i>
