@@ -24,7 +24,7 @@ class Administracao(models.Model):
     )
 
     # Dados iniciais
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
     imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
     valor_aluguel = models.CharField("Valor do aluguel", default=None, max_length=20)
     taxa_admin_mensal = models.CharField("Tx Adm Mensal", default=10, max_length=20)
@@ -79,10 +79,10 @@ class Aluguel(models.Model):
     )
 
     # dados do contrato
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +', limit_choices_to={'qualificacao':'Proprietário'})
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
     imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True, sort=True)
     garantia = models.CharField('Garantia', max_length=50, choices=garantia_choices, blank=True, null=True)
-    locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True, limit_choices_to={'qualificacao':'Locatário'})  
+    locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True)  
     finalidade = models.CharField('Finalidade', max_length=50, choices=finalidade_choices, blank=True, null=True)
     data_inicial = models.DateField('Data inicial', blank=True, null=True)
     periodo_meses = models.IntegerField('Período (em meses)', blank=True, null=True)
