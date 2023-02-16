@@ -121,7 +121,7 @@
             $("#id_pagamento").blur(function() {
                 
                 // FORMATA O VENCIMENTO REAL
-                var vencimento_real = document.querySelector("#id_vencimento").value;
+                var vencimento_real = document.querySelector("#id_vencimento_real").value;
                 var arrvencimento_real = vencimento_real.split('/');
                 var stringFormatada = arrvencimento_real[1] + '-' + arrvencimento_real[0] + '-' +arrvencimento_real[2];
                 var vencimento_real_formatado = new Date(stringFormatada);
@@ -132,13 +132,13 @@
                 var stringFormatada = arr_data_pagamento[1] + '-' + arr_data_pagamento[0] + '-' +arr_data_pagamento[2];
                 var data_pagamento_formatado = new Date(stringFormatada);
                 
+                // CALCULA QUANTOS DIAS TEM DE ATRASO
+                let difference = Math.abs(data_pagamento_formatado - vencimento_real_formatado);
+                dias_de_atraso = difference/(1000 * 3600 * 24)
+
                 // VERIFICA SE O PAGAMENTO ESTÁ SENDO EFETUADO COM ATRASO
                 if (data_pagamento_formatado > vencimento_real_formatado){ 
-
-                    // CALCULA QUANTOS DIAS TEM DE ATRASO
-                    let difference = Math.abs(data_pagamento_formatado - vencimento_real_formatado);
-                    dias_de_atraso = difference/(1000 * 3600 * 24)
-
+                    
                     // CALCULA A MULTA E JUROS
                     let valor = document.querySelector('#id_valor').value
                     let multa = parseFloat(valor * .1).toFixed(2) 
@@ -147,10 +147,22 @@
                     let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
                     
                     // EDITA OS CAMPOS APÓS ATUALIZAÇÃO
-                    $("#id_multa").val(multa)
-                    $("#id_valor_total").val(valor_total);
-                    $("#id_juros").val(juros_total);
-                } 
+                    $("#id_multa").val(parseFloat(multa).toFixed(2))
+                    $("#id_juros").val(parseFloat(juros_total).toFixed(2))
+                    $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
+
+                } else {
+                    // CALCULA A MULTA E JUROS
+                    let valor = document.querySelector('#id_valor').value
+                    let multa = 0.00
+                    let juros_por_dia =  0
+                    let juros_total = 0
+                    let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
+                    
+                    $("#id_multa").val(parseFloat(multa).toFixed(2))
+                    $("#id_juros").val(parseFloat(juros_total).toFixed(2))
+                    $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
+                }
                 
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------

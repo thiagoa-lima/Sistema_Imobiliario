@@ -103,7 +103,7 @@ class Financeiro_do_ContratoUpdate(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(*args, **kwargs)
 
         context['titulo'] = "Baixar Parcela de Aluguel"
-        context['botao'] = "Salvar"
+        context['botao'] = "Baixar Parcela"
         
         return context
 

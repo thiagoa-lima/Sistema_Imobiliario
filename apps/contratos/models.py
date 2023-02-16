@@ -108,13 +108,13 @@ class Financeiro_do_Contrato(models.Model):
 
     contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
     vencimento = models.DateField("Vencimento", max_length=10)
-    vencimento_real = models.DateField ("Vencimento Real", max_length=20)
+    vencimento_real = models.DateField ("Vencimento Real", max_length=20, null=True, blank=True)
     pagamento = models.DateField("Data Pagamento", null=True, blank=True)
-    parcela = models.CharField("Parcela", max_length=10, null=True, blank=True)
-    valor = models.DecimalField("Valor", max_digits=50,decimal_places=2, null=True, blank=True)
-    multa = models.CharField("Multa", max_length=10, null=True, blank=True)
-    juros = models.CharField("Juros", max_length=10, null=True, blank=True)
-    valor_total = models.CharField("Valor Total", max_length=10, null=True, blank=True)
+    parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
+    valor = models.DecimalField("Valor", max_digits=50, decimal_places=2, null=True, blank=True)
+    multa = models.DecimalField("Multa", max_digits=50, decimal_places=2, null=True, blank=True)
+    juros = models.DecimalField("Juros", max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_total = models.DecimalField("Valor total", max_digits=50, decimal_places=2, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Financeiro'
