@@ -33,17 +33,17 @@
             </thead> 
 
             <tbody>
-                {% for Contrato in object_list %}
+                {% for parcela in object_list %}
                 <tr>
-                    <td>{{ Contrato.pk }}</td>
-                    <td>{{ Contrato.contrato }}</td>
-                    <td>{{ Contrato.parcela }}</td>
-                    <td>{{ Contrato.vencimento|date:'d/m/Y' }}</td>
-                    <td>{{ Contrato.pagamento|date:'d/m/Y' }}</td>
-                    <td>{{ Contrato.valor }}</td>
+                    <td>{{ parcela.pk }}</td>
+                    <td>{{ parcela.contrato }}</td>
+                    <td>{{ parcela.parcela }}</td>
+                    <td>{{ parcela.vencimento|date:'d/m/Y' }}</td>
+                    <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
+                    <td>{{ parcela.valor }}</td>
                     
                     <td>
-                        <a href="{% url 'financeiro-do-contrato-editar' Contrato.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                        <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a> 
                         <a href="#" class="btn btn-danger btn-sm" title="Excluir">

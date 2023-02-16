@@ -7,16 +7,13 @@ from django.views.generic.list import ListView
 
 from . import forms
 
-def pagamento(request):
+def Financeiro_do_aluguel(request, pk):  
     context = {}
-    pagamento_list = Financeiro_do_Contrato.objects.all()
-    aluguel = Aluguel.objects.all()
-    return render(request, 'lista.html', context)
-
-
-
-
-
+    contratos = Aluguel.objects.filter(id=pk)
+    parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
+    context['contratos'] = contratos
+    context['parcelas'] = parcelas
+    return render(request, 'contratos/aluguel/financeiro.html', context)
 
 
 # ===================================================================================

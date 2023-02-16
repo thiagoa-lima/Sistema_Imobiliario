@@ -3,7 +3,7 @@ from .views import AdministracaoList, AluguelList, Financeiro_do_ContratoList
 from .views import AdministracaoCreate, AluguelCreate
 from .views import AdministracaoUpdate, AluguelUpdate, Financeiro_do_ContratoUpdate
 from .views import AdministracaoDelete, AluguelDelete
-from .views import pagamento
+from apps.contratos import views
 
 # app_name = 'contratos'
 
@@ -18,8 +18,13 @@ urlpatterns = [
     path('contratos-aluguel/excluir/<int:pk>', AluguelDelete.as_view(), name='contrato-aluguel-excluir'),
     path('contratos-aluguel/editar/<int:pk>', AluguelUpdate.as_view(), name='contrato-aluguel-editar'),
 
-    path('contratos-aluguel/financeiro/listar', Financeiro_do_ContratoList.as_view(), name='financeiro-do-contrato-listar'),
     path('contratos-aluguel/financeiro/editar/<int:pk>', Financeiro_do_ContratoUpdate.as_view(), name='financeiro-do-contrato-editar'),
+    path('contratos-aluguel/financeiro/listar/<int:pk>', views.Financeiro_do_aluguel, name='financeiro-do-contrato-listar' ),
 
-    path('lista',pagamento, name='lista' )
+
+
+
+
+
+    path('contratos-aluguel/financeiro/listar', Financeiro_do_ContratoList.as_view(), name='financeiro-do-contrato-lisssssstar'),
 ]

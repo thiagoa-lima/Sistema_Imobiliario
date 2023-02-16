@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="jumbotron">
+    <h1 class="display-3">Parcela</h1>
+    <p class="lead">Exemplo</p>
+    <hr class="my-2">
+</div>
+
+
+{% for contrato in contratos %}
+    {{ contrato.pk }}
+    {{ contrato.locatario }}
+    {{ contrato.imovel }}
+    {{ contrato.data_inicial|date:'d/m/Y' }}
+    {{ contrato.data_final|date:'d/m/Y' }}
+    {{ contrato.finalidade }}
+{% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h5>teste</h5>
+            <table class="table table-striped" id="tabela">
+                <thead>
+                    <tr>
+                        <th>Parcela</th>
+                        <th>Vencimento</th>
+                        <th>Valor</th>
+                        <th>Data Pgto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parcela in parcelas %}
+                    <tr>
+                        <td>{{ parcela.parcela }}</td>
+                        <td>{{ parcela.vencimento|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.valor }}</td>
+                        <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block scripts %}
+
+
+    <script>
+        $(document).ready(function() {
+
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
+
+            $('.select2').select2({theme: 'bootstrap-5'});
+        
+            // =============================================================
+            // ------ DESABILITA CAMPOS ------------------------------------
+            // =============================================================
+            
+            $('#id_contrato').attr('readonly','readonly')
+            $('#id_parcela').attr('readonly','readonly')
+            $('#id_vencimento').attr('readonly','readonly')
+            $('#id_vencimento_real').attr('readonly','readonly')
+            $('#id_multa').attr('readonly','readonly')
+            $('#id_juros').attr('readonly','readonly')
+            $('#id_valor_total').attr('readonly','readonly')
+            $('#id_valor').attr('readonly','readonly')
+            
+            // =============================================================
+            // ------ CALCULA MULTA E JUROS --------------------------------
+            // =============================================================
+
+            $("#id_pagamento").blur(function() {
+                
+                // FORMATA O VENCIMENTO REAL
+                var vencimento_real = document.querySelector("#id_vencimento_real").value;
+                var arrvencimento_real = vencimento_real.split('/');
+                var stringFormatada = arrvencimento_real[1] + '-' + arrvencimento_real[0] + '-' +arrvencimento_real[2];
+                var vencimento_real_formatado = new Date(stringFormatada);
+                
+                // FORMATA A DATA DO PAGAMENTO
+                var data_pagamento = document.querySelector("#id_pagamento").value;
+                var arr_data_pagamento = data_pagamento.split('/');
+                var stringFormatada = arr_data_pagamento[1] + '-' + arr_data_pagamento[0] + '-' +arr_data_pagamento[2];
+                var data_pagamento_formatado = new Date(stringFormatada);
+                
+                // CALCULA QUANTOS DIAS TEM DE ATRASO
+                let difference = Math.abs(data_pagamento_formatado - vencimento_real_formatado);
+                dias_de_atraso = difference/(1000 * 3600 * 24)
+
+                // VERIFICA SE O PAGAMENTO ESTÁ SENDO EFETUADO COM ATRASO
+                if (data_pagamento_formatado > vencimento_real_formatado){ 
+                    
+                    // CALCULA A MULTA E JUROS
+                    let valor = document.querySelector('#id_valor').value
+                    let multa = parseFloat(valor * .1).toFixed(2) 
+                    let juros_por_dia =  0.000333333 * parseFloat(valor)
+                    let juros_total = parseFloat(juros_por_dia * dias_de_atraso).toFixed(2)
+                    let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
+                    
+                    // EDITA OS CAMPOS APÓS ATUALIZAÇÃO
+                    $("#id_multa").val(parseFloat(multa).toFixed(2))
+                    $("#id_juros").val(parseFloat(juros_total).toFixed(2))
+                    $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
+
+                } else {
+                    // CALCULA A MULTA E JUROS
+                    let valor = document.querySelector('#id_valor').value
+                    let multa = 0.00
+                    let juros_por_dia =  0
+                    let juros_total = 0
+                    let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
+                    
+                    $("#id_multa").val(parseFloat(multa).toFixed(2))
+                    $("#id_juros").val(parseFloat(juros_total).toFixed(2))
+                    $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
+                }
+                
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            // $('#id_valor').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_multa').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_valor_total').mask("000.000.000.000.000,00", {reverse: true});
+            // // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
+            // // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+
+            });
+        });
+    </script>
+{% endblock %}
