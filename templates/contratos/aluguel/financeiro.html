@@ -26,7 +26,7 @@
     </h5> 
 
 
-    <div class="accordion mt-4" id="accordionExample">
+    <div class="accordion mt-4 mb-2" id="accordionExample">
         <div class="card">
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
@@ -38,7 +38,28 @@
         
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non alemanha 0 x 2 coreia do sul cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <form action=""method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label mb-0 mt-1"> Nº de parcelas</label>
+                                <input class="form-control" type="number" name="f_nome" placeholder="">
+                            </div>
+                            <div class="col">
+                                <label class="form-label mb-0 mt-1"> Nº da 1ª parcela</label>
+                                <input class="form-control" type="number" name="f_nome" placeholder="">      
+                            </div>
+                            <div class="col">   
+                                <label class="form-label mb-0 mt-1"> Vcto 1ª parcela</label>
+                                <input class="form-control" type="date" name="f_nome" placeholder="">
+                            </div>
+                            <div class="col">
+                                <label class="form-label mb-0 mt-1"> Valor</label>
+                                <input class="form-control" type="number" name="f_nome" placeholder="">
+                            </div>
+                        </div>
+                        <input class="form-control mb-0 mt-3" type="submit" name="btn_gerar_parcelas" value="Gerar">
+                    </form>
                 </div>
             </div>
         </div>
@@ -69,7 +90,7 @@
                         <td>{{ parcela.valor }}</td>
                         <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
                         <td>
-                            <a href="" class="btn btn-success btn-sm" title="Financeiro">
+                            <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg" title="Financeiro">
                                 <i class="fas fa-money-bill-wave    "></i>
                             </a>
                             <a href="" class="btn btn-warning btn-sm" title="Editar">
@@ -87,6 +108,26 @@
 </div>
     
 
+<!-- Modal grande -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      thiago asm
+      <div class="card text-left">
+        <img class="card-img-top" src="holder.js/100px180/" alt="">
+        <div class="card-body">
+          <h4 class="card-title">Title</h4>
+          <p class="card-text">Body</p>
+          <a href="" class="btn btn-danger btn-sm" title="Excluir">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -100,7 +141,6 @@
             // =============================================================
             // ------ COLLAPSE ---------------------------------------------
             // =============================================================
-            $('.').collapse()
             
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
