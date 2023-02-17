@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AdministracaoList, AluguelList, Financeiro_do_ContratoList
+from .views import AdministracaoList, AluguelList, Listar_Financeiro_do_aluguel
 from .views import AdministracaoCreate, AluguelCreate
 from .views import AdministracaoUpdate, AluguelUpdate, Financeiro_do_ContratoUpdate
 from .views import AdministracaoDelete, AluguelDelete
@@ -19,12 +19,5 @@ urlpatterns = [
     path('contratos-aluguel/editar/<int:pk>', AluguelUpdate.as_view(), name='contrato-aluguel-editar'),
 
     path('contratos-aluguel/financeiro/editar/<int:pk>', Financeiro_do_ContratoUpdate.as_view(), name='financeiro-do-contrato-editar'),
-    path('contratos-aluguel/financeiro/listar/<int:pk>', views.Financeiro_do_aluguel, name='financeiro-do-contrato-listar' ),
-
-
-
-
-
-
-    path('contratos-aluguel/financeiro/listar', Financeiro_do_ContratoList.as_view(), name='financeiro-do-contrato-lisssssstar'),
+    path('contratos-aluguel/financeiro/listar/<int:pk>', views.Listar_Financeiro_do_aluguel, name='financeiro-do-contrato-listar' ),
 ]

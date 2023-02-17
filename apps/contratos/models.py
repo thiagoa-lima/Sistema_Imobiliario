@@ -107,7 +107,7 @@ class Aluguel(models.Model):
 class Financeiro_do_Contrato(models.Model):
 
     contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
-    vencimento = models.DateField("Vencimento", max_length=10)
+    vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
     vencimento_real = models.DateField ("Vencimento Real", max_length=20, null=True, blank=True)
     pagamento = models.DateField("Data Pagamento", null=True, blank=True)
     parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
@@ -120,18 +120,18 @@ class Financeiro_do_Contrato(models.Model):
         verbose_name = 'Financeiro'
         verbose_name_plural = 'Financeiro do Contrato'
 
-    def calcula_vencimento_real():
-        vencimento_real = datetime.today.weekday()
-        return vencimento_real
+#     def calcula_vencimento_real():
+#         vencimento_real = datetime.today.weekday()
+#         return vencimento_real
 
-# ------------------------------------------------------------------------------------
+# # ------------------------------------------------------------------------------------
 # ------ CALCULA O VENCIMENTO REAL ---------------------------------------------------
 # ------------------------------------------------------------------------------------
 
-@receiver(pre_save, sender=Financeiro_do_Contrato)
-def Calula_rencimento_real(sender, instance, *args, **kwargs):
-    if datetime.date.weekday(instance.vencimento) == 6:
-        instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
-    elif datetime.date.weekday(instance.vencimento) == 5:
-        instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
+# @receiver(pre_save, sender=Financeiro_do_Contrato)
+# def Calcula_vencimento_real(sender, instance, *args, **kwargs):
+#     if datetime.date.weekday(instance.vencimento) == 6:
+#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
+#     elif datetime.date.weekday(instance.vencimento) == 5:
+#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
   

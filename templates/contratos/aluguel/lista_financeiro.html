@@ -21,11 +21,11 @@
             {{ contrato.locatario }}
         </h2> 
     </div>
+
     <h5 class="lead">
         {{ contrato.imovel }}
     </h5> 
-
-
+    
     <div class="accordion mt-4 mb-2" id="accordionExample">
         <div class="card">
             <div class="card-header" id="headingOne">
@@ -38,24 +38,24 @@
         
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    <form action=""method="post">
+                    <form action="" method='post' id="id_form">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col">
                                 <label class="form-label mb-0 mt-1"> Nº de parcelas</label>
-                                <input class="form-control" type="number" name="f_nome" placeholder="">
+                                <input class="form-control" type="number" id='num_parcelas' name="num_parcelas" placeholder="" autocomplete="off">
                             </div>
                             <div class="col">
                                 <label class="form-label mb-0 mt-1"> Nº da 1ª parcela</label>
-                                <input class="form-control" type="number" name="f_nome" placeholder="">      
+                                <input class="form-control" type="number" name="primeira_parcela" placeholder="">      
                             </div>
                             <div class="col">   
                                 <label class="form-label mb-0 mt-1"> Vcto 1ª parcela</label>
-                                <input class="form-control" type="date" name="f_nome" placeholder="">
+                                <input class="form-control" type="date" name="vencimento_primeira_parcela" placeholder="">
                             </div>
                             <div class="col">
                                 <label class="form-label mb-0 mt-1"> Valor</label>
-                                <input class="form-control" type="number" name="f_nome" placeholder="">
+                                <input class="form-control" type="number" name="valor_da_parcela" placeholder="">
                             </div>
                         </div>
                         <input class="form-control mb-0 mt-3" type="submit" name="btn_gerar_parcelas" value="Gerar">
@@ -65,8 +65,6 @@
         </div>
     </div>
 </div>
-
-
 {% endfor %}
 
 <div class="container">
@@ -94,12 +92,14 @@
                         <td>{{ parcela.vencimento_real|date:'d/m/Y' }}</td>
                         <td>{{ parcela.valor }}</td>
                         <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
-                        <td>{{ parcela.multa|date:'d/m/Y' }}</td>
-                        <td>{{ parcela.juros|date:'d/m/Y' }}</td>
-                        <td>{{ parcela.total|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.multa }}</td>
+                        <td>{{ parcela.juros }}</td>
+                        <td>{{ parcela.valor_total }}</td>
                         <td>
-                            <a href="" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg" title="Financeiro">
-                                <i class="fas fa-money-bill-wave    "></i>
+                            <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+
+                               
                             </a>
                             <a href="" class="btn btn-warning btn-sm" title="Editar">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -115,26 +115,17 @@
     </div>
 </div>
     
-
 <!-- Modal grande -->
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Modal grande</button>
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      thiago asm
-      <div class="card text-left">
-        <img class="card-img-top" src="holder.js/100px180/" alt="">
-        <div class="card-body">
-          <h4 class="card-title">Title</h4>
-          <p class="card-text">Body</p>
-          <a href="" class="btn btn-danger btn-sm" title="Excluir">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-        </div>
-      </div>
+        Testando
     </div>
   </div>
-</div>
+</div> -->
 
 {% endblock %}
 
@@ -149,7 +140,8 @@
             // =============================================================
             // ------ COLLAPSE ---------------------------------------------
             // =============================================================
-            
+
+
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
             // =============================================================
@@ -225,7 +217,8 @@
                     $("#id_juros").val(parseFloat(juros_total).toFixed(2))
                     $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
                 }
-                
+            });
+
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
             // =============================================================
@@ -238,7 +231,6 @@
             // // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
             // // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
 
-            });
         });
     </script>
 {% endblock %}

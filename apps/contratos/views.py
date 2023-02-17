@@ -7,13 +7,68 @@ from django.views.generic.list import ListView
 
 from . import forms
 
-def Financeiro_do_aluguel(request, pk):  
+def Listar_Financeiro_do_aluguel(request, pk):  
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
     parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
     context['contratos'] = contratos
-    context['parcelas'] = parcelas
-    return render(request, 'contratos/aluguel/financeiro.html', context)
+    context['parcelas'] = parcelas 
+    
+    
+    
+# ----------------------------------------------------------------------------------- 
+    num_parcelas = None
+    print(num_parcelas)
+
+    if request.method == 'POST':
+        num_parcelas = None
+        print(num_parcelas)
+
+        num_parcelas = request.POST['num_parcelas']
+        primeira_parcela = request.POST['primeira_parcela']
+        vencimento_primeira_parcela = request.POST['vencimento_primeira_parcela']
+        valor_da_parcela=request.POST['valor_da_parcela']
+        print(num_parcelas)
+
+        if num_parcelas != None:
+            nova_parcela = Financeiro_do_Contrato.objects.create(
+                    parcela=primeira_parcela, 
+                    contrato_id=pk,
+                    vencimento=vencimento_primeira_parcela,
+                    valor=valor_da_parcela,
+                    multa=0,
+                    juros=0,
+                    valor_total=0,
+                )
+    
+    
+    
+    # if request.method == 'POST':
+    #     num_parcelas = None
+    #     print(num_parcelas)
+
+    #     num_parcelas = request.POST['num_parcelas']
+    #     print(num_parcelas)
+
+    #     if num_parcelas != None:
+    #         nova_parcela = Financeiro_do_Contrato.objects.create(
+    #                 parcela=num_parcelas, 
+    #                 contrato_id=pk,
+    #             )
+
+
+
+# ----------------------------------------------------------------------------------- 
+
+    return render(request, 'contratos/aluguel/lista_financeiro.html', context)
+
+# @receiver(pre_save, sender=Financeiro_do_Contrato)
+# def Calcula_vencimento_real(sender, instance, *args, **kwargs):
+#     if datetime.date.weekday(instance.vencimento) == 6:
+#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
+#     elif datetime.date.weekday(instance.vencimento) == 5:
+#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
+  
 
 
 # ===================================================================================
@@ -93,9 +148,12 @@ class Financeiro_do_ContratoUpdate(LoginRequiredMixin, UpdateView):
     model = Financeiro_do_Contrato
     fields = '__all__'
     template_name = 'contratos/financeiro/form.html'
-    success_url = reverse_lazy('financeiro-do-contrato-listar')
 
-    # Atualizar os campos do formulário
+    # Método que guarda o ID do formulário que está sendo atualizado
+    def get_success_url(self) -> str:
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.pk})
+
+    # Método que atualiza os campos do formulário
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
 

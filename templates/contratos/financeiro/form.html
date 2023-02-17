@@ -30,11 +30,8 @@
 
         <div class="row">
             <h5></h5>
-            <div class="form-group col-md-10 mb-3" >
+             <div class="form-group col-md-10 mb-3 invisible" >
                 {{ form.contrato|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-3">
-                {{ form.parcela|as_crispy_field }}
             </div>
         </div>
 
@@ -43,10 +40,13 @@
                 Dados Gerais
                 <hr>
                 <div class="row mt-4">                        
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-2 mb-3">
+                        {{ form.parcela|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-3">
                         {{ form.vencimento|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-4 mb-3">
+                    <div class="form-group col-md-3 mb-3">
                         {{ form.vencimento_real|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-4 mb-3">
@@ -164,6 +164,9 @@
                     $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
                 }
                 
+                
+            });
+
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
             // =============================================================
@@ -176,7 +179,28 @@
             // // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
             // // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
 
-            });
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
     </script>
 {% endblock %}
