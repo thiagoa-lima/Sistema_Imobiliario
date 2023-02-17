@@ -4,72 +4,75 @@ from .models import Administracao, Aluguel, Financeiro_do_Contrato
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-
 from . import forms
+import datetime
+from dateutil.relativedelta import relativedelta
+from django.utils.dateparse import parse_date
 
-def Listar_Financeiro_do_aluguel(request, pk):  
+
+
+def Lista_parcela_aluguel(request, pk):  
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
     parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
     context['contratos'] = contratos
     context['parcelas'] = parcelas 
-    
-    
-    
-# ----------------------------------------------------------------------------------- 
-    num_parcelas = None
-    print(num_parcelas)
 
     if request.method == 'POST':
         num_parcelas = None
-        print(num_parcelas)
 
-        num_parcelas = request.POST['num_parcelas']
-        primeira_parcela = request.POST['primeira_parcela']
-        vencimento_primeira_parcela = request.POST['vencimento_primeira_parcela']
+        # ----------------------------------------------------------------------------
+        # DECLARAÇÃO VARIÁVEIS
+        # ----------------------------------------------------------------------------
+
+        num_parcelas_str = request.POST['num_parcelas']
+        num_parcelas = int(num_parcelas_str)
+
+        primeira_parcela_str = request.POST['primeira_parcela']
+        primeira_parcela = int(primeira_parcela_str)
+
+        vencimento_primeira_parcela_str = request.POST['vencimento_primeira_parcela']
+        vencimento_primeira_parcela = parse_date(vencimento_primeira_parcela_str)
+
         valor_da_parcela=request.POST['valor_da_parcela']
-        print(num_parcelas)
+  
+        # ----------------------------------------------------------------------------
+        # INCLUSÃO DAS NOVAS PARCELAS NO BANCO DE DADOS
+        # ----------------------------------------------------------------------------
 
-        if num_parcelas != None:
-            nova_parcela = Financeiro_do_Contrato.objects.create(
-                    parcela=primeira_parcela, 
-                    contrato_id=pk,
-                    vencimento=vencimento_primeira_parcela,
-                    valor=valor_da_parcela,
-                    multa=0,
-                    juros=0,
-                    valor_total=0,
-                )
-    
-    
-    
-    # if request.method == 'POST':
-    #     num_parcelas = None
-    #     print(num_parcelas)
+        for i in range(num_parcelas):
+            if num_parcelas != None:
 
-    #     num_parcelas = request.POST['num_parcelas']
-    #     print(num_parcelas)
+                # --------------------------------------------------------------------
+                # VALIDAÇÃO DE DATA PARA CÁLCULO DO VENCIMENTO REAL
+                # --------------------------------------------------------------------
 
-    #     if num_parcelas != None:
-    #         nova_parcela = Financeiro_do_Contrato.objects.create(
-    #                 parcela=num_parcelas, 
-    #                 contrato_id=pk,
-    #             )
+                vencimento = (vencimento_primeira_parcela + relativedelta(months=+i))
 
+                if datetime.date.weekday(vencimento) == 6:
+                    vencimento_real = (vencimento + relativedelta(days=+1))
+                elif datetime.date.weekday(vencimento) == 5:
+                     vencimento_real = (vencimento + relativedelta(days=+2))
+                else:
+                    vencimento_real = vencimento
+        
+                # --------------------------------------------------------------------
+                # EFETUA OS LANÇAMENTOS NO BANCO DE DADOS
+                # --------------------------------------------------------------------
 
-
-# ----------------------------------------------------------------------------------- 
+                nova_parcela = Financeiro_do_Contrato.objects.create(
+                        parcela=primeira_parcela + i, 
+                        contrato_id=pk,
+                        vencimento=vencimento,
+                        valor=valor_da_parcela,
+                        multa=0,
+                        juros=0,
+                        valor_total=0,
+                        vencimento_real=vencimento_real
+                    )
+            i += 1
 
     return render(request, 'contratos/aluguel/lista_financeiro.html', context)
-
-# @receiver(pre_save, sender=Financeiro_do_Contrato)
-# def Calcula_vencimento_real(sender, instance, *args, **kwargs):
-#     if datetime.date.weekday(instance.vencimento) == 6:
-#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
-#     elif datetime.date.weekday(instance.vencimento) == 5:
-#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
-  
-
 
 # ===================================================================================
 # ------ CREATE ---------------------------------------------------------------------
@@ -143,15 +146,15 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         
         return context
 
-class Financeiro_do_ContratoUpdate(LoginRequiredMixin, UpdateView):
+class Baixa_de_Parcela(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     fields = '__all__'
-    template_name = 'contratos/financeiro/form.html'
+    template_name = 'contratos/aluguel/baixa_de_parcela.html'
 
     # Método que guarda o ID do formulário que está sendo atualizado
     def get_success_url(self) -> str:
-        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.pk})
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
 
     # Método que atualiza os campos do formulário
     def get_context_data(self, *args, **kwargs):

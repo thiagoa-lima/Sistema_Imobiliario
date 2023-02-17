@@ -120,6 +120,12 @@
 
             $("#id_pagamento").blur(function() {
                 
+                // FORMATA O VENCIMENTO
+                var vencimento = document.querySelector("#id_vencimento").value;
+                var arrvencimento = vencimento.split('/');
+                var stringFormatada = arrvencimento[1] + '-' + arrvencimento[0] + '-' +arrvencimento[2];
+                var vencimento_formatado = new Date(stringFormatada);
+
                 // FORMATA O VENCIMENTO REAL
                 var vencimento_real = document.querySelector("#id_vencimento_real").value;
                 var arrvencimento_real = vencimento_real.split('/');
@@ -133,7 +139,7 @@
                 var data_pagamento_formatado = new Date(stringFormatada);
                 
                 // CALCULA QUANTOS DIAS TEM DE ATRASO
-                let difference = Math.abs(data_pagamento_formatado - vencimento_real_formatado);
+                let difference = Math.abs(data_pagamento_formatado - vencimento_formatado);
                 dias_de_atraso = difference/(1000 * 3600 * 24)
 
                 // VERIFICA SE O PAGAMENTO ESTÁ SENDO EFETUADO COM ATRASO

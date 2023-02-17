@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import AdministracaoList, AluguelList, Listar_Financeiro_do_aluguel
+from .views import AdministracaoList, AluguelList, Lista_parcela_aluguel
 from .views import AdministracaoCreate, AluguelCreate
-from .views import AdministracaoUpdate, AluguelUpdate, Financeiro_do_ContratoUpdate
+from .views import AdministracaoUpdate, AluguelUpdate, Baixa_de_Parcela
 from .views import AdministracaoDelete, AluguelDelete
 from apps.contratos import views
 
@@ -18,6 +18,6 @@ urlpatterns = [
     path('contratos-aluguel/excluir/<int:pk>', AluguelDelete.as_view(), name='contrato-aluguel-excluir'),
     path('contratos-aluguel/editar/<int:pk>', AluguelUpdate.as_view(), name='contrato-aluguel-editar'),
 
-    path('contratos-aluguel/financeiro/editar/<int:pk>', Financeiro_do_ContratoUpdate.as_view(), name='financeiro-do-contrato-editar'),
-    path('contratos-aluguel/financeiro/listar/<int:pk>', views.Listar_Financeiro_do_aluguel, name='financeiro-do-contrato-listar' ),
+    path('contratos-aluguel/financeiro/editar/<int:pk>', Baixa_de_Parcela.as_view(), name='financeiro-do-contrato-editar'),
+    path('contratos-aluguel/financeiro/listar/<int:pk>', views.Lista_parcela_aluguel, name='financeiro-do-contrato-listar' ),
 ]

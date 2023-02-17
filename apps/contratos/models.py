@@ -120,18 +120,4 @@ class Financeiro_do_Contrato(models.Model):
         verbose_name = 'Financeiro'
         verbose_name_plural = 'Financeiro do Contrato'
 
-#     def calcula_vencimento_real():
-#         vencimento_real = datetime.today.weekday()
-#         return vencimento_real
-
-# # ------------------------------------------------------------------------------------
-# ------ CALCULA O VENCIMENTO REAL ---------------------------------------------------
-# ------------------------------------------------------------------------------------
-
-# @receiver(pre_save, sender=Financeiro_do_Contrato)
-# def Calcula_vencimento_real(sender, instance, *args, **kwargs):
-#     if datetime.date.weekday(instance.vencimento) == 6:
-#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+1))
-#     elif datetime.date.weekday(instance.vencimento) == 5:
-#         instance.vencimento_real = (instance.vencimento + relativedelta(days=+2))
   
