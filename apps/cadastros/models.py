@@ -1,4 +1,5 @@
 from django.db import models
+from cpf_field.models import CPFField
 
 
 class Clientes(models.Model):
@@ -26,7 +27,7 @@ class Clientes(models.Model):
     )
     
     # INFORMAÇÕES INICIAIS
-    cpf = models.CharField('CPF', max_length=14, blank=True)
+    cpf = CPFField('CPF')
     nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
     tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
     qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)

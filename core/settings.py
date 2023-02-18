@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'smart_selects',
     'crispy_forms',
     'django_select2',
+    'cpf_field',
     
     
     # My apps
