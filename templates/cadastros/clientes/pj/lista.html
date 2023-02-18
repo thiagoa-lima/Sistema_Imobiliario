@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+    <title>Lista de Clientes</title>
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="container">
+
+    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+        <h2>Clientes</h2> 
+        
+        <a href="{% url 'cadastrar-clientes-pj' %}" class="btn btn-primary btn-bg">Cadastrar Cliente</a>
+
+    </div>
+
+    <hr>
+
+    <div class="table-resposive">
+        
+        <table class="table table-striped" id="tabela">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Celular</th>
+                    <th>Tipo</th>
+                    <th>Qualificação</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for Clientes in object_list %}
+                <tr>
+                    <td>{{ Clientes.pk }}</td>
+                    <td>{{ Clientes.nome }}</td>
+                    <td>{{ Clientes.celular }}</td>
+                    <td>{{ Clientes.tipo_cliente }}</td>
+                    <td>{{ Clientes.qualificacao }}</td>
+                    <td>
+                        <a href="{% url 'editar-clientes' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a> 
+                        <a href="{% url 'excluir-clientes' Clientes.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                
+                <tr>
+                    <td colspan="3">
+                        Nenhum cliente registrado
+                    </td>
+                </tr>
+                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Importação da Datatables que serve para formatar a tabela da lista -->
+<!-- <script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" 
+    type="text/javascript" >
+</script> -->
+
+<script src={% static "js/datatables-simple-demo.js" %}></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#tabela').DataTable({
+            "pageLength": 50,
+            "bSort": true,
+            "language":{
+                "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
+            },
+        });
+    });
+
+</script>
+{% endblock %}

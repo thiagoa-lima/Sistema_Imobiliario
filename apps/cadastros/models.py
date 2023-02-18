@@ -1,6 +1,8 @@
 from django.db import models
 from cpf_field.models import CPFField
 
+class Cliente(models.Model):
+    pass
 
 class Clientes_PF(models.Model):
 
@@ -28,18 +30,18 @@ class Clientes_PF(models.Model):
     
     # INFORMAÇÕES INICIAIS
     cpf = CPFField('CPF')
-    nome = models.CharField('Nome Completo', max_length=100, null=False, blank=False)
-    tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=False, blank=False)
+    nome = models.CharField('Nome Completo', max_length=100, null=True, blank=True)
+    tipo_cliente = models.CharField('Tipo Cliente', max_length=2, choices=tipo_cliente_choices, null=True, blank=True)
     qualificacao = models.CharField('Qualificação', max_length=20, choices=qualificacao_choices, null=True, blank=True)
 
     # CONTATO
-    telefone = models.CharField('Telefone', max_length=15, blank=True)
-    celular = models.CharField('Celular', max_length=15, blank=True)
+    telefone = models.CharField('Telefone', max_length=15, null=True, blank=True)
+    celular = models.CharField('Celular', max_length=15, null=True, blank=True)
     email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # FILIAÇÃO
-    pai = models.CharField('Nome do pai', max_length=120, blank=True)
-    mae = models.CharField('Nome da mãe', max_length=120, blank=True)
+    pai = models.CharField('Nome do pai', max_length=120, null=True, blank=True)
+    mae = models.CharField('Nome da mãe', max_length=120, null=True, blank=True)
     
     # MAIS OPÇÕES
     rg = models.CharField('RG', max_length=20, blank=True)
@@ -80,22 +82,32 @@ class Clientes_PF(models.Model):
         return self.nome
 
 class Clientes_PJ(models.Model):
+
+    # Dados Iniciais
+    cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
+    razao_social = models.CharField('Razão social', max_length=20, null=True, blank=True)
+    nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
+    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=20, null=True, blank=True)
+    data_abertura = models.CharField('Data de abertura', max_length=20, null=True, blank=True)
     
-    cnpj = models.CharField('RG', max_length=20, null=True, blank=True)
-    razao_social = models.CharField('RG', max_length=20, null=True, blank=True)
-    nome_fantasia = models.CharField('RG', max_length=20, null=True, blank=True)
-    inscricao_estadual = models.CharField('RG', max_length=20, null=True, blank=True)
-    data_abertura = models.CharField('RG', max_length=20, null=True, blank=True)
-    cep_sede = models.CharField('RG', max_length=20, null=True, blank=True)
-    endereco = models.CharField('RG', max_length=20, null=True, blank=True)
-    email_contato = models.CharField('RG', max_length=20, null=True, blank=True)
-    telefone_1 = models.CharField('RG', max_length=20, null=True, blank=True)
-    telefone_2 = models.CharField('RG', max_length=20, null=True, blank=True)
-    telefone_3 = models.CharField('RG', max_length=20, null=True, blank=True)
+    # Endereço
+    cep = models.CharField('CEP', max_length=10, null=True, blank=True)
+    endereco = models.CharField('Endereço', max_length=200, null=True, blank=True)
+    numero = models.CharField('Número', max_length=10, null=True, blank=True)
+    complemento = models.CharField('Complemento', max_length=100, null=True, blank=True)
+    bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
+    cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
+    uf = models.CharField('UF', max_length=2, null=True, blank=True)
+    
+    # Contato
+    email_contato = models.CharField('Email contato', max_length=20, null=True, blank=True)
+    telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
+    telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
+    telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
     responsavel_1 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
-    tipo_responsavel_1 = models.CharField('RG', max_length=20, null=True, blank=True)
+    tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
     responsavel_2 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
-    tipo_responsavel_2 = models.CharField('RG', max_length=20, null=True, blank=True)
+    tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Cliente PJ'
@@ -103,8 +115,6 @@ class Clientes_PJ(models.Model):
 
     def __str__(self):
         return self.razao_social
-
-
 
 class Imoveis(models.Model):
     

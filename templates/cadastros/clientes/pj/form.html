@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <h5>Informações Iniciais</h4>
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.cnpj|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.razao_social|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.nome_fantasia|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3  mb-0">
+                {{ form.inscricao_estadual|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.data_abertura|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <h5>Contatos</h4>
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.cep|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.endereco|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.email_contato|as_crispy_field }}
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    // Script para mascara
+    var SPMaskBehavior = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+    onKeyPress: function(val, e, field, options) {
+        field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $(document).ready(function () {
+        
+        
+        // =============================================================
+        // ------ MÁSCARA DE ENTRADA DE DADOS
+        // =============================================================
+        
+        $('#id_cpf').mask('000.000.000-00', {reverse: true, placeholder: "___.___.___-__"});
+        $('#id_telefone').mask(SPMaskBehavior, spOptions);
+        $('#id_celular').mask(SPMaskBehavior, spOptions);
+        $('#id_data_expedicao').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
+        $('#id_data_expedicao_conjuge').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
+        $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
+        $('#id_cep').mask('00000-000');
+     
+        // =============================================================
+        // ------ BUSCAR CEP AUTOMATICAMENTE
+        // =============================================================
+
+        function limpa_formulário_cep() {
+            // Limpa valores do formulário de cep.
+            $("#id_endereco").val("");
+            $("#id_bairro").val("");
+            $("#id_cidade").val("");
+            $("#id_uf").val("");
+        }
+
+        //Quando o campo cep perde o foco.
+        $("#id_cep").blur(function() {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = $(this).val().replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    $("#id_endereco").val("buscando...");
+                    $("#id_bairro").val("buscando...");
+                    $("#id_cidade").val("buscando...");
+                    $("#id_uf").val("buscando...");
+
+                    //Consulta o webservice viacep.com.br/
+                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                        if (!("erro" in dados)) {
+                            //Atualiza os campos com os valores da consulta.
+                            $("#id_endereco").val(dados.logradouro);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_cidade").val(dados.localidade);
+                            $("#id_uf").val(dados.uf);
+                        } //end if.
+                        else {
+                            //CEP pesquisado não foi encontrado.
+                            limpa_formulário_cep();
+                            alert("CEP não encontrado.");
+                        }
+                    });
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        }); 
+        // =============================================================
+        // ------ FIM BUSCAR CEP AUTOMATICAMENTE
+        // =============================================================
+    });
+
+</script>
+{% endblock %}

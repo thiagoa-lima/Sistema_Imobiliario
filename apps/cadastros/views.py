@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-from .models import Clientes_PF, Imoveis
+from .models import Clientes_PF, Clientes_PJ, Imoveis
 from django.urls import reverse_lazy
 from . import forms
 
@@ -80,6 +80,32 @@ class Clientes_PF_Delete(LoginRequiredMixin, DeleteView):
     model = Clientes_PF
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('listar-clientes')
+
+# ===================================================================================
+# ------ Clientes_PJ ----------------------------------------------------------------
+# ===================================================================================
+
+class Clientes_PJ_List(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Clientes_PJ
+    template_name = 'cadastros/clientes/pj/lista.html'
+
+class Clientes_PJ_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    group_required = u'administrador'
+    model = Clientes_PJ
+    fields = '__all__'
+    template_name = 'cadastros/clientes/pj/form.html'
+    success_url = reverse_lazy('listar-clientes-pj')
+
+    # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['titulo'] = "Cadastro de Clientes - Pessoa Jurídica"
+        context['botao'] = "Cadastrar"
+        
+        return context  
+
 
 # ===================================================================================
 # ------ Imóveis --------------------------------------------------------------------
