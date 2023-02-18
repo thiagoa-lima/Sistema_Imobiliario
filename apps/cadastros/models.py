@@ -2,7 +2,7 @@ from django.db import models
 from cpf_field.models import CPFField
 
 
-class Clientes(models.Model):
+class Clientes_PF(models.Model):
 
     # choices
     qualificacao_choices = (
@@ -53,7 +53,7 @@ class Clientes(models.Model):
 
     # CÔNJUGE
     nome_conjunge = models.CharField('Nome Completo', max_length=100, null=True, blank=True)
-    cpf_conjuge = models.CharField('CPF', max_length=20, null=True, blank=True)
+    cpf_conjuge = CPFField('CPF')
     rg_conjuge = models.CharField('RG', max_length=20, null=True, blank=True)
     orgao_expedidor_conjuge = models.CharField('Orgão Expedidor', max_length=20, null=True, blank=True)
     data_expedicao_conjuge = models.DateField('Data de Expedição', max_length=10, null=True, blank=True)
@@ -73,11 +73,38 @@ class Clientes(models.Model):
     uf = models.CharField('UF', max_length=2, null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Cliente'
-        verbose_name_plural = 'Clientes'
+        verbose_name = 'Cliente PF'
+        verbose_name_plural = 'Clientes PF'
 
     def __str__(self):
         return self.nome
+
+class Clientes_PJ(models.Model):
+    
+    cnpj = models.CharField('RG', max_length=20, null=True, blank=True)
+    razao_social = models.CharField('RG', max_length=20, null=True, blank=True)
+    nome_fantasia = models.CharField('RG', max_length=20, null=True, blank=True)
+    inscricao_estadual = models.CharField('RG', max_length=20, null=True, blank=True)
+    data_abertura = models.CharField('RG', max_length=20, null=True, blank=True)
+    cep_sede = models.CharField('RG', max_length=20, null=True, blank=True)
+    endereco = models.CharField('RG', max_length=20, null=True, blank=True)
+    email_contato = models.CharField('RG', max_length=20, null=True, blank=True)
+    telefone_1 = models.CharField('RG', max_length=20, null=True, blank=True)
+    telefone_2 = models.CharField('RG', max_length=20, null=True, blank=True)
+    telefone_3 = models.CharField('RG', max_length=20, null=True, blank=True)
+    responsavel_1 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
+    tipo_responsavel_1 = models.CharField('RG', max_length=20, null=True, blank=True)
+    responsavel_2 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
+    tipo_responsavel_2 = models.CharField('RG', max_length=20, null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Cliente PJ'
+        verbose_name_plural = 'Clientes PJ'
+
+    def __str__(self):
+        return self.razao_social
+
+
 
 class Imoveis(models.Model):
     
@@ -89,7 +116,7 @@ class Imoveis(models.Model):
     ]
 
     # dados básicos
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='cliente_proprietario')
+    proprietario = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='cliente_proprietario')
     tipo = models.CharField('Tipo de Imóvel', max_length=20, null=False, blank=False, choices=tipo_imovel_choices)
     
     # Endereço do imóvel
@@ -111,3 +138,5 @@ class Imoveis(models.Model):
         else:
             endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.cidade + '/' + self.uf
         return endereco_completo
+
+

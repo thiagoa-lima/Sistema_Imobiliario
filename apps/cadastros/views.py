@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-from .models import Clientes, Imoveis
+from .models import Clientes_PF, Imoveis
 from django.urls import reverse_lazy
 from . import forms
 
@@ -13,29 +13,7 @@ from braces.views import GroupRequiredMixin
 # CREATE ('C' - CRUD)
 # ===================================================================================
 
-class ClientesCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')
-    group_required = u'administrador'
-    model = Clientes
-   
-    fields = [
-        'cpf', 'nome', 'tipo_cliente', 'qualificacao', 'telefone', 'celular', 'email', 'pai', 'mae',
-        'rg', 'orgao_expedidor', 'data_expedicao', 'sexo', 'nascimento', 'estado_civil', 'nacionalidade',
-        'naturalidade', 'nome_conjunge', 'cpf_conjuge', 'rg_conjuge', 'orgao_expedidor_conjuge', 
-        'data_expedicao_conjuge', 'sexo_conjuge', 'profissao_conjuge', 'telefone_conjuge', 'celular_conjuge',
-        'email_conjuge', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf',
-    ]
-    template_name = 'cadastros/clientes/form.html'
-    success_url = reverse_lazy('listar-clientes')
-
-    # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        context['titulo'] = "Cadastro de clientes"
-        context['botao'] = "Cadastrar"
-        
-        return context    
+  
 
 class ImoveisCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -51,24 +29,40 @@ class ImoveisCreate(LoginRequiredMixin, CreateView):
         context['botao'] = "Cadastrar"
         
         return context 
-    
 
 # ===================================================================================
-# UPDATE ('U' - CRUD)
+# ------ Clientes_PF ----------------------------------------------------------------
 # ===================================================================================
 
-class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+class Clientes_PF_List(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Clientes_PF
+    template_name = 'cadastros/clientes/pf/lista.html'
+
+class Clientes_PF_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
-    model = Clientes
-    fields = [
-        'cpf', 'nome', 'tipo_cliente', 'qualificacao', 'telefone', 'celular', 'email', 'pai', 'mae',
-        'rg', 'orgao_expedidor', 'data_expedicao', 'sexo', 'nascimento', 'estado_civil', 'nacionalidade',
-        'naturalidade', 'nome_conjunge', 'cpf_conjuge', 'rg_conjuge', 'orgao_expedidor_conjuge', 
-        'data_expedicao_conjuge', 'sexo_conjuge', 'profissao_conjuge', 'telefone_conjuge', 'celular_conjuge',
-        'email_conjuge', 'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'uf',
-    ]
-    template_name = 'cadastros/clientes/form.html'
+    model = Clientes_PF
+   
+    fields = '__all__'
+    template_name = 'cadastros/clientes/pf/form.html'
+    success_url = reverse_lazy('listar-clientes')
+
+    # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Cadastro de Clientes - Pessoa Física"
+        context['botao'] = "Cadastrar"
+        
+        return context  
+
+class Clientes_PF_Update(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    group_required = u'administrador'
+    model = Clientes_PF
+    fields = '__all__'
+    template_name = 'cadastros/clientes/pf/form.html'
     success_url = reverse_lazy('listar-clientes')
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
@@ -79,7 +73,30 @@ class ClientesUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
 
         return context 
-    
+
+class Clientes_PF_Delete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    group_required = u'administrador'
+    model = Clientes_PF
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('listar-clientes')
+
+# ===================================================================================
+# ------ Imóveis --------------------------------------------------------------------
+# ===================================================================================
+
+class ImoveisList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Imoveis
+    template_name = 'cadastros/imoveis/lista.html'
+
+class ImoveisDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    group_required = u'administrador'
+    model = Imoveis
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('listar-imoveis')
+  
 class ImoveisUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Imoveis
@@ -95,38 +112,6 @@ class ImoveisUpdate(LoginRequiredMixin, UpdateView):
         
         return context 
     
-# ===================================================================================
-# ------ DELETE ---------------------------------------------------------------------
-# ===================================================================================
-
-class ClientesDelete(LoginRequiredMixin, DeleteView):
-    login_url = reverse_lazy('login')
-    group_required = u'administrador'
-    model = Clientes
-    template_name = 'padrao/form-excluir.html'
-    success_url = reverse_lazy('listar-clientes')
-
-class ImoveisDelete(LoginRequiredMixin, DeleteView):
-    login_url = reverse_lazy('login')
-    group_required = u'administrador'
-    model = Imoveis
-    template_name = 'padrao/form-excluir.html'
-    success_url = reverse_lazy('listar-imoveis')
-
-# ===================================================================================
-# LIST
-# ===================================================================================
-
-class ClientesList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
-    model = Clientes
-    template_name = 'cadastros/clientes/lista.html'
-    
-class ImoveisList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
-    model = Imoveis
-    template_name = 'cadastros/imoveis/lista.html'
-
 
 
 

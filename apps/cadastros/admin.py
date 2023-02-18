@@ -1,8 +1,8 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, Imoveis
+from apps.cadastros.models import Clientes_PF, Imoveis
 from apps.cadastros.forms import ClientesFormAdmin, ImoveisFormAdmin
 
-@admin.register(Clientes)
+@admin.register(Clientes_PF)
 class ClientesAdmin(admin.ModelAdmin):
 
     # -------------------------------------------------------------------------------------------------------------------------
@@ -24,9 +24,9 @@ class ClientesAdmin(admin.ModelAdmin):
     # list_filter = ('qualificacao', )
     list_per_page = 20
 
-    # --------------------------------------------------
-    # Informaçõe usadas pelo JAZZMIN (DIVISÃO DE CAMPOS)
-    # --------------------------------------------------
+    # ---------------------------------------------------
+    # InformaçõeS usadas pelo JAZZMIN (DIVISÃO DE CAMPOS)
+    # ---------------------------------------------------
 
     fieldsets = (
         ("Informações Iniciais", {'fields': ('tipo_cliente', 'cpf', 'nome', 'qualificacao', )}),
