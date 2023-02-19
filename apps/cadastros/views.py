@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-from .models import Clientes_PF, Clientes_PJ, Imoveis
+from .models import Clientes_PF, Clientes_PJ, Imoveis, Clientes
 from django.urls import reverse_lazy
 from . import forms
 
@@ -36,8 +36,8 @@ class ImoveisCreate(LoginRequiredMixin, CreateView):
 
 class Clientes_PF_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
-    model = Clientes_PF
-    template_name = 'cadastros/clientes/pf/lista.html'
+    model = Clientes
+    template_name = 'cadastros/clientes/lista.html'
 
 class Clientes_PF_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')

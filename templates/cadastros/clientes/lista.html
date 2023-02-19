@@ -12,9 +12,10 @@
 
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>Clientes</h2> 
-        
-        <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Cadastrar Cliente</a>
-
+        <div>
+            <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Novo Cliente PJ</a>
+            <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Novo Cliente PF</a>
+        </div>
     </div>
 
     <hr>
