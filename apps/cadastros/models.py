@@ -87,6 +87,26 @@ class Clientesssss_PF(Clientes):
     celular_conjuge = models.CharField('Celular', max_length=15, null=True, blank=True)
     email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
+class Clientesssss_PJ(Clientes):
+
+    # Dados Iniciais
+    cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
+    nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
+    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=20, null=True, blank=True)
+    data_abertura = models.CharField('Data de abertura', max_length=20, null=True, blank=True)
+    
+    # Contato
+    email_contato = models.CharField('Email contato', max_length=20, null=True, blank=True)
+    telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
+    telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
+    telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
+    responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
+    tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
+    responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
+    tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
+
+
+
 class Clientes_PF(models.Model):
 
     # choices
