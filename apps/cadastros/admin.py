@@ -23,25 +23,15 @@ class ClientesAdmin(admin.ModelAdmin):
 @admin.register(Clientes_PF)
 class ClientesAdmin(admin.ModelAdmin):
 
-    # -------------------------------------------------------------------------------------------------------------------------
-    # Busca informação do forms.py para usar a mascara de entradas cadastradas no formulário em vez de usar as opções do django
-    # -------------------------------------------------------------------------------------------------------------------------
-    
     form = ClientesFormAdmin
 
     class Media:
         js = ('jquery.mask.min.js', "mask.js")
 
-    # ----------------------------------------------------------------
-    # Edita informaçõe da tela inicial do cadastro de clientes (ADMIN)
-    # ----------------------------------------------------------------
-    
-    list_display = ('nome', 'tipo_cliente', 'qualificacao', 'telefone',  'celular', 'email',)
-
-    search_fields = ('nome', 'email')
+    list_display = ('cpf', 'nome',)
+    search_fields = ('cpf', 'nome',)
     # list_filter = ('qualificacao', )
     list_per_page = 20
-
 
 @admin.register(Imoveis)
 class ImoveisAdmin(admin.ModelAdmin):
