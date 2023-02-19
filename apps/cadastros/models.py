@@ -190,40 +190,7 @@ class Clientes_PF(models.Model):
     def __str__(self):
         return self.nome
 
-class Clientes_PJ(models.Model):
 
-    # Dados Iniciais
-    cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
-    razao_social = models.CharField('Razão social', max_length=20, null=True, blank=True)
-    nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
-    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=20, null=True, blank=True)
-    data_abertura = models.CharField('Data de abertura', max_length=20, null=True, blank=True)
-    
-    # Endereço
-    cep = models.CharField('CEP', max_length=10, null=True, blank=True)
-    endereco = models.CharField('Endereço', max_length=200, null=True, blank=True)
-    numero = models.CharField('Número', max_length=10, null=True, blank=True)
-    complemento = models.CharField('Complemento', max_length=100, null=True, blank=True)
-    bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
-    cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
-    uf = models.CharField('UF', max_length=2, null=True, blank=True)
-    
-    # Contato
-    email_contato = models.CharField('Email contato', max_length=20, null=True, blank=True)
-    telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
-    telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
-    telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
-    responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='cadastros.Clientes_PJ.responsavel_1+')
-    tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
-    responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='cadastros.Clientes_PJ.responsavel_2+')
-    tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
-
-    class Meta:
-        verbose_name = 'Cliente PJ'
-        verbose_name_plural = 'Clientes PJ'
-
-    def __str__(self):
-        return self.razao_social
 
 class Imoveis(models.Model):
     
