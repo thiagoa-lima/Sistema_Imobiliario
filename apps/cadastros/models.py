@@ -89,13 +89,13 @@ class Clientesssss_PF(Clientes):
 
 class Clientesssss_PJ(Clientes):
 
-    # Dados Iniciais
+    # DADOS DA EMPRESA
     cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
     nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
     inscricao_estadual = models.CharField('Inscrição Estadual', max_length=20, null=True, blank=True)
     data_abertura = models.CharField('Data de abertura', max_length=20, null=True, blank=True)
     
-    # Contato
+    # CONTATO DA EMPRESA
     email_contato = models.CharField('Email contato', max_length=20, null=True, blank=True)
     telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
     telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
@@ -229,7 +229,7 @@ class Imoveis(models.Model):
     ]
 
     # dados básicos
-    proprietario = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='cliente_proprietario')
+    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Proprietário', related_name='cliente_proprietario')
     tipo = models.CharField('Tipo de Imóvel', max_length=20, null=False, blank=False, choices=tipo_imovel_choices)
     
     # Endereço do imóvel
