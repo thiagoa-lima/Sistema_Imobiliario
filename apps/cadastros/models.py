@@ -11,10 +11,18 @@ class Clientes(models.Model):
     # ------ ATRIBUTOS -----------------------------------------------------------
     # ----------------------------------------------------------------------------
 
-    nome_razao_social = models.CharField('Nome / Razão Social', max_length=20, null=True, blank=True)
+    nome = models.CharField('Nome', max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return self.nome_razao_social
+        return self.nome
+
+class Clientesssss_PF(Clientes):
+
+    # ----------------------------------------------------------------------------
+    # ------ ATRIBUTOS -----------------------------------------------------------
+    # ----------------------------------------------------------------------------
+
+    cpf = models.CharField('CPF', max_length=20, null=True, blank=True)
 
 
 class Clientes_PF(models.Model):

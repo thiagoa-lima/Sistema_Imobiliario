@@ -1,12 +1,14 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, Clientes_PF, Imoveis
+from apps.cadastros.models import Clientes, Clientes_PF, Imoveis, Clientesssss_PF
 from apps.cadastros.forms import ClientesFormAdmin, ImoveisFormAdmin
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
-    list_display = ('nome_razao_social',)
+    list_display = ('nome',)
 
-
+@admin.register(Clientesssss_PF)
+class ClientesAdmin(admin.ModelAdmin):
+    list_display = ('cpf', 'nome',)
 
 # -------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------
