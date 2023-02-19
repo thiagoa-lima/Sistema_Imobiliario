@@ -29,19 +29,27 @@
                 <h5>Informações Iniciais</h4>
             </div>
             <div class="form-group col-md-3 mb-0">
-                {{ form.cpf|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
                 {{ form.nome|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.tipo_cliente|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3  mb-0">
-                {{ form.qualificacao|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.sexo|as_crispy_field }}
+                {{ form.tipo_cliente|as_crispy_field  }}
+                {{ form.cnpj|as_crispy_field }}
+                {{ form.cep|as_crispy_field }}
+                {{ form.endereco|as_crispy_field }}
+                {{ form.numero|as_crispy_field }}
+                {{ form.complemento|as_crispy_field }}
+                {{ form.bairro|as_crispy_field }}
+                {{ form.cidade|as_crispy_field }}
+                {{ form.uf|as_crispy_field }}
+                {{ form.nome_fantasia|as_crispy_field }}
+                {{ form.inscricao_estadual|as_crispy_field }}
+                {{ form.data_abertura|as_crispy_field }}
+                {{ form.email_contato|as_crispy_field }}
+                {{ form.telefone_1|as_crispy_field }}
+                {{ form.telefone_2|as_crispy_field }}
+                {{ form.telefone_3|as_crispy_field }}
+                {{ form.responsavel_1|as_crispy_field }}
+                {{ form.tipo_responsavel_1|as_crispy_field }}
+                {{ form.responsavel_2|as_crispy_field }}
+                {{ form.tipo_responsavel_2|as_crispy_field }}
             </div>
         </div>
 
@@ -49,115 +57,28 @@
             <div>
                 <h5>Contatos</h4>
             </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.telefone|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.celular|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.email|as_crispy_field }}
-            </div>
         </div>
 
         <div class="row mt-4">
             <div>
                 <h5>Filiação</h4>
             </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.pai|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.mae|as_crispy_field }}
-            </div>
         </div>
 
         <div class="row mt-4">
             <div>
                 <h5>Documentos</h4>
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.rg|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.orgao_expedidor|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.data_expedicao|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.nascimento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.estado_civil|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.nacionalidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.naturalidade|as_crispy_field }}
-            </div>
+            </div> 
         </div>
 
         <div class="row mt-4">
             <div>
                 <h5>Dados do cônjuge</h4>
-            </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.nome_conjunge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.cpf_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.rg_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.orgao_expedidor_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.data_expedicao_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.sexo_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.profissao_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.telefone_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.celular_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.email_conjuge|as_crispy_field }}
-            </div>
+            </div> 
         </div>
         <div class="row mt-4">
             <div>
                 <h5>Endereço residencial</h4>
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.cep|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-7 mb-0">
-                {{ form.endereco|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.numero|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.complemento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.bairro|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.cidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.uf|as_crispy_field }}
             </div>
         </div>
 
@@ -182,7 +103,12 @@
     };
 
     $(document).ready(function () {
-        
+        // =============================================================
+        // ------ CAMPO PADRÃO -----------------------------------------
+        // =============================================================
+
+        tipo_cliente = 'PJ'
+        $("#id_tipo_cliente").val(tipo_cliente)
         
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS

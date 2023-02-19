@@ -13,8 +13,8 @@
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>Clientes</h2> 
         <div>
-            <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Novo Cliente PJ</a>
-            <a href="{% url 'cadastrar-clientes' %}" class="btn btn-primary btn-bg">Novo Cliente PF</a>
+            <a href="{% url 'cadastrar-clientes-pj' %}" class="btn btn-primary btn-bg">Novo Cliente PJ</a>
+            <a href="{% url 'cadastrar-clientes-pf' %}" class="btn btn-primary btn-bg">Novo Cliente PF</a>
         </div>
     </div>
 
@@ -43,9 +43,19 @@
                     <td>{{ Clientes.tipo_cliente }}</td>
                     <td>{{ Clientes.qualificacao }}</td>
                     <td>
-                        <a href="{% url 'editar-clientes' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                        <!-- Se o cliente for Pessoa Física -->
+                        {% if  Clientes.tipo_cliente == 'PF' %}
+                        <a href="{% url 'editar-clientes-pf' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a> 
+                        {% endif %}
+                        <!-- Se o cliente for Pessoa Jurídica -->
+                        {% if  Clientes.tipo_cliente == 'PJ' %}
+                        <a href="{% url 'editar-clientes-pj' Clientes.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a> 
+                        {% endif %}
+                      
                         <a href="{% url 'excluir-clientes' Clientes.pk %}" class="btn btn-danger btn-sm" title="Excluir">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>

@@ -11,7 +11,8 @@ class Clientes(models.Model):
     # ------ INÍCIO DOS ATRIBUTOS ------------------------------------------------
     # ----------------------------------------------------------------------------
 
-    nome = models.CharField('Nome', max_length=20, null=True, blank=True)
+    nome = models.CharField('Nome', max_length=100, null=True, blank=True)
+    tipo_cliente = models.CharField('Tipo', max_length=20, null=True, blank=True)
 
     # ENDEREÇO
     cep = models.CharField('CEP', max_length=10, null=True, blank=True)
@@ -27,6 +28,9 @@ class Clientes(models.Model):
     # ----------------------------------------------------------------------------
 
     def __str__(self):
+
+        if self.nome==None:
+            return "ERROR-CUSTOMER NAME IS NULL"
         return self.nome
 
 class Clientesssss_PF(Clientes):
@@ -39,10 +43,6 @@ class Clientesssss_PF(Clientes):
     sexo_choices = (
         ('M', 'Masculino'), 
         ('F', 'Feminino'),
-    )
-    tipo_cliente_choices = (
-        ('PF', 'Pessoa Física'), 
-        ('PJ', 'Pessoa Jurídica'),
     )
     estado_civil_choices = (
         (1, 'Casado(a)'), 
@@ -100,12 +100,13 @@ class Clientesssss_PJ(Clientes):
     telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
     telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
     telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
-    responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
+    responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
     tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
-    responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
+    responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
     tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
 
-
+    def __str__(self):
+        return str(self.nome)
 
 class Clientes_PF(models.Model):
 

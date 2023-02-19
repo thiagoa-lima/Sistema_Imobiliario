@@ -11,6 +11,7 @@ class ImoveisForm(forms.ModelForm):
             "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'})            
         }
 
+
 class ClientesFormAdmin(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ClientesFormAdmin, self).__init__(*args, **kwargs)
