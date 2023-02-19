@@ -87,7 +87,7 @@ class ClientePF(Clientes):
     celular_conjuge = models.CharField('Celular', max_length=15, null=True, blank=True)
     email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
-class Clientesssss_PJ(Clientes):
+class ClientePJ(Clientes):
 
     tipo_socio = (
         ('Sócio', 'Sócio'), 

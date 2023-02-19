@@ -13,7 +13,7 @@ class ImoveisForm(forms.ModelForm):
 
 class Clientes_PJ_Form(forms.ModelForm):
     class Meta:
-        model = models.Clientesssss_PJ
+        model = models.ClientePJ
         fields = '__all__'
         exclude = []
         widgets = {
