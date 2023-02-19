@@ -1,14 +1,10 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, Clientes_PF, Imoveis, Clientesssss_PF, Clientesssss_PJ
+from apps.cadastros.models import Clientes, Imoveis, Clientesssss_PF, Clientesssss_PJ
 from apps.cadastros.forms import ClientesFormAdmin, ImoveisFormAdmin
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
     list_display = ('nome',)
-
-@admin.register(Clientesssss_PF)
-class ClientesAdmin(admin.ModelAdmin):
-    list_display = ('cpf', 'nome',)
 
 @admin.register(Clientesssss_PJ)
 class ClientesAdmin(admin.ModelAdmin):
@@ -20,7 +16,7 @@ class ClientesAdmin(admin.ModelAdmin):
 # -------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------
 
-@admin.register(Clientes_PF)
+@admin.register(Clientesssss_PF)
 class ClientesAdmin(admin.ModelAdmin):
 
     form = ClientesFormAdmin
@@ -53,4 +49,3 @@ class ImoveisAdmin(admin.ModelAdmin):
     # search_fields = ('tipo',)
     # list_filter = ('tipo', )
     list_per_page = 20
-

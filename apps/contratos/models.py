@@ -1,5 +1,5 @@
 from django.db import models
-from apps.cadastros.models import Clientes_PF, Imoveis
+from apps.cadastros.models import Imoveis, Clientes
 from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
 import datetime 
@@ -8,8 +8,6 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from .models import Clientes_PF, Imoveis
-from apps.cadastros.models import Clientes
 
 
 class Administracao(models.Model):
