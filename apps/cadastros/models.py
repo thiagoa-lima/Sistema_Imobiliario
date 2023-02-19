@@ -1,8 +1,21 @@
 from django.db import models
 from cpf_field.models import CPFField
 
-class Cliente(models.Model):
-    pass
+class Clientes(models.Model):
+    class Meta:
+        abstract = False
+        verbose_name = 'Clientes'
+        verbose_name_plural = 'Clientes'
+
+    # ----------------------------------------------------------------------------
+    # ------ ATRIBUTOS -----------------------------------------------------------
+    # ----------------------------------------------------------------------------
+
+    nome_razao_social = models.CharField('Nome / Razão Social', max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_razao_social
+
 
 class Clientes_PF(models.Model):
 
