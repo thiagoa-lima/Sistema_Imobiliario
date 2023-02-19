@@ -33,7 +33,7 @@ class Clientes(models.Model):
             return "ERROR-CUSTOMER NAME IS NULL"
         return self.nome
 
-class Clientesssss_PF(Clientes):
+class ClientePF(Clientes):
 
     # ----------------------------------------------------------------------------
     # ------ ATRIBUTOS -----------------------------------------------------------

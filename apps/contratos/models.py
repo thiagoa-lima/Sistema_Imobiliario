@@ -2,11 +2,10 @@ from django.db import models
 from apps.cadastros.models import Imoveis, Clientes
 from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
-import datetime 
+
 
 # Módulos importados para alteração automática de datas
 from dateutil.relativedelta import relativedelta
-from django.db.models.signals import pre_save
 from django.dispatch import receiver
 
 
@@ -45,9 +44,9 @@ class Administracao(models.Model):
         endereco = str(self.imovel)
         return endereco
        
-@receiver(pre_save, sender=Administracao)
-def callback_Administracao(sender, instance, *args, **kwargs):
-    instance.data_final = (instance.data_inicial + relativedelta(months=+3))
+# @receiver(pre_save, sender=Administracao)
+# def callback_Administracao(sender, instance, *args, **kwargs):
+#     instance.data_final = (instance.data_inicial + relativedelta(months=+3))
 
 class Aluguel(models.Model):
 

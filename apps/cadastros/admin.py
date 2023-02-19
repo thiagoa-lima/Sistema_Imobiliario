@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, Imoveis, Clientesssss_PF, Clientesssss_PJ
+from apps.cadastros.models import Clientes, ClientePF, Imoveis, Clientesssss_PJ
 from apps.cadastros.forms import ClientesFormAdmin, ImoveisFormAdmin
 
 @admin.register(Clientes)
@@ -16,7 +16,7 @@ class ClientesAdmin(admin.ModelAdmin):
 # -------------------------------------------------------------------------------------
 # -------------------------------------------------------------------------------------
 
-@admin.register(Clientesssss_PF)
+@admin.register(ClientePF)
 class ClientesAdmin(admin.ModelAdmin):
 
     form = ClientesFormAdmin
