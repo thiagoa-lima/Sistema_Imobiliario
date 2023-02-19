@@ -26,59 +26,85 @@
         {% csrf_token %}
         <div class="row">
             <div>
-                <h5>Informações Iniciais</h4>
+                <h5>Dados da empresa</h4>
             </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.nome|as_crispy_field }}
-                {{ form.tipo_cliente|as_crispy_field  }}
+            <div hidden class="form-group col-md-3 mb-2 ">
+                {{ form.tipo_cliente|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.cnpj|as_crispy_field }}
-                {{ form.cep|as_crispy_field }}
-                {{ form.endereco|as_crispy_field }}
-                {{ form.numero|as_crispy_field }}
-                {{ form.complemento|as_crispy_field }}
-                {{ form.bairro|as_crispy_field }}
-                {{ form.cidade|as_crispy_field }}
-                {{ form.uf|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.nome|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.nome_fantasia|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.inscricao_estadual|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.data_abertura|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div>
+                <h5>Endereço</h4>
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.cep|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-7 mb-2">
+                {{ form.endereco|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-2">
+                {{ form.numero|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.complemento|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                {{ form.bairro|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.cidade|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-2">
+                {{ form.uf|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div>
+                <h5>Contato</h4>
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.email_contato|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.telefone_1|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.telefone_2|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
                 {{ form.telefone_3|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div>
+                <h5>Sócio / Procurador</h4>
+            </div>
+            <div class="form-group col-md-8 mb-2">
                 {{ form.responsavel_1|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
                 {{ form.tipo_responsavel_1|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-8 mb-2">
                 {{ form.responsavel_2|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
                 {{ form.tipo_responsavel_2|as_crispy_field }}
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div>
-                <h5>Contatos</h4>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div>
-                <h5>Filiação</h4>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div>
-                <h5>Documentos</h4>
-            </div> 
-        </div>
-
-        <div class="row mt-4">
-            <div>
-                <h5>Dados do cônjuge</h4>
-            </div> 
-        </div>
-        <div class="row mt-4">
-            <div>
-                <h5>Endereço residencial</h4>
             </div>
         </div>
 
@@ -109,21 +135,32 @@
 
         tipo_cliente = 'PJ'
         $("#id_tipo_cliente").val(tipo_cliente)
+
+        // =============================================================
+        // ------ SELECT2 ----------------------------------------------
+        // =============================================================
+        $('.select2').select2({theme: 'bootstrap-5'});
         
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS
         // =============================================================
         
-        $('#id_cpf').mask('000.000.000-00', {reverse: true, placeholder: "___.___.___-__"});
+        $('#id_cnpj').mask('00.000.000/0000-00', {reverse: true});
+        $('#id_telefone_1').mask(SPMaskBehavior, spOptions);
+        $('#id_telefone_2').mask(SPMaskBehavior, spOptions);
+        $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
+        $('#id_data_abertura').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_cep').mask('00000-000');
+
+        
+        $('#id_celular').mask(SPMaskBehavior, spOptions);
         $('#id_telefone').mask(SPMaskBehavior, spOptions);
         $('#id_celular').mask(SPMaskBehavior, spOptions);
-        $('#id_data_expedicao').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
         $('#id_data_expedicao_conjuge').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
-        $('#id_cep').mask('00000-000');
      
         // =============================================================
         // ------ BUSCAR CEP AUTOMATICAMENTE

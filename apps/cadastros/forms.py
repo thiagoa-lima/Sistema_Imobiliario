@@ -8,7 +8,18 @@ class ImoveisForm(forms.ModelForm):
         fields = '__all__'
         exclude = []
         widgets = {
-            "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'})            
+            "proprietario": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um proprietário', 'style': 'width: 100%'}),          
+        }
+
+class Clientes_PJ_Form(forms.ModelForm):
+    class Meta:
+        model = models.Clientesssss_PJ
+        fields = '__all__'
+        exclude = []
+        widgets = {
+            "responsavel_1": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um cliente', 'style': 'width: 100%'}),               
+            "responsavel_2": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um cliente', 'style': 'width: 100%'}),
+            "nome": forms.TextInput(attrs={'placeholder': 'Razão Social da empresa'}),
         }
 
 

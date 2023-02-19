@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-from .models import Clientes_PF, Clientes_PJ, Imoveis, Clientes, Clientesssss_PF, Clientesssss_PJ
+from .models import Imoveis, Clientes, Clientesssss_PF, Clientesssss_PJ
 from django.urls import reverse_lazy
 from . import forms
 
@@ -91,15 +91,14 @@ class Clientes_PF_Update(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
 # ------ CLIENTES PJ ----------------------------------------------------------------
 # ===================================================================================
 
-class Clientes_PJ_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
+class Clientes_PJ_Create(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
-    group_required = u'administrador'
     model = Clientesssss_PJ
-    fields = '__all__'
+    form_class = forms.Clientes_PJ_Form
     template_name = 'cadastros/clientes/form_PJ.html'
     success_url = reverse_lazy('listar-clientes')
 
-    # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
+    # O método abaixo serve para alterar os campos dentro dos formulários.
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['titulo'] = "Cadastro de Clientes - Pessoa Jurídica"
@@ -107,11 +106,10 @@ class Clientes_PJ_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
         
         return context  
 
-class Clientes_PJ_Update(GroupRequiredMixin, LoginRequiredMixin, UpdateView):
+class Clientes_PJ_Update(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
-    group_required = u'administrador'
     model = Clientesssss_PJ
-    fields = '__all__'
+    form_class = forms.Clientes_PJ_Form
     template_name = 'cadastros/clientes/form_PJ.html'
     success_url = reverse_lazy('listar-clientes')
 

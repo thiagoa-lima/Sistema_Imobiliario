@@ -26,9 +26,9 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nome</th>
-                    <th>Celular</th>
                     <th>Tipo</th>
+                    <th>Nome / Razão Social</th>
+                    <th>Celular</th>
                     <th>Qualificação</th>
                     <th>Opções</th>
                 </tr>
@@ -38,9 +38,9 @@
                 {% for Clientes in object_list %}
                 <tr>
                     <td>{{ Clientes.pk }}</td>
+                    <td>{{ Clientes.tipo_cliente }}</td>
                     <td>{{ Clientes.nome }}</td>
                     <td>{{ Clientes.celular }}</td>
-                    <td>{{ Clientes.tipo_cliente }}</td>
                     <td>{{ Clientes.qualificacao }}</td>
                     <td>
                         <!-- Se o cliente for Pessoa Física -->

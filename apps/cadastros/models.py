@@ -89,21 +89,26 @@ class Clientesssss_PF(Clientes):
 
 class Clientesssss_PJ(Clientes):
 
+    tipo_socio = (
+        ('Sócio', 'Sócio'), 
+        ('Procurador', 'Procurador'),
+    )
+
     # DADOS DA EMPRESA
     cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
     nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
-    inscricao_estadual = models.CharField('Inscrição Estadual', max_length=20, null=True, blank=True)
-    data_abertura = models.CharField('Data de abertura', max_length=20, null=True, blank=True)
+    inscricao_estadual = models.CharField('Inscrição estadual', max_length=20, null=True, blank=True)
+    data_abertura = models.DateField('Data de abertura', max_length=10, blank=True, null=True)
     
     # CONTATO DA EMPRESA
-    email_contato = models.CharField('Email contato', max_length=20, null=True, blank=True)
+    email_contato = models.EmailField('E-mail de contato', max_length=50, null=True, blank=True)
     telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
     telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
     telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
     responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
-    tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
+    tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True, choices=tipo_socio)
     responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
-    tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
+    tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True, choices=tipo_socio)
 
     def __str__(self):
         return str(self.nome)
