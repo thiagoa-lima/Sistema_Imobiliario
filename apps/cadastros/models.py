@@ -207,9 +207,9 @@ class Clientes_PJ(models.Model):
     telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
     telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
     telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
-    responsavel_1 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
+    responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 1', related_name='cadastros.Clientes_PJ.responsavel_1+')
     tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True)
-    responsavel_2 = models.ForeignKey(Clientes_PF, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')
+    responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=False, blank=False, verbose_name='Responsável 2', related_name='cadastros.Clientes_PJ.responsavel_2+')
     tipo_responsavel_2 = models.CharField('Tipo', max_length=20, null=True, blank=True)
 
     class Meta:
