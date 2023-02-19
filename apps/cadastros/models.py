@@ -8,10 +8,23 @@ class Clientes(models.Model):
         verbose_name_plural = 'Clientes'
 
     # ----------------------------------------------------------------------------
-    # ------ ATRIBUTOS -----------------------------------------------------------
+    # ------ INÍCIO DOS ATRIBUTOS ------------------------------------------------
     # ----------------------------------------------------------------------------
 
     nome = models.CharField('Nome', max_length=20, null=True, blank=True)
+
+    # ENDEREÇO
+    cep = models.CharField('CEP', max_length=10, null=True, blank=True)
+    endereco = models.CharField('Endereço', max_length=200, null=True, blank=True)
+    numero = models.CharField('Número', max_length=10, null=True, blank=True)
+    complemento = models.CharField('Complemento', max_length=100, null=True, blank=True)
+    bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
+    cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
+    uf = models.CharField('UF', max_length=2, null=True, blank=True)
+
+    # ----------------------------------------------------------------------------
+    # ------ FIM DOS ATRIBUTOS ---------------------------------------------------
+    # ----------------------------------------------------------------------------
 
     def __str__(self):
         return self.nome
@@ -22,8 +35,57 @@ class Clientesssss_PF(Clientes):
     # ------ ATRIBUTOS -----------------------------------------------------------
     # ----------------------------------------------------------------------------
 
-    cpf = models.CharField('CPF', max_length=20, null=True, blank=True)
+    # choices
+    sexo_choices = (
+        ('M', 'Masculino'), 
+        ('F', 'Feminino'),
+    )
+    tipo_cliente_choices = (
+        ('PF', 'Pessoa Física'), 
+        ('PJ', 'Pessoa Jurídica'),
+    )
+    estado_civil_choices = (
+        (1, 'Casado(a)'), 
+        (2, 'Divorciado(a)'), 
+        (3, 'Solteiro(a)'), 
+        (4, 'União Estável'),
+        (5, 'Viúvo(a)')
+    )
+    
+    # INFORMAÇÕES INICIAIS
 
+    cpf = CPFField('CPF', null=True, blank=True)
+
+    # CONTATO
+    telefone = models.CharField('Telefone', max_length=15, null=True, blank=True)
+    celular = models.CharField('Celular', max_length=15, null=True, blank=True)
+    email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
+
+    # FILIAÇÃO
+    pai = models.CharField('Nome do pai', max_length=120, null=True, blank=True)
+    mae = models.CharField('Nome da mãe', max_length=120, null=True, blank=True)
+    
+    # MAIS OPÇÕES
+    rg = models.CharField('RG', max_length=20, blank=True)
+    orgao_expedidor = models.CharField('Orgão Expedidor', max_length=20, blank=True, null=True)
+    data_expedicao = models.DateField('Data de Expedição', max_length=10, blank=True, null=True)
+    sexo = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
+    nascimento = models.DateField('Nascimento', max_length=10, null=True, blank=True)
+    estado_civil = models.IntegerField('Estado Civil', choices=estado_civil_choices, null=True, blank=True)
+    nacionalidade = models.CharField('Nacionalidade', max_length=50, null=True, blank=True)
+    naturalidade = models.CharField('Naturalidade', max_length=50, null=True, blank=True)
+
+    # CÔNJUGE
+    nome_conjunge = models.CharField('Nome Completo', max_length=100, null=True, blank=True)
+    cpf_conjuge = CPFField('CPF', null=True, blank=True)
+    rg_conjuge = models.CharField('RG', max_length=20, null=True, blank=True)
+    orgao_expedidor_conjuge = models.CharField('Orgão Expedidor', max_length=20, null=True, blank=True)
+    data_expedicao_conjuge = models.DateField('Data de Expedição', max_length=10, null=True, blank=True)
+    sexo_conjuge = models.CharField('Sexo',max_length=1, choices=sexo_choices, null=True, blank=True)
+    profissao_conjuge = models.CharField('Profissão', max_length=20, null=True, blank=True)
+    telefone_conjuge = models.CharField('Telefone Comercial', max_length=15, null=True, blank=True)
+    celular_conjuge = models.CharField('Celular', max_length=15, null=True, blank=True)
+    email_conjuge = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
 class Clientes_PF(models.Model):
 
