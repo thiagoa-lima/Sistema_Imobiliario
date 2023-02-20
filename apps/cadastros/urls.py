@@ -15,7 +15,7 @@ urlpatterns = [
     # ------ CLIENTES  -------------------------------------------------------------------------
     # ==========================================================================================
 
-    path('clientes/listar/', Clientes_List.as_view(), name='listar-clientes'),
+    path('clientes/', Clientes_List.as_view(), name='listar-clientes'),
     path('clientes/excluir/<int:pk>', Clientes_Delete.as_view(), name='excluir-clientes'),
 
     path('clientes/pf/cadastrar/', Clientes_PF_Create.as_view(), name='cadastrar-clientes-pf'),

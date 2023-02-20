@@ -13,8 +13,8 @@
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>Clientes</h2> 
         <div>
-            <a href="{% url 'cadastrar-clientes-pj' %}" class="btn btn-primary btn-bg">Novo Cliente PJ</a>
-            <a href="{% url 'cadastrar-clientes-pf' %}" class="btn btn-primary btn-bg">Novo Cliente PF</a>
+            <a href="{% url 'cadastrar-clientes-pj' %}" class="btn btn-primary btn-bg">Novo Cliente - PJ</a>
+            <a href="{% url 'cadastrar-clientes-pf' %}" class="btn btn-primary btn-bg">Novo Cliente - PF</a>
         </div>
     </div>
 
@@ -25,11 +25,11 @@
         <table class="table table-striped" id="tabela">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!-- <th>ID</th> -->
                     <th>Tipo</th>
                     <th>Nome / Razão Social</th>
-                    <th>Celular</th>
-                    <th>Qualificação</th>
+                    <th>Telefones</th>
+                    <th>Emails</th>
                     <th>Opções</th>
                 </tr>
             </thead>
@@ -37,11 +37,11 @@
             <tbody>
                 {% for Clientes in object_list %}
                 <tr>
-                    <td>{{ Clientes.pk }}</td>
+                    <!-- <td>{{ Clientes.pk }}</td> -->
                     <td>{{ Clientes.tipo_cliente }}</td>
                     <td>{{ Clientes.nome }}</td>
-                    <td>{{ Clientes.celular }}</td>
-                    <td>{{ Clientes.qualificacao }}</td>
+                    <td>{{ Clientes.telefone_1 }}<br>{{ Clientes.telefone_2 }}</td>
+                    <td>{{ Clientes.email_1 }}<br>{{ Clientes.email_2 }}</td>
                     <td>
                         <!-- Se o cliente for Pessoa Física -->
                         {% if  Clientes.tipo_cliente == 'PF' %}

@@ -29,16 +29,16 @@
                 <h5>Informações Iniciais</h4>
             </div>
          
-            <div hidden class="form-group col-md-2 mb-0" >
+            <div hidden class="form-group col-md-3 mb-2" >
                 {{ form.tipo_cliente|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.cpf|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.nome|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.sexo|as_crispy_field }}
             </div>
         </div>
@@ -47,14 +47,20 @@
             <div>
                 <h5>Contatos</h4>
             </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.telefone|as_crispy_field }}
+            <div class="form-group col-md-6 mb-2">
+                {{ form.email_1|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.celular|as_crispy_field }}
+            <div class="form-group col-md-6 mb-2">
+                {{ form.email_2|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.email|as_crispy_field }}
+            <div class="form-group col-md-4 mb-2">
+                {{ form.telefone_1|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                {{ form.telefone_2|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
+                {{ form.telefone_3|as_crispy_field }}
             </div>
         </div>
 
@@ -62,10 +68,10 @@
             <div>
                 <h5>Filiação</h4>
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.pai|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.mae|as_crispy_field }}
             </div>
         </div>
@@ -74,25 +80,25 @@
             <div>
                 <h5>Documentos</h4>
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.rg|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.orgao_expedidor|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.data_expedicao|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.nascimento|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.estado_civil|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.nacionalidade|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.naturalidade|as_crispy_field }}
             </div>
         </div>
@@ -101,34 +107,34 @@
             <div>
                 <h5>Dados do cônjuge</h4>
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.nome_conjunge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.cpf_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.rg_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.orgao_expedidor_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.data_expedicao_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-2 mb-2">
                 {{ form.sexo_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.profissao_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.telefone_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.celular_conjuge|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.email_conjuge|as_crispy_field }}
             </div>
         </div>
@@ -136,25 +142,25 @@
             <div>
                 <h5>Endereço residencial</h4>
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.cep|as_crispy_field }}
             </div>
-            <div class="form-group col-md-7 mb-0">
+            <div class="form-group col-md-7 mb-2">
                 {{ form.endereco|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-2 mb-2">
                 {{ form.numero|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.complemento|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.bairro|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.cidade|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-2 mb-2">
                 {{ form.uf|as_crispy_field }}
             </div>
         </div>
@@ -192,8 +198,10 @@
         // =============================================================
         
         $('#id_cpf').mask('000.000.000-00', {reverse: true, placeholder: "___.___.___-__"});
-        $('#id_telefone').mask(SPMaskBehavior, spOptions);
-        $('#id_celular').mask(SPMaskBehavior, spOptions);
+        $('#id_telefone_1').mask(SPMaskBehavior, spOptions);
+        $('#id_telefone_2').mask(SPMaskBehavior, spOptions);
+        $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
+
         $('#id_data_expedicao').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});

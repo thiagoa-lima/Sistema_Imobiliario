@@ -23,6 +23,13 @@ class Clientes(models.Model):
     cidade = models.CharField('Cidade', max_length=100, null=True, blank=True)
     uf = models.CharField('UF', max_length=2, null=True, blank=True)
 
+    #CONTATOS
+    email_1 = models.EmailField('E-mail (1)', max_length=50, null=True, blank=True)
+    email_2 = models.EmailField('E-mail (2)', max_length=50, null=True, blank=True)
+    telefone_1 = models.CharField('Telefone', max_length=20, null=True, blank=True)
+    telefone_2 = models.CharField('Telefone', max_length=20, null=True, blank=True)
+    telefone_3 = models.CharField('Telefone', max_length=20, null=True, blank=True)
+
     # ----------------------------------------------------------------------------
     # ------ FIM DOS ATRIBUTOS ---------------------------------------------------
     # ----------------------------------------------------------------------------
@@ -53,13 +60,7 @@ class ClientePF(Clientes):
     )
     
     # INFORMAÇÕES INICIAIS
-
     cpf = CPFField('CPF', null=True, blank=True)
-
-    # CONTATO
-    telefone = models.CharField('Telefone', max_length=15, null=True, blank=True)
-    celular = models.CharField('Celular', max_length=15, null=True, blank=True)
-    email = models.EmailField('E-mail', max_length=50, null=True, blank=True)
 
     # FILIAÇÃO
     pai = models.CharField('Nome do pai', max_length=120, null=True, blank=True)
@@ -101,10 +102,6 @@ class ClientePJ(Clientes):
     data_abertura = models.DateField('Data de abertura', max_length=10, blank=True, null=True)
     
     # CONTATO DA EMPRESA
-    email_contato = models.EmailField('E-mail de contato', max_length=50, null=True, blank=True)
-    telefone_1 = models.CharField('Telefone 1', max_length=20, null=True, blank=True)
-    telefone_2 = models.CharField('Telefone 2', max_length=20, null=True, blank=True)
-    telefone_3 = models.CharField('Telefone 3', max_length=20, null=True, blank=True)
     responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')
     tipo_responsavel_1 = models.CharField('Tipo', max_length=20, null=True, blank=True, choices=tipo_socio)
     responsavel_2 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 2', related_name='Cliente_PJ_responsavel_2')

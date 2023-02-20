@@ -75,18 +75,21 @@
         </div>
         <div class="row mt-4">
             <div>
-                <h5>Contato</h4>
+                <h5>Contatos</h4>
             </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.email_contato|as_crispy_field }}
+            <div class="form-group col-md-6 mb-2">
+                {{ form.email_1|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-2">
+            <div class="form-group col-md-6 mb-2">
+                {{ form.email_2|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-2">
                 {{ form.telefone_1|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-2">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.telefone_2|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-2">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.telefone_3|as_crispy_field }}
             </div>
         </div>

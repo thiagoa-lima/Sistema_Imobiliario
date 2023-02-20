@@ -22,7 +22,6 @@ class Clientes_PJ_Form(forms.ModelForm):
             "nome": forms.TextInput(attrs={'placeholder': 'Razão Social da empresa'}),
         }
 
-
 class ClientesFormAdmin(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ClientesFormAdmin, self).__init__(*args, **kwargs)
