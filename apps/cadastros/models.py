@@ -100,6 +100,10 @@ class ClientePJ(Clientes):
     nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
     inscricao_estadual = models.CharField('Inscrição estadual', max_length=20, null=True, blank=True)
     data_abertura = models.DateField('Data de abertura', max_length=10, blank=True, null=True)
+    situacao = models.CharField('Situação', max_length=50, null=True, blank=True)
+    data_situacao = models.DateField('Data da situação', max_length=10, blank=True, null=True)
+    porte = models.CharField('Porte', max_length=50, null=True, blank=True)
+    natureza_juridica = models.CharField('Natureza Jurídica', max_length=50, null=True, blank=True)
     
     # CONTATO DA EMPRESA
     responsavel_1 = models.ForeignKey(Clientes, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Responsável 1', related_name='Cliente_PJ_responsavel_1')

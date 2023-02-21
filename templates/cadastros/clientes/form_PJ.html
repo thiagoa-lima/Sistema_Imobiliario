@@ -34,10 +34,10 @@
             <div class="form-group col-md-3 mb-2">
                 {{ form.cnpj|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-2">
+            <div class="form-group col-md-5 mb-2">
                 {{ form.nome|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-2">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.nome_fantasia|as_crispy_field }}
             </div>
             <div class="form-group col-md-3 mb-2">
@@ -45,6 +45,18 @@
             </div>
             <div class="form-group col-md-3 mb-2">
                 {{ form.data_abertura|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.situacao|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-2">
+                {{ form.data_situacao|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-2">
+                {{ form.porte|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-2">
+                {{ form.natureza_juridica|as_crispy_field }}
             </div>
         </div>
         <div class="row mt-4">
@@ -120,6 +132,8 @@
 
 {% block scripts %}
 
+<script scr="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
 <script>
     // Script para mascara
     var SPMaskBehavior = function (val) {
@@ -133,7 +147,7 @@
 
     $(document).ready(function () {
         // =============================================================
-        // ------ CAMPO PADRÃO -----------------------------------------
+        // ------ CAMPO PADRÃO PARA CADASTRO PJ ------------------------
         // =============================================================
 
         tipo_cliente = 'PJ'
@@ -142,6 +156,7 @@
         // =============================================================
         // ------ SELECT2 ----------------------------------------------
         // =============================================================
+        
         $('.select2').select2({theme: 'bootstrap-5'});
         
         // =============================================================
@@ -154,8 +169,6 @@
         $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
         $('#id_data_abertura').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_cep').mask('00000-000');
-
-        
         $('#id_celular').mask(SPMaskBehavior, spOptions);
         $('#id_telefone').mask(SPMaskBehavior, spOptions);
         $('#id_celular').mask(SPMaskBehavior, spOptions);
@@ -166,7 +179,7 @@
         $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
      
         // =============================================================
-        // ------ BUSCAR CEP AUTOMATICAMENTE
+        // ------ API DE BUSCA: CEP ------------------------------------
         // =============================================================
 
         function limpa_formulário_cep() {
@@ -226,10 +239,94 @@
                 limpa_formulário_cep();
             }
         }); 
-        // =============================================================
-        // ------ FIM BUSCAR CEP AUTOMATICAMENTE
-        // =============================================================
-    });
 
+        // =============================================================
+        // ------ API DE BUSCA: CNPJ -----------------------------------
+        // =============================================================      
+
+        $("#id_cnpj").blur(function(){
+
+            //Nova variável "cnpj" somente com dígitos.
+            cnpj = document.querySelector('#id_cnpj').value.replace(/\D/g, '')
+
+            // Se o CNPJ for diferente de vazio, consome API
+            if (cnpj != ""){
+                $.ajax({
+                    'url': 'https://receitaws.com.br/v1/cnpj/' + cnpj,
+                    'type': "GET",
+                    'dataType': 'jsonp',
+                    'success': function(dados){
+    
+                        if(dados.nome == undefined) {
+                            // DADOS DA EMPRESA
+                            $("#id_nome").val('CNPJ INVÁLIDO');
+                            $("#id_nome_fantasia").val('');
+                            $("#id_data_abertura").val('');
+                            $("#id_situacao").val('');
+                            $("#id_data_situacao").val('');
+                            $("#id_porte").val('');
+                            $("#id_natureza_juridica").val('');
+                            //CONTATO
+                            $("#id_email").val('');
+                            // ENDEREÇO
+                            $("#id_cep").val('');
+                            $("#id_endereco").val('');
+                            $("#id_numero").val('');
+                            $("#id_bairro").val('');
+                            $("#id_cidade").val('');
+                            $("#id_uf").val(''); 
+    
+                        } else  {
+                            // DADOS DA EMPRESA
+                            $("#id_nome").val(dados.nome);
+                            $("#id_nome_fantasia").val(dados.fantasia);
+                            $("#id_data_abertura").val(dados.abertura);
+                            $("#id_situacao").val(dados.situacao);
+                            $("#id_data_situacao").val(dados.data_situacao);
+                            $("#id_porte").val(dados.porte);
+                            $("#id_natureza_juridica").val(dados.natureza_juridica);
+                            //CONTATO
+                            $("#id_email").val(dados.email);
+                            // ENDEREÇO
+                            $("#id_cep").val(dados.cep);
+                            $("#id_endereco").val(dados.logradouro);
+                            $("#id_numero").val(dados.numero);
+                            $("#id_bairro").val(dados.bairro);
+                            $("#id_cidade").val(dados.municipio);
+                            $("#id_uf").val(dados.uf);
+                            
+                            situacao = dados.situacao
+                            console.log(situacao)
+    
+                            classe = document.querySelector('#id_cnpj')
+
+                            if (situacao != 'ATIVA'){
+                                
+                            }
+                        }    
+                    }
+                })
+            // Se o CNPJ for igual a vazio, não consome API e anula todos os campos
+            } else {
+                // DADOS DA EMPRESA
+                $("#id_nome").val('');
+                $("#id_nome_fantasia").val('');
+                $("#id_data_abertura").val('');
+                $("#id_situacao").val('');
+                $("#id_data_situacao").val('');
+                $("#id_porte").val('');
+                $("#id_natureza_juridica").val('');
+                //CONTATO
+                $("#id_email").val('');
+                // ENDEREÇO
+                $("#id_cep").val('');
+                $("#id_endereco").val('');
+                $("#id_numero").val('');
+                $("#id_bairro").val('');
+                $("#id_cidade").val('');
+                $("#id_uf").val('');
+            }
+        }); 
+    });
 </script>
 {% endblock %}
