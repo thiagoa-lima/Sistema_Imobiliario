@@ -102,6 +102,90 @@
             $('#id_valor_aluguel').mask("000.000.000.000.000,00", {reverse: true});
             $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
             $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+
+            // =============================================================
+            // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
+            // =============================================================
+
+            $("#id_data_inicial").blur(function() {
+                
+                data_inicial = document.querySelector('#id_data_inicial').value
+                periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+                if (periodo_contrato == "" || data_inicial == "") {
+                    $("#id_data_final").val(null)
+                }
+                else {
+                    // FORMATA A DATA INICIAL
+                    var data_inicial = document.querySelector("#id_data_inicial").value;
+                    var arr_data_inicial = data_inicial.split('/');
+                    var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' +arr_data_inicial[2];
+                    var data_inicial_formatada = new Date(stringFormatada);
+                    
+                    // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                    prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                    prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                    // CALCULA A DATA FINAL
+                    data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                    data_final = new Date(data_final)
+
+                    // FORMATA A DATA PARA STRING NOVAMENTE 
+                    function adicionaZero(numero){
+                        if (numero <= 9) 
+                            return "0" + numero;
+                        else
+                            return numero; 
+                    }
+
+                    data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth()+1).toString()) + "/" + data_final.getFullYear());
+                    
+                    // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                    $("#id_data_final").val(data_final_string)
+                }
+            }); 
+
+            // =============================================================
+            // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
+            // =============================================================
+
+            $("#id_prazo_contrato").blur(function() {
+                
+                data_inicial = document.querySelector('#id_data_inicial').value
+                periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+                if (periodo_contrato == "" || data_inicial == "") {
+                    $("#id_data_final").val(null)
+                }
+                else {
+                    // FORMATA A DATA INICIAL
+                    var data_inicial = document.querySelector("#id_data_inicial").value;
+                    var arr_data_inicial = data_inicial.split('/');
+                    var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' +arr_data_inicial[2];
+                    var data_inicial_formatada = new Date(stringFormatada);
+                    
+                    // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                    prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                    prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                    // CALCULA A DATA FINAL
+                    data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                    data_final = new Date(data_final)
+
+                    // FORMATA A DATA PARA STRING NOVAMENTE 
+                    function adicionaZero(numero){
+                        if (numero <= 9) 
+                            return "0" + numero;
+                        else
+                            return numero; 
+                    }
+                    
+                    data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth()+1).toString()) + "/" + data_final.getFullYear());
+                    
+                    // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                    $("#id_data_final").val(data_final_string)
+                }
+            });   
             
         });
     </script>

@@ -83,7 +83,7 @@ class Aluguel(models.Model):
     locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True)  
     finalidade = models.CharField('Finalidade', max_length=50, choices=finalidade_choices, blank=True, null=True)
     data_inicial = models.DateField('Data inicial', blank=True, null=True)
-    periodo_meses = models.IntegerField('Período (em meses)', blank=True, null=True)
+    prazo_contrato = models.IntegerField('Período (em meses)', blank=True, null=True)
     data_final = models.DateField('Data final', blank=True, null=True)
     valor_contrato = models.CharField('Valor do aluguel', max_length=50, blank=True, null=True)
 
