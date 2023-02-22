@@ -59,11 +59,11 @@ class Aluguel(models.Model):
     )
 
     garantia_choices =(
+        ('Não possui', 'Não possui'),
         ('Caução','Caução'),
         ('Fiador','Fiador'),
         ('Seguro fiança', 'Seguro fiança',),
         ('Título de capitalização', 'Título de capitalização'),
-        ('Não possui', 'Não possui'),
     )
 
     repasse_garantido_choices = (
@@ -79,13 +79,31 @@ class Aluguel(models.Model):
     # dados do contrato
     proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
     imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True, sort=True)
-    garantia = models.CharField('Garantia', max_length=50, choices=garantia_choices, blank=True, null=True)
+    garantia = models.CharField('Garantia', max_length=50, default="Não possui",choices=garantia_choices, blank=False, null=False)
     locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True)  
     finalidade = models.CharField('Finalidade', max_length=50, choices=finalidade_choices, blank=True, null=True)
     data_inicial = models.DateField('Data inicial', blank=True, null=True)
     prazo_contrato = models.IntegerField('Período (em meses)', blank=True, null=True)
     data_final = models.DateField('Data final', blank=True, null=True)
     valor_contrato = models.CharField('Valor do aluguel', max_length=50, blank=True, null=True)
+    
+    # Garantia - GERAL
+    observacao_garantia = models.TextField("Observação", blank=True, null=True)
+    data_inicial_garantia = models.DateField('Data inicial', blank=True, null=True)
+    data_final_garantia = models.DateField('Data final', blank=True, null=True)
+
+    # Garantia - FIADOR
+    fiador = models.ForeignKey(Clientes, on_delete=models.PROTECT, verbose_name='Fiador', related_name='Clientes_Fiador +', null=True, blank=True)
+
+    # Garantia - CAUÇÃO
+    valor_garantia = models.CharField('Valor', max_length=50, blank=True, null=True)
+
+    # Garantia - TÍTULO CAPITALIZAÇÃO
+    banco_garantia = models.CharField('Banco', max_length=50, blank=True, null=True)
+    apolice_garantia = models.CharField('Apólice', max_length=50, blank=True, null=True)
+    
+    # Garantia - SEGURO FIANÇA
+    seguradora = models.CharField('Seguradora', max_length=50, blank=True, null=True)
 
     # Dados do repasse
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=True, blank=True)

@@ -30,37 +30,71 @@
 
         <div class="row">
             <h5>Imóvel</h5>
-            <div class="form-group col-md-5 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.proprietario|as_crispy_field }}
             </div>
-            <div class="form-group col-md-5 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.imovel|as_crispy_field }}
             </div>
-            <div class="form-group col-md-2 mb-0">
+            <div class="form-group col-md-4 mb-2">
                 {{ form.finalidade|as_crispy_field }}
             </div>
         </div>
         <div class="row mt-4">
             <h5 >Locatário e garantia</h5>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.locatario|as_crispy_field }}
             </div>
-            <div class="form-group col-md-6 mb-0">
+            <div class="form-group col-md-6 mb-2">
                 {{ form.garantia|as_crispy_field }}
             </div> 
         </div>
+
+        <div id="detalhes_garantia" class="card  mt-0" >
+            <div class="card-body ">
+                <div class="row">
+                    <h6>DETALHES</h6>
+                    <hr>
+                    <div id="data_inicial_garantia" class="form-group col-md-4 mb-2">
+                        {{ form.data_inicial_garantia|as_crispy_field }}
+                    </div> 
+                    <div id="data_final_garantia" class="form-group col-md-4 mb-2">
+                        {{ form.data_final_garantia|as_crispy_field }}
+                    </div> 
+                    <div id="valor_garantia" class="form-group col-md-4 mb-2">
+                        {{ form.valor_garantia|as_crispy_field }}
+                    </div> 
+                    <div id="fiador" class="form-group col-md-6 mb-2">
+                        {{ form.fiador|as_crispy_field }}
+                    </div> 
+                    <div id="seguradora" class="form-group col-md-6 mb-2">
+                        {{ form.seguradora|as_crispy_field }}
+                    </div> 
+                    <div id="banco_garantia" class="form-group col-md-6 mb-2">
+                        {{ form.banco_garantia|as_crispy_field }}
+                    </div> 
+                    <div id="apolice_garantia" class="form-group col-md-6 mb-2">
+                        {{ form.apolice_garantia|as_crispy_field }}
+                    </div> 
+                    <div id="observacao_garantia" class="form-group col-md-12 mb-2">
+                        {{ form.observacao_garantia|as_crispy_field }}
+                    </div> 
+                </div>
+            </div> 
+        </div>
+
         <div class="row mt-4">
             <h5 >Dados do contrato</h5>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.data_inicial|as_crispy_field }}
             </div>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.prazo_contrato|as_crispy_field }}
             </div>
-            <fieldset readonly class="form-group col-md-3 mb-0">
+            <fieldset readonly class="form-group col-md-3 mb-2">
                 {{ form.data_final|as_crispy_field }}
             </fieldset>
-            <div class="form-group col-md-3 mb-0">
+            <div class="form-group col-md-3 mb-2">
                 {{ form.valor_contrato|as_crispy_field }}
             </div>   
 
@@ -80,14 +114,74 @@
 {% endblock %}
 {% block scripts %}
 
-
-
     <script>
         $(document).ready(function() {
-            
+
+            // =============================================================
+            // ------ VERIFICA OS DETALHES DA GARANTIA ---------------------
+            // =============================================================
+
+            $("#id_garantia").ready(function() {
+                garantia = document.querySelector('#id_garantia').value
+                console.log(garantia)
+
+                if (garantia == "Não possui") {
+                    detalhes_garantia.style.display = 'none'
+                }
+                if (garantia == "Fiador") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'none'
+                    data_final_garantia.style.display = 'none'
+                    valor_garantia.style.display = 'none'
+                    fiador.style.display = 'block'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'none'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'none'
+                }
+                if (garantia == "Caução") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'none'
+                    data_final_garantia.style.display = 'none'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'none'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'block'
+                }
+                if (garantia == "Título de capitalização") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'block'
+                    data_final_garantia.style.display = 'block'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'block'
+                    apolice_garantia.style.display = 'block'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'block'
+                }
+                
+                if (garantia == "Seguro fiança") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'block'
+                    data_final_garantia.style.display = 'block'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'block'
+                    seguradora.style.display = 'block'
+                    observacao_garantia.style.display = 'block'
+                }
+            });
             // =============================================================
             // ------ SELECT2 ----------------------------------------------
             // =============================================================
+
             $('.select2').select2({theme: 'bootstrap-5'});
         
             // =============================================================
@@ -100,11 +194,9 @@
             // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
             // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
 
-
             // =============================================================
             // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
             // =============================================================
-
 
             $("#id_data_inicial").blur(function() {
                 
@@ -184,7 +276,69 @@
                     // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
                     $("#id_data_final").val(data_final_string)
                 }
-            });   
+            });
+            
+            // =============================================================
+            // ------ FAZ APARECER OS DETALHES DA GARANTIA -----------------
+            // =============================================================
+
+            $("#id_garantia").change(function() {
+                garantia = document.querySelector('#id_garantia').value
+                console.log(garantia)
+
+                if (garantia == "Não possui") {
+                    detalhes_garantia.style.display = 'none'
+                }
+                if (garantia == "Fiador") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'none'
+                    data_final_garantia.style.display = 'none'
+                    valor_garantia.style.display = 'none'
+                    fiador.style.display = 'block'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'none'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'none'
+                }
+                if (garantia == "Caução") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'none'
+                    data_final_garantia.style.display = 'none'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'none'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'block'
+                }
+                if (garantia == "Título de capitalização") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'block'
+                    data_final_garantia.style.display = 'block'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'block'
+                    apolice_garantia.style.display = 'block'
+                    seguradora.style.display = 'none'
+                    observacao_garantia.style.display = 'block'
+                }
+                
+                if (garantia == "Seguro fiança") {
+                    detalhes_garantia.style.display = 'block'
+
+                    data_inicial_garantia.style.display = 'block'
+                    data_final_garantia.style.display = 'block'
+                    valor_garantia.style.display = 'block'
+                    fiador.style.display = 'none'
+                    banco_garantia.style.display = 'none'
+                    apolice_garantia.style.display = 'block'
+                    seguradora.style.display = 'block'
+                    observacao_garantia.style.display = 'block'
+                }
+            });
         });
     </script>
 {% endblock %}

@@ -97,7 +97,7 @@ class ClientePJ(Clientes):
 
     # DADOS DA EMPRESA
     cnpj = models.CharField('CNPJ', max_length=20, null=True, blank=True)
-    nome_fantasia = models.CharField('Nome fantasia', max_length=20, null=True, blank=True)
+    nome_fantasia = models.CharField('Nome fantasia', max_length=100, null=True, blank=True)
     inscricao_estadual = models.CharField('Inscrição estadual', max_length=20, null=True, blank=True)
     data_abertura = models.DateField('Data de abertura', max_length=10, blank=True, null=True)
     situacao = models.CharField('Situação', max_length=50, null=True, blank=True)
