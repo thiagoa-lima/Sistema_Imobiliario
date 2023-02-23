@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h1 class="mt-4">
+        {{ titulo }}
+    </h1>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dados da empresa</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="profile" aria-selected="false">Taxas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contato" role="tab" aria-controls="contact" aria-selected="false">Contato</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+               <div class="container">
+                    <div class="row">
+                        <h2 class="mt-4 mb-4">
+                            Dados da Empresa
+                        </h2>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.cpf_cnpj|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.nome_empresa|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.nome_fantasia|as_crispy_field }}
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="perfil" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="container">
+                     <div class="row">
+                        <h2 class="mt-4 mb-4">
+                            Taxas
+                        </h2>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.cpf_cnpj|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.nome_empresa|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-6 mb-2">
+                            {{ form.nome_fantasia|as_crispy_field }}
+                        </div>
+                     </div>
+                </div>
+                laj dad alkj daksj dka jdlkaj klj c
+            </div>
+            <div class="tab-pane fade" id="contato" role="tabpanel" aria-labelledby="contact-tab">
+                ..j dja da da dlka lk lksl klk k lc
+            </div>
+        </div>
+
+        
+
+   
+           
+        
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+        <button type="reset" class="btn btn-danger mt-4">
+            Cancelar         
+        </button>
+    </form>
+
+    
+</div>
+{% endblock %}
+{% block scripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
+            
+            $('#id_data_inicial ').datepicker({dateFormat:'dd/mm/yy'});
+            $('#id_data_inicial_garantia ').datepicker({dateFormat:'dd/mm/yy'});
+            $('#id_data_final_garantia ').datepicker({dateFormat:'dd/mm/yy'});
+
+            // =============================================================
+            // ------ CAMPOS SOMENTE LEITURA -------------------------------
+            // =============================================================
+            
+            $('#id_data_final').prop('readonly', true)
+            
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
+
+            // $('.select2').select2({theme: 'bootstrap-5'});
+        
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            // $('#id_data_inicial').mask('00/00/0000');
+            // $('#id_data_final').mask('00/00/0000');
+            // $('#id_valor_contrato').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_valor_garantia').mask("000.000.000.000.000,00", {reverse: true});
+            // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+        });
+    </script>
+{% endblock %}

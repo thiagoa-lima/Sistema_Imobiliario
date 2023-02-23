@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Painel(models.Model):
+class Painel_administrativo(models.Model):
     
     # Dados Cadastrais
     cpf_cnpj = models.CharField("CPF/CNPJ", max_length=100, null=True)

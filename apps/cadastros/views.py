@@ -10,6 +10,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin 
 
 # ===================================================================================
+# ------ PÁGINAS PRINCIPAIS
+# ===================================================================================
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+class SobreView(TemplateView):
+    template_name = 'sobre.html'
+
+class BootView(TemplateView):
+    template_name = 'boot.html'
+
+class ClientesView(TemplateView):
+    template_name = 'padrao/form.html'
+
+
+# ===================================================================================
 # CREATE ('C' - CRUD)
 # ===================================================================================
 
@@ -161,16 +178,3 @@ class ImoveisUpdate(LoginRequiredMixin, UpdateView):
     
 
 
-
-
-class IndexView(TemplateView):
-    template_name = 'base.html'
-
-class SobreView(TemplateView):
-    template_name = 'sobre.html'
-
-class BootView(TemplateView):
-    template_name = 'boot.html'
-
-class ClientesView(TemplateView):
-    template_name = 'padrao/form.html'
