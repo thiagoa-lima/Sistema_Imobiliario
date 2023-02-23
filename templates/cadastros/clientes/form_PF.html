@@ -186,6 +186,15 @@
     };
 
     $(document).ready(function () {
+
+        // =============================================================
+        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+        // =============================================================
+        
+        $('#id_data_expedicao').datepicker({dateFormat:'dd/mm/yy'});
+        $('#id_nascimento').datepicker({dateFormat:'dd/mm/yy'});
+        $('#id_data_expedicao_conjuge').datepicker({dateFormat:'dd/mm/yy'});
+        
         // =============================================================
         // ------ CAMPO PADRÃO -----------------------------------------
         // =============================================================
@@ -223,7 +232,7 @@
         }
 
         //Quando o campo cep perde o foco.
-        $("#id_cep").blur(function() {
+        $("#id_cep").change(function() {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');

@@ -116,6 +116,20 @@
 
     <script>
         $(document).ready(function() {
+
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
+            
+            $('#id_data_inicial ').datepicker({dateFormat:'dd/mm/yy'});
+            $('#id_data_inicial_garantia ').datepicker({dateFormat:'dd/mm/yy'});
+            $('#id_data_final_garantia ').datepicker({dateFormat:'dd/mm/yy'});
+
+            // =============================================================
+            // ------ CAMPOS SOMENTE LEITURA -------------------------------
+            // =============================================================
+            
+            $('#id_data_final').prop('readonly', true)
             
             // =============================================================
             // ------ VERIFICA OS DETALHES DA GARANTIA ---------------------
@@ -190,17 +204,17 @@
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
             // =============================================================
         
-            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
-            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_inicial').mask('00/00/0000');
+            $('#id_data_final').mask('00/00/0000');
             $('#id_valor_contrato').mask("000.000.000.000.000,00", {reverse: true});
-            // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
+            $('#id_valor_garantia').mask("000.000.000.000.000,00", {reverse: true});
             // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
 
             // =============================================================
             // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
             // =============================================================
 
-            $("#id_data_inicial").blur(function() {
+            $("#id_data_inicial").change(function() {
                 
                 data_inicial = document.querySelector('#id_data_inicial').value
                 periodo_contrato = document.querySelector('#id_prazo_contrato').value
@@ -242,7 +256,7 @@
             // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
             // =============================================================
 
-            $("#id_prazo_contrato").blur(function() {
+            $("#id_prazo_contrato").change(function() {
                 
                 data_inicial = document.querySelector('#id_data_inicial').value
                 periodo_contrato = document.querySelector('#id_prazo_contrato').value

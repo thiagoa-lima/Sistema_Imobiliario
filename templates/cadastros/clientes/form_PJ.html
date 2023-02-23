@@ -146,6 +146,14 @@
     };
 
     $(document).ready(function () {
+        
+        // =============================================================
+        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+        // =============================================================
+
+        $('#id_data_abertura').datepicker({dateFormat:'dd/mm/yy'});
+        $('#id_data_situacao').datepicker({dateFormat:'dd/mm/yy'});
+        
         // =============================================================
         // ------ CAMPO PADRÃO PARA CADASTRO PJ ------------------------
         // =============================================================
@@ -161,13 +169,14 @@
         
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS
-        // =============================================================
-        
+        // =============================================================.
+
         $('#id_cnpj').mask('00.000.000/0000-00', {reverse: true});
         $('#id_telefone_1').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_2').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
         $('#id_data_abertura').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_data_situacao').mask('00/00/0000', {placeholder: "__/__/____"});
         $('#id_cep').mask('00000-000');
         $('#id_celular').mask(SPMaskBehavior, spOptions);
         $('#id_telefone').mask(SPMaskBehavior, spOptions);
@@ -191,7 +200,7 @@
         }
 
         //Quando o campo cep perde o foco.
-        $("#id_cep").blur(function() {
+        $("#id_cep").change(function() {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
@@ -244,7 +253,7 @@
         // ------ API DE BUSCA: CNPJ -----------------------------------
         // =============================================================      
 
-        $("#id_cnpj").blur(function(){
+        $("#id_cnpj").change(function(){
 
             //Nova variável "cnpj" somente com dígitos.
             cnpj = document.querySelector('#id_cnpj').value.replace(/\D/g, '')

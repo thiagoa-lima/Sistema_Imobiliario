@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from django.contrib.admin import widgets   
 
 
 class ImoveisForm(forms.ModelForm):
@@ -21,6 +22,12 @@ class Clientes_PJ_Form(forms.ModelForm):
             "responsavel_2": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um cliente', 'style': 'width: 100%'}),
             "nome": forms.TextInput(attrs={'placeholder': 'Razão Social da empresa'}),
         }
+
+    # def __init__(self, *args, **kwargs):
+    #     super(Clientes_PJ_Form, self).__init__(*args, **kwargs)
+    #     self.fields['data_abertura'].widget = widgets.AdminDateWidget()
+    #     # self.fields['mytime'].widget = widgets.AdminTimeWidget()
+    #     # self.fields['mydatetime'].widget = widgets.AdminSplitDateTime()
 
 class ClientesFormAdmin(forms.ModelForm):
     def __init__(self, *args, **kwargs):

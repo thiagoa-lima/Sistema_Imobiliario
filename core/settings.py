@@ -153,7 +153,7 @@ LOGIN_URL = 'login'
 
 # --------------------------------------------
 
-# REST_FRAMEWORK = {
-#     'DATE_FORMAT': "%d/%m/%Y",
-#     'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
-# }
+REST_FRAMEWORK = {
+    'DATE_FORMAT': "%d/%m/%Y",
+    'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
+}

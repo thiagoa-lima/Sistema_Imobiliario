@@ -43,10 +43,6 @@ class Administracao(models.Model):
     def __str__(self) -> str:
         endereco = str(self.imovel)
         return endereco
-       
-# @receiver(pre_save, sender=Administracao)
-# def callback_Administracao(sender, instance, *args, **kwargs):
-#     instance.data_final = (instance.data_inicial + relativedelta(months=+3))
 
 class Aluguel(models.Model):
 

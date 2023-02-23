@@ -54,7 +54,7 @@
             <div class="form-group col-md-4 mb-0">
                 {{ form.prazo_contrato|as_crispy_field }}
             </div>
-            <div class="form-group col-md-4 mb-0">
+            <div  class="form-group col-md-4 mb-0">
                 {{ form.data_final|as_crispy_field }}
             </div>
         </div>
@@ -82,12 +82,26 @@
 
     </form>
 </div>
+
+
 {% endblock %}
 
 {% block scripts %}
     <script>
         $(document).ready(function() {
+
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
             
+            $('#id_data_inicial ').datepicker({dateFormat:'dd/mm/yy'});
+
+            // =============================================================
+            // ------ CAMPOS SOMENTE LEITURA -------------------------------
+            // =============================================================
+            
+            $('#id_data_final').prop('readonly', true)
+
             // =============================================================
             // ------ SELECT2 ----------------------------------------------
             // =============================================================
@@ -107,7 +121,7 @@
             // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
             // =============================================================
 
-            $("#id_data_inicial").blur(function() {
+            $("#id_data_inicial").change(function() {
                 
                 data_inicial = document.querySelector('#id_data_inicial').value
                 periodo_contrato = document.querySelector('#id_prazo_contrato').value
@@ -149,7 +163,7 @@
             // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
             // =============================================================
 
-            $("#id_prazo_contrato").blur(function() {
+            $("#id_prazo_contrato").change(function() {
                 
                 data_inicial = document.querySelector('#id_data_inicial').value
                 periodo_contrato = document.querySelector('#id_prazo_contrato').value
