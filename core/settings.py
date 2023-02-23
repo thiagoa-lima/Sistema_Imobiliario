@@ -33,11 +33,11 @@ INSTALLED_APPS = [
     'django_select2',
     'cpf_field',
     
-    
-    # My apps
+    # Meus apps
     'apps.cadastros.apps.CadastrosConfig',
     'apps.contratos.apps.ContratosConfig',
     'apps.usuarios.apps.UsuariosConfig',
+    'apps.administrativo.apps.AdministrativoConfig',
 ]
 
 MIDDLEWARE = [
