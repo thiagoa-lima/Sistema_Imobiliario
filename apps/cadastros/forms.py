@@ -1,7 +1,20 @@
 from django import forms
 from . import models
-from django.contrib.admin import widgets   
+from django.contrib.admin.widgets import AdminSplitDateTime, AdminDateWidget, AdminTimeWidget
 
+
+
+class Saida_de_Chaves_Form(forms.ModelForm):
+
+    class Meta:
+        model = models.Saida_de_Chaves
+        fields = "__all__"
+        exclude = []
+        widgets = {
+            "imovel": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um imóvel', 'style': 'width: 100%'}),          
+            "cliente": forms.Select(attrs={'class': 'select2 form-control', 'data-placeholder': 'Selecione um cliente', 'style': 'width: 100%'}),   
+            "observacao": forms.Textarea(attrs={'placeholder': 'Observação', 'style': 'width: 100%', 'rows':2, 'cols':40}),
+        }
 
 class ImoveisForm(forms.ModelForm):
     class Meta:

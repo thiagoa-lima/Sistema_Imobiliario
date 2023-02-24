@@ -142,9 +142,20 @@ class Imoveis(models.Model):
     
     def __str__(self):
         if self.complemento == None:
-            endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.cidade + '/' + self.uf 
+            endereco_completo = self.endereco + ', ' + self.numero  + ', ' + self.bairro + ', ' + self.cidade + '/' + self.uf 
         else:
-            endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.cidade + '/' + self.uf
+            endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.bairro + ', ' + self.cidade + '/' + self.uf
         return endereco_completo
 
+class Saida_de_Chaves(models.Model):
+    imovel = models.ForeignKey(Imoveis, on_delete=models.PROTECT, default=None, verbose_name='imovel', related_name='Imovel +', null=True)
+    cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Cliente', related_name='cliente', null=True)
+    data_retirada = models.DateField("Data", null=True)
+    hora_retirada = models.TimeField("Hora", null=True)
+    data_devolucao = models.DateField("Data", null=True)
+    hora_devolucao = models.TimeField("Hora", null=True)
+    observacao = models.TextField("Observação", null=True)
 
+    def __str__(self):
+        imovel = str(self.imovel)
+        return "Saída de chaves do imóvel localizado em: " + imovel

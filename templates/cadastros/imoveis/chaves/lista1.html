@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Lista de Imóveis</title>
+<title>Saída de chaves</title>
 {% endblock %}
 
 {% block conteudo %}
@@ -12,8 +12,8 @@
 <div class="container">
 
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Imóveis</h2> 
-        <a href="{% url 'cadastrar-imoveis' %}" class="btn btn-primary btn-bg">Cadastrar imóvel</a>
+        <h2>Saída de chaves</h2> 
+        <a href="{% url 'cadastrar-saida-chaves' %}" class="btn btn-primary btn-bg">Nova Saída</a>
     </div>
 
     <hr>
@@ -23,30 +23,27 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Endereço</th>
-                    <th>Bairro</th>
-                    <th>Tipo</th>
-                    <th>Proprietário</th>
+                    <th>Imóvel</th>
+                    <th>Cliente</th>
+                    <th>Saída</th>
+                    <th>Retorno</th>
                     <th>Opções</th>
                 </tr>
             </thead>
             
             <tbody>
-                {% for Imoveis in object_list %}
+                {% for saida_de_chaves in object_list %}
                 <tr>
-                    <td>{{ Imoveis.pk }}</td>
-                    <td>{{ Imoveis }}</td>
-                    <td>{{ Imoveis.bairro }}</td>
-                    <td>{{ Imoveis.tipo }}</td>
-                    <td>{{ Imoveis.proprietario }}</td>
+                    <td>{{ saida_de_chaves.pk }}</td>
+                    <td>{{ saida_de_chaves.imovel}}</td>
+                    <td>{{ saida_de_chaves.cliente }}</td>
+                    <td>{{ saida_de_chaves.data_retirada|date:'d/m/Y' }}<br>{{ saida_de_chaves.hora_retirada }}</td>
+                    <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }}<br>{{ saida_de_chaves.hora_devolucao }}</td>
                     <td>
-                        <a href="{% url 'listar-controle-chaves' Imoveis.pk %} " class="btn btn-secondary btn-sm" title="Controle de chaves">
-                            <i class="fa fa-key" aria-hidden="true"></i>
-                        </a> 
-                        <a href="{% url 'editar-imoveis' Imoveis.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                        <a href="{% url 'editar-saida-chaves' saida_de_chaves.pk %}" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a> 
-                        <a href="{% url 'excluir-imoveis' Imoveis.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                        <a href="{% url 'excluir-saida-chaves' saida_de_chaves.pk %}" class="btn btn-danger btn-sm" title="Excluir">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </td>
@@ -77,6 +74,7 @@
     $(document).ready(function () {
         $('#tabela').DataTable({
             "pageLength": 50,
+            "order": [[ 0, "desc" ]],
             "bSort": true,
             "language":{
                 "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"

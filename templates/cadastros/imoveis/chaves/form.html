@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h2 class="mt-4">
+        {{ titulo }}
+    </h2>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div>
+                <h5></h4>
+            </div>
+            <div class="form-group col-md-6 mb-2">
+                {{ form.imovel|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-2">
+                {{ form.cliente|as_crispy_field }}
+            </div>
+            <!-- <div class='form-group'>
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </div> -->
+        </div>
+
+                <div class="row mt-2 mb-1">
+                    <div class="form-group col-md-6 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class=>Saída</h5>
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.data_retirada|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.hora_retirada|as_crispy_field }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class=>Retorno</h5>
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.data_devolucao|as_crispy_field }}
+                                    </div>
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.hora_devolucao|as_crispy_field }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+  
+
+        <div class="form-group col-md-12 mb-2">
+            {{ form.observacao|as_crispy_field }}
+        </div> 
+
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+    </form>
+</div>
+
+{{ form.media }}
+{{ form.as }} 
+
+{% endblock %}
+
+{% block scripts %}
+
+
+
+
+<script>
+    // Script para mascara
+    var SPMaskBehavior = function (val) {
+    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+    onKeyPress: function(val, e, field, options) {
+        field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $(document).ready(function () { 
+
+        // =============================================================
+        // ------ SELECT2 ----------------------------------------------
+        // =============================================================
+        
+        $('.select2').select2({theme: 'bootstrap-5'});
+
+        // =============================================================
+        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+        // =============================================================
+
+        $('#id_data_retirada').datepicker({dateFormat:'dd/mm/yy'});
+        $('#id_data_devolucao').datepicker({dateFormat:'dd/mm/yy'});
+
+        // =============================================================
+        // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+        // =============================================================
+        
+        $('#id_data_retirada').mask('00/00/0000');
+        $('#id_data_devolucao').mask('00/00/0000');
+        $('#id_hora_retirada').mask('00:00:00');
+        $('#id_hora_devolucao').mask('00:00:00');
+        
+    });
+
+</script>
+{% endblock %}

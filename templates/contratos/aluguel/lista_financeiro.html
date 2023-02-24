@@ -13,9 +13,8 @@
 
 
 {% block conteudo %}
-
-{% for contrato in contratos %}
 <div class="container">
+    {% for contrato in contratos %}
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>
             {{ contrato.locatario }}
@@ -27,7 +26,7 @@
     <h5 class="lead">
         {{ contrato.imovel }}
     </h5> 
-    
+    {% endfor %}
     <div class="accordion mt-4 mb-2" id="accordionExample">
         <div class="card">
             <div class="card-header" id="headingOne">
@@ -67,7 +66,7 @@
         </div>
     </div>
 </div>
-{% endfor %}
+
 
 
 <div class="container">

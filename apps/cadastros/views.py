@@ -1,13 +1,16 @@
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView # usada para cadastros
 from django.views.generic.list import ListView # usada para fazer listas
-from .models import Imoveis, Clientes, ClientePF, ClientePJ
+from .models import Imoveis, Clientes, ClientePF, ClientePJ, Saida_de_Chaves
 from django.urls import reverse_lazy
 from . import forms
 
 # CONTROLE DE LOGIN e USÁRIOS
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import GroupRequiredMixin 
+
+
 
 # ===================================================================================
 # ------ PÁGINAS PRINCIPAIS
@@ -26,24 +29,6 @@ class ClientesView(TemplateView):
     template_name = 'padrao/form.html'
 
 
-# ===================================================================================
-# CREATE ('C' - CRUD)
-# ===================================================================================
-
-class ImoveisCreate(LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')
-    model = Imoveis
-    form_class = forms.ImoveisForm
-    template_name = 'cadastros/imoveis/form.html'
-    success_url = reverse_lazy('listar-imoveis')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        context['titulo'] = "Cadastro de imóveis"
-        context['botao'] = "Cadastrar"
-        
-        return context 
 
 # ===================================================================================
 # ------ CLIENTES LISTA -------------------------------------------------------------
@@ -154,12 +139,20 @@ class ImoveisList(LoginRequiredMixin, ListView):
     model = Imoveis
     template_name = 'cadastros/imoveis/lista.html'
 
-class ImoveisDelete(LoginRequiredMixin, DeleteView):
+class ImoveisCreate(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
-    group_required = u'administrador'
     model = Imoveis
-    template_name = 'padrao/form-excluir.html'
+    form_class = forms.ImoveisForm
+    template_name = 'cadastros/imoveis/form.html'
     success_url = reverse_lazy('listar-imoveis')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Cadastro de imóveis"
+        context['botao'] = "Cadastrar"
+        
+        return context 
   
 class ImoveisUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -176,5 +169,71 @@ class ImoveisUpdate(LoginRequiredMixin, UpdateView):
         
         return context 
     
+class ImoveisDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    group_required = u'administrador'
+    model = Imoveis
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('listar-imoveis')
 
+# ===================================================================================
+# ------ SAÍDA DE CHAVES ------------------------------------------------------------
+# ===================================================================================
 
+class Saida_de_Chaves_List(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Saida_de_Chaves
+    template_name = 'cadastros/imoveis/chaves/lista1.html'
+
+class Saida_de_Chaves_Create(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = Saida_de_Chaves
+    form_class = forms.Saida_de_Chaves_Form
+    template_name = 'cadastros/imoveis/chaves/form.html'
+    success_url = reverse_lazy('listar-saida-chaves')
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Controle de saída de chaves"
+        context['botao'] = "Cadastrar"
+        
+        return context 
+
+class Saida_de_Chaves_Update(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Saida_de_Chaves
+    form_class = forms.Saida_de_Chaves_Form
+    template_name = 'cadastros/imoveis/chaves/form.html'
+    success_url = reverse_lazy('listar-saida-chaves')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Devolver chaves"
+        context['botao'] = "Salvar"
+        
+        return context 
+    
+class Saida_de_Chaves_Delete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Saida_de_Chaves
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('listar-saida-chaves')
+
+def Saida_de_Chaves_por_Imovel(request,pk): 
+    context = {}
+    imoveis = Imoveis.objects.filter(pk=pk)
+    chaves = Saida_de_Chaves.objects.filter(imovel_id=pk)
+    context['imoveis'] = imoveis
+    context['chaves'] = chaves 
+
+    if request.method == 'POST':
+        cliente = request.POST['cliente']
+
+        lancamento = Saida_de_Chaves.objects.create(
+            imovel_id = pk,
+            observacao = cliente,
+        )
+    
+    return render(request, 'cadastros/imoveis/chaves/lista.html', context)

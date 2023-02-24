@@ -1,10 +1,15 @@
 from django.contrib import admin
-from apps.cadastros.models import Clientes, ClientePF, Imoveis, ClientePJ
+from apps.cadastros.models import Clientes, ClientePF, Imoveis, ClientePJ, Saida_de_Chaves
 from apps.cadastros.forms import ClientesFormAdmin, ImoveisFormAdmin
+
+@admin.register(Saida_de_Chaves)
+class Controle_de_Chaves_Admin(admin.ModelAdmin):
+    list_display = ('id','imovel', 'cliente', 'data_retirada', 'data_devolucao')
 
 @admin.register(Clientes)
 class ClientesAdmin(admin.ModelAdmin):
     list_display = ('nome',)
+
 
 @admin.register(ClientePJ)
 class ClientesAdmin(admin.ModelAdmin):
@@ -40,7 +45,7 @@ class ImoveisAdmin(admin.ModelAdmin):
     # Edita informaçõe da tela inicial do cadastro de clientes (ADMIN)
     # ----------------------------------------------------------------
 
-    list_display = ('proprietario', 'endereco', 'numero', 'complemento', 'cidade', 'uf', 'tipo', )
+    list_display = ('id','proprietario', 'endereco', 'numero', 'complemento', 'cidade', 'uf', 'tipo', )
     # search_fields = ('tipo',)
     # list_filter = ('tipo', )
     list_per_page = 20
