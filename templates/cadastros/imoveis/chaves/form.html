@@ -122,13 +122,29 @@
         $('#id_data_devolucao').datepicker({dateFormat:'dd/mm/yy'});
 
         // =============================================================
+        // ------ INCLUÍNDO AS HORAS -----------------------------------
+        // =============================================================
+
+        $('#id_data_retirada').change(function () { 
+            now = new Date()
+            hora_retirada = (now.getUTCHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
+            console.log(hora_retirada)
+            $("#id_hora_retirada").val(hora_retirada)
+        });
+
+        $('#id_data_devolucao').change(function () { 
+            now = new Date()
+            hora_retirada = (now.getUTCHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
+            console.log(hora_retirada)
+            $("#id_hora_devolucao").val(hora_retirada)
+        });
+
+        // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
         // =============================================================
         
         $('#id_data_retirada').mask('00/00/0000');
         $('#id_data_devolucao').mask('00/00/0000');
-        $('#id_hora_retirada').mask('00:00:00');
-        $('#id_hora_devolucao').mask('00:00:00');
         
     });
 

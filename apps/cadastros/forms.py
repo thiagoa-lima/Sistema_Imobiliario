@@ -1,11 +1,8 @@
 from django import forms
 from . import models
-from django.contrib.admin.widgets import AdminSplitDateTime, AdminDateWidget, AdminTimeWidget
-
 
 
 class Saida_de_Chaves_Form(forms.ModelForm):
-
     class Meta:
         model = models.Saida_de_Chaves
         fields = "__all__"
@@ -36,11 +33,6 @@ class Clientes_PJ_Form(forms.ModelForm):
             "nome": forms.TextInput(attrs={'placeholder': 'Razão Social da empresa'}),
         }
 
-    # def __init__(self, *args, **kwargs):
-    #     super(Clientes_PJ_Form, self).__init__(*args, **kwargs)
-    #     self.fields['data_abertura'].widget = widgets.AdminDateWidget()
-    #     # self.fields['mytime'].widget = widgets.AdminTimeWidget()
-    #     # self.fields['mydatetime'].widget = widgets.AdminSplitDateTime()
 
 class ClientesFormAdmin(forms.ModelForm):
     def __init__(self, *args, **kwargs):

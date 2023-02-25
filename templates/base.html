@@ -48,7 +48,6 @@
                         <i class="fas fa-user fa-fw"></i>
                         {{ request.user.email }}
                     </a>
-
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
                             <a class="dropdown-item" href="#!">
@@ -63,7 +62,7 @@
                                 Atividades
                             </a>
                         </li>
-                        
+
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
@@ -105,77 +104,44 @@
                                     <a class="nav-link" href="{% url 'listar-clientes' %}">Clientes</a>
                                     <a class="nav-link" href="{% url 'listar-imoveis' %}">Imóveis</a>
                                     <a class="nav-link" href="{% url 'listar-usuarios' %}">Usuários</a>
+
                                 </nav>
                             </div>
 
-                            <hr>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                ALUGUEL
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#contratos" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Contratos
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-
-
-
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Contratos
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{% url 'contrato-administracao-listar' %}">Administração</a>
-                                        </nav>
-                                    </div>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{% url 'contrato-aluguel-listar' %}">Aluguel</a>
-                                        </nav>
-                                    </div> 
-
-
-                                    <a class="nav-link collapsed" href="{% url 'listar-saida-chaves' %}" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Saída de Chaves
-                                        <div class="sb-sidenav-collapse-arrow"><i class=""></i></div>
-                                    </a>     
-                                    
-                                    
-
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
+                            <div class="collapse" id="contratos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="{% url 'contrato-administracao-listar' %}">Administração</a>
+                                    <a class="nav-link" href="{% url 'contrato-aluguel-listar' %}">Aluguel</a>
+                                    <a class="nav-link" href="{% url 'listar-saida-chaves' %}">Saída de Chaves</a>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
                             <hr>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#erro" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                                Erro
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="rro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                            <hr>
+
+             
                             <a class="nav-link collapsed" href="{url 'painel-administrativo' 1} " aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div> 
                                 Administrativo
                                 <div class="sb-sidenav-collapse-arrow"></i></div>
                             </a>
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
                     </div>
                 </nav>
             </div>
@@ -209,7 +175,6 @@
         <!-- Adição do Bootstrap--> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        
     
         <!-- Importação do Datepicker (calendário de data) -->
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
