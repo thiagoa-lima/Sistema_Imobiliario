@@ -135,6 +135,8 @@ class Imoveis(models.Model):
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
     cidade = models.CharField('Cidade', max_length=100, default=None, null=False, blank=False)
     uf = models.CharField('UF', max_length=2, default=None, null=False, blank=False)
+    taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
+    taxa_admin_anual = models.CharField("Tx Adm Anual (%)", max_length=20, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Imóvel'
@@ -147,15 +149,19 @@ class Imoveis(models.Model):
             endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.bairro + ', ' + self.cidade + '/' + self.uf
         return endereco_completo
 
+    @property 
+    def get_taxa_admin_mensal(self):
+        return self.taxa_admin_mensal
+
 class Saida_de_Chaves(models.Model):
     imovel = models.ForeignKey(Imoveis, on_delete=models.PROTECT, default=None, verbose_name='imovel', related_name='Imovel +', null=True)
     cliente = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Cliente', related_name='cliente', null=True)
-    data_retirada = models.DateField("Data")
-    hora_retirada = models.TimeField("Hora")
+    data_retirada = models.DateField("Data", default=None)
+    hora_retirada = models.TimeField("Hora", default=None)
     data_devolucao = models.DateField("Data", blank=True, null=True)
     hora_devolucao = models.TimeField("Hora", blank=True, null=True)
     observacao = models.TextField("Observação", blank=True, null=True)
-
+    
     def __str__(self):
         imovel = str(self.imovel)
         return "Saída de chaves do imóvel localizado em: " + imovel

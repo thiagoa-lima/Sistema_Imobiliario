@@ -74,7 +74,7 @@ class Aluguel(models.Model):
 
     # dados do contrato
     proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
-    imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True, sort=True)
+    imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", related_name='+', show_all=False, auto_choose=True, sort=True)
     garantia = models.CharField('Garantia', max_length=50, default="Não possui",choices=garantia_choices, blank=False, null=False)
     locatario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Locatário', related_name='locatario +', blank=True, null=True)  
     finalidade = models.CharField('Finalidade', max_length=50, choices=finalidade_choices, blank=True, null=True)
@@ -89,7 +89,7 @@ class Aluguel(models.Model):
     data_final_garantia = models.DateField('Data final', blank=True, null=True)
 
     # Garantia - FIADOR
-    fiador = models.ForeignKey(Clientes, on_delete=models.PROTECT, verbose_name='Fiador', related_name='Clientes_Fiador +', null=True, blank=True)
+    fiador = models.ForeignKey(Clientes, on_delete=models.PROTECT, verbose_name='Fiador', related_name='+', null=True, blank=True)
 
     # Garantia - CAUÇÃO
     valor_garantia = models.CharField('Valor', max_length=50, blank=True, null=True)
@@ -105,6 +105,8 @@ class Aluguel(models.Model):
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=True, blank=True)
     regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=True, blank=True)
     dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
+    taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
+    taxa_admin_anual = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
 
     class Meta():
         verbose_name = 'Contrato de Aluguel'
@@ -114,7 +116,6 @@ class Aluguel(models.Model):
         imovel = str(self.imovel)
         locatario = str(self.locatario)
         return locatario + ': ' + imovel
-
 
 class Financeiro_do_Contrato(models.Model):
 
