@@ -11,21 +11,23 @@
 </title>
 {% endblock %}
 
-
 {% block conteudo %}
 <div class="container">
     {% for contrato in contratos %}
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>
-            {{ contrato.locatario }}
+            Locatário: {{ contrato.locatario }}
         </h2>
         <a href="#" class="btn btn-primary btn-bg">
             Imprimir</a> 
     </div>
 
     <h5 class="lead">
-        {{ contrato.imovel }}
+        Imóvel: {{ contrato.imovel }}
     </h5> 
+    <h1 class="lead">
+        Taxa mensal: {{ contrato.taxa_admin_mensal }} | Taxa anual: {{ contrato.taxa_admin_anual}} 
+    </p>
     {% endfor %}
     <div class="accordion mt-4 mb-2" id="accordionExample">
         <div class="card">

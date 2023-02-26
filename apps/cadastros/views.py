@@ -31,17 +31,13 @@ class ClientesView(TemplateView):
 
 
 # ===================================================================================
-# ------ CLIENTES LISTA -------------------------------------------------------------
+# ------ CLIENTES - CLASSE PAI ------------------------------------------------------
 # ===================================================================================
 
 class Clientes_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Clientes
     template_name = 'cadastros/clientes/lista.html'
-
-# ===================================================================================
-# ------ CLIENTES PAGAR -------------------------------------------------------------
-# ===================================================================================
 
 class Clientes_Delete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
