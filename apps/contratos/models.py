@@ -115,7 +115,7 @@ class Aluguel(models.Model):
     def __str__(self):
         imovel = str(self.imovel)
         locatario = str(self.locatario)
-        return locatario + ': ' + imovel
+        return locatario
 
 class Financeiro_do_Contrato(models.Model):
 
@@ -128,9 +128,18 @@ class Financeiro_do_Contrato(models.Model):
     multa = models.DecimalField("Multa", max_digits=50, decimal_places=2, null=True, blank=True)
     juros = models.DecimalField("Juros", max_digits=50, decimal_places=2, null=True, blank=True)
     valor_total = models.DecimalField("Valor total", max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_pago = models.DecimalField("Valor pago", max_digits=50, decimal_places=2, null=True, blank=True)
+    comissao = models.DecimalField("Comissão", max_digits=50, decimal_places=2, null=True, blank=True)
+    repasse = models.DecimalField("Comissão",max_digits=50, decimal_places=2, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Financeiro'
         verbose_name_plural = 'Financeiro do Contrato'
+
+    def __str__(self):
+        imovel = str(self.imovel)
+        locatario = str(self.locatario)
+        return locatario + ': ' + imovel
+
 
   

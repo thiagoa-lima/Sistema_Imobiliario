@@ -38,27 +38,36 @@
                     </button>
                 </h5>
             </div>
-        
+    
+
+
+            
+
+
             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                     <form action="" method='post' id="id_form">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col">
-                                <label class="form-label mb-0 mt-1"> Nº de parcelas</label>
-                                <input class="form-control" type="number" id='num_parcelas' name="num_parcelas" placeholder="" autocomplete="off">
+                                <input class="form-control" type="number" id='num_parcelas' name="num_parcelas" placeholder="Qtde de parcelas" autocomplete="off">
                             </div>
                             <div class="col">
-                                <label class="form-label mb-0 mt-1"> Nº da 1ª parcela</label>
-                                <input class="form-control" type="number" name="primeira_parcela" placeholder="">      
+                                <input class="form-control" type="number" name="primeira_parcela" placeholder="Nº da 1ª parcela">      
                             </div>
                             <div class="col">   
-                                <label class="form-label mb-0 mt-1"> Vcto 1ª parcela</label>
-                                <input class="form-control data" type="date" name="vencimento_primeira_parcela" placeholder="__/__/____">
+                                <input class="form-control data" type="date" name="vencimento_primeira_parcela" placeholder="Vencimento da 1ª parcela">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <input class="form-control" type="number" min="1" max="100" name="taxa_primeira_parcela" placeholder="Tx 1ª parcela (%)">
                             </div>
                             <div class="col">
-                                <label class="form-label mb-0 mt-1"> Valor</label>
-                                <input class="form-control" type="number" name="valor_da_parcela" placeholder="">
+                                <input class="form-control" type="number" min="1" max="100" name="taxa_demais_parcelas" placeholder="Tx demais parcelas (%)">
+                            </div>
+                            <div class="col">
+                                <input class="form-control" type="number" name="valor_da_parcela" placeholder="Valor">
                             </div>
                         </div>
                         <input class="form-control mb-0 mt-3" type="submit" name="btn_gerar_parcelas" value="Gerar parcelas">
@@ -84,7 +93,8 @@
                         <th>Data Pgto</th>
                         <th>Multa</th>
                         <th>Juros</th>
-                        <th>Valor Pago</th>
+                        <th>Valor total</th>
+                        <th>Valor pago</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -99,6 +109,7 @@
                         <td>{{ parcela.multa }}</td>
                         <td>{{ parcela.juros }}</td>
                         <td>{{ parcela.valor_total }}</td>
+                        <td>{{ parcela.valor_pago }}</td>
                         <td>
                             <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                 <i class="fa fa-check" aria-hidden="true"></i>

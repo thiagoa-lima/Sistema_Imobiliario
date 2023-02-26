@@ -34,7 +34,21 @@ def Lista_parcela_aluguel(request, pk):
         vencimento_primeira_parcela_str = request.POST['vencimento_primeira_parcela']
         vencimento_primeira_parcela = parse_date(vencimento_primeira_parcela_str)
 
-        valor_da_parcela=request.POST['valor_da_parcela']
+        valor_da_parcela_str = request.POST['valor_da_parcela']
+        valor_da_parcela = float(valor_da_parcela_str)
+        
+        taxa_primeira_parcela_str = request.POST['taxa_primeira_parcela']
+        taxa_primeira_parcela = float(taxa_primeira_parcela_str)
+
+        taxa_demais_parcelas_str = request.POST['taxa_demais_parcelas']
+        taxa_demais_parcelas = float(taxa_demais_parcelas_str)
+
+        comissao_primeira_parcela = valor_da_parcela * taxa_primeira_parcela / 100
+        repasse_primeira_parcela = valor_da_parcela - comissao_primeira_parcela
+
+        comissao_demais_parcelas = valor_da_parcela * taxa_demais_parcelas / 100
+        repasse_demais_parcelas = valor_da_parcela - comissao_demais_parcelas
+        
   
         # ----------------------------------------------------------------------------
         # INCLUSÃO DAS NOVAS PARCELAS NO BANCO DE DADOS
@@ -60,16 +74,36 @@ def Lista_parcela_aluguel(request, pk):
                 # EFETUA OS LANÇAMENTOS NO BANCO DE DADOS
                 # --------------------------------------------------------------------
 
-                nova_parcela = Financeiro_do_Contrato.objects.create(
-                        parcela=primeira_parcela + i, 
-                        contrato_id=pk,
-                        vencimento=vencimento,
-                        valor=valor_da_parcela,
-                        multa=0,
-                        juros=0,
-                        valor_total=0,
-                        vencimento_real=vencimento_real
+                if i == 1:
+                    nova_parcela = Financeiro_do_Contrato.objects.create(
+                            parcela = primeira_parcela + i, 
+                            contrato_id = pk,
+                            vencimento = vencimento,
+                            valor = valor_da_parcela,
+                            multa = 0,
+                            juros = 0,
+                            valor_total = valor_da_parcela,
+                            vencimento_real = vencimento_real,
+                            comissao = comissao_primeira_parcela,
+                            repasse = repasse_primeira_parcela,
+                            valor_pago = 0
+                        )
+                else:
+                    nova_parcela = Financeiro_do_Contrato.objects.create(
+                            parcela = primeira_parcela + i, 
+                            contrato_id = pk,
+                            vencimento = vencimento,
+                            valor = valor_da_parcela,
+                            multa = 0,
+                            juros = 0,
+                            valor_total = valor_da_parcela,
+                            vencimento_real = vencimento_real,
+                            comissao = comissao_demais_parcelas,
+                            repasse = repasse_demais_parcelas,
+                            valor_pago = 0
+                            
                     )
+
             i += 1
 
     return render(request, 'contratos/aluguel/lista_financeiro.html', context)
@@ -206,8 +240,17 @@ class Financeiro_do_ContratoList(LoginRequiredMixin, ListView):
     model = Financeiro_do_Contrato
     template_name = 'contratos/financeiro/lista.html'
    
+# ===================================================================================
+# ------ RECEITAS - ALUGUEIS --------------------------------------------------------
+# ===================================================================================
 
+class Receita_Alugueis_List(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'receitas/alugueis/lista.html'
 
+    def get_queryset(self):
+        return Financeiro_do_Contrato.objects.filter(valor_pago = 0)
 
 
 
