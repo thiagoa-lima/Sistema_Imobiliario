@@ -24,13 +24,13 @@
 
     <hr>
 
-    <form action="" method="post">
+    <form name="form" action="" onsubmit="return validateForm()" method="post">
 
         {% csrf_token %}
 
         <div class="row">
             <h5></h5>
-             <div class="form-group col-md-10 mb-3 invisible" >
+             <div hidden class="form-group col-md-10 mb-2" >
                 {{ form.contrato|as_crispy_field }}
             </div>
         </div>
@@ -40,32 +40,35 @@
                 Dados Gerais
                 <hr>
                 <div class="row mt-4">                        
-                    <div class="form-group col-md-2 mb-3">
+                    <div class="form-group col-md-2 mb-2">
                         {{ form.parcela|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.vencimento|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.vencimento_real|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-4 mb-3">
-                        {{ form.pagamento|as_crispy_field }}
+                    <div class="form-group col-md-4 mb-2">
+                        {{ form.data_pagamento|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.valor|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-3">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.multa|as_crispy_field }}
                     </div> 
-                    <div class="form-group col-md-3 mb-0">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.juros|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-0">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.valor_total|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-3 mb-0">
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.valor_pago|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.saldo|as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -90,20 +93,37 @@
 {% endblock %}
 {% block scripts %}
     <script>
+
+        // =============================================================
+        // ------ VALIDA O FORMULÁRIO ANTES DE ENVIAR ------------------
+        // =============================================================
+        
+        function validateForm(){
+            var valor_pago = document.querySelector("#id_valor_pago").value
+            var valor_total = document.querySelector('#id_valor_total').value
+            
+            var saldo = valor_total - valor_pago
+            if (saldo > 0 || saldo < 0 ) {
+                alert("Não é possível baixar essa parcela. Verifique o saldo.")
+            return false
+            }
+
+        }
+
         $(document).ready(function() {
+
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
+            
+            $('#id_data_pagamento ').datepicker({dateFormat:'dd/mm/yy'});
+
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
             // =============================================================
         
-            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
-            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
+            $('#id_data_pagamento').mask('00/00/0000');
 
-            // =============================================================
-            // ------ SELECT2 ----------------------------------------------
-            // =============================================================
-
-            $('.select2').select2({theme: 'bootstrap-5'});
-        
             // =============================================================
             // ------ DESABILITA CAMPOS ------------------------------------
             // =============================================================
@@ -116,12 +136,13 @@
             $('#id_juros').attr('readonly','readonly')
             $('#id_valor_total').attr('readonly','readonly')
             $('#id_valor').attr('readonly','readonly')
+            $('#id_saldo').attr('readonly','readonly')
             
             // =============================================================
             // ------ CALCULA MULTA E JUROS --------------------------------
             // =============================================================
 
-            $("#id_pagamento").change(function() {
+            $("#id_data_pagamento").change(function() {
                 
                 // FORMATA O VENCIMENTO
                 var vencimento = document.querySelector("#id_vencimento").value;
@@ -136,7 +157,7 @@
                 var vencimento_real_formatado = new Date(stringFormatada);
                 
                 // FORMATA A DATA DO PAGAMENTO
-                var data_pagamento = document.querySelector("#id_pagamento").value;
+                var data_pagamento = document.querySelector("#id_data_pagamento").value;
                 var arr_data_pagamento = data_pagamento.split('/');
                 var stringFormatada = arr_data_pagamento[1] + '-' + arr_data_pagamento[0] + '-' +arr_data_pagamento[2];
                 var data_pagamento_formatado = new Date(stringFormatada);
@@ -172,44 +193,40 @@
                     $("#id_juros").val(parseFloat(juros_total).toFixed(2))
                     $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
                 }
-                
-                
             });
 
+
             // =============================================================
-            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // ------ CALCULA O SALDO --------------------------------------
             // =============================================================
-        
-            $('#id_data_inicial').mask('00/00/0000', {placeholder: "__/__/____"});
-            $('#id_data_final').mask('00/00/0000', {placeholder: "__/__/____"});
-            // $('#id_valor').mask("000.000.000.000.000,00", {reverse: true});
-            // $('#id_multa').mask("000.000.000.000.000,00", {reverse: true});
-            // $('#id_valor_total').mask("000.000.000.000.000,00", {reverse: true});
-            // // $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
-            // // $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
 
+            // APÓS ATUALIZAÇÃO DO VALOR PAGO
+            $("#id_valor_pago").change(function() {
+                var valor_pago = document.querySelector("#id_valor_pago").value
+                var valor_total = document.querySelector('#id_valor_total').value
+                
+                var saldo = valor_total - valor_pago
 
+                console.log(saldo)
 
- 
+                // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
+                $("#id_saldo").val(parseFloat(saldo).toFixed(2))
+            
+            });
 
+            // APÓS ATUALIZAÇÃO DA DATA DO PAGAMENTO
+            $("#id_data_pagamento").change(function() {
+                var valor_pago = document.querySelector("#id_valor_pago").value
+                var valor_total = document.querySelector('#id_valor_total').value
+                
+                var saldo = valor_total - valor_pago
 
+                console.log(saldo)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
+                $("#id_saldo").val(parseFloat(saldo).toFixed(2))
+            
+            });
         });
     </script>
 {% endblock %}

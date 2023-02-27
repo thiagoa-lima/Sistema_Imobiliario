@@ -87,11 +87,11 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <div class="sb-sidenav-menu-heading"></div>
+                            <!-- <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
-                            </a>
+                            </a> -->
                            
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -128,7 +128,8 @@
                             </a>
                             <div class="collapse" id="receitas" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'receitas-alugueis-listar' %}">Alugueis</a>
+                                    <a class="nav-link" href="{% url 'receitas-alugueis-listar' %}">Alugueis a receber</a>
+                                    <a class="nav-link" href="{% url 'receitas-alugueis-recebidos-listar' %}">Alugueis recebidos</a>
                                 </nav>
                             </div>
 
@@ -145,7 +146,7 @@
                             <hr>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#erro" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                                Erro
+                                Error
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="rro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -156,8 +157,6 @@
                                 </nav>
                             </div>
                             <hr>
-
-             
                             <a class="nav-link collapsed" href="{url 'painel-administrativo' 1} " aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-gear"></i></div> 
                                 Administrativo
@@ -169,7 +168,6 @@
             </div>
             <div id="layoutSidenav_content">
                 {% block conteudo%}
-                
                 {% endblock %}
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

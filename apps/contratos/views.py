@@ -9,8 +9,6 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.utils.dateparse import parse_date
 
-
-
 def Lista_parcela_aluguel(request, pk):  
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
@@ -86,7 +84,8 @@ def Lista_parcela_aluguel(request, pk):
                             vencimento_real = vencimento_real,
                             comissao = comissao_primeira_parcela,
                             repasse = repasse_primeira_parcela,
-                            valor_pago = 0
+                            valor_pago = 0,
+                            saldo = valor_da_parcela,
                         )
                 else:
                     nova_parcela = Financeiro_do_Contrato.objects.create(
@@ -100,8 +99,8 @@ def Lista_parcela_aluguel(request, pk):
                             vencimento_real = vencimento_real,
                             comissao = comissao_demais_parcelas,
                             repasse = repasse_demais_parcelas,
-                            valor_pago = 0
-                            
+                            valor_pago = 0,
+                            saldo = valor_da_parcela,
                     )
 
             i += 1
@@ -244,13 +243,20 @@ class Financeiro_do_ContratoList(LoginRequiredMixin, ListView):
 # ------ RECEITAS - ALUGUEIS --------------------------------------------------------
 # ===================================================================================
 
-class Receita_Alugueis_List(LoginRequiredMixin, ListView):
+class Receita_Alugueis_a_Receber_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
-    template_name = 'receitas/alugueis/lista.html'
+    template_name = 'receitas/alugueis/lista - alugueis a receber.html'
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(valor_pago = 0)
 
+class Receita_Alugueis_Recebidos_List(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'receitas/alugueis/lista - alugueis recebidos.html'
+
+    def get_queryset(self):
+        return Financeiro_do_Contrato.objects.filter(saldo = 0)
 
 

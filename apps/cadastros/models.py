@@ -1,6 +1,7 @@
 from django.db import models
 from cpf_field.models import CPFField
 
+
 class Clientes(models.Model):
     class Meta:
         abstract = False
@@ -141,17 +142,13 @@ class Imoveis(models.Model):
     class Meta:
         verbose_name = 'Imóvel'
         verbose_name_plural = 'Imóveis'
-    
+
     def __str__(self):
         if self.complemento == None:
             endereco_completo = self.endereco + ', ' + self.numero  + ', ' + self.bairro + ', ' + self.cidade + '/' + self.uf 
         else:
             endereco_completo = self.endereco + ', ' + self.numero + ', ' + self.complemento + ', ' + self.bairro + ', ' + self.cidade + '/' + self.uf
         return endereco_completo
-
-    @property 
-    def get_taxa_admin_mensal(self):
-        return self.taxa_admin_mensal
 
 class Saida_de_Chaves(models.Model):
     imovel = models.ForeignKey(Imoveis, on_delete=models.PROTECT, default=None, verbose_name='imovel', related_name='Imovel +', null=True)

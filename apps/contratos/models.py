@@ -2,6 +2,7 @@ from django.db import models
 from apps.cadastros.models import Imoveis, Clientes
 from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
+from apps.cadastros.models import Imoveis
 
 
 # Módulos importados para alteração automática de datas
@@ -113,7 +114,6 @@ class Aluguel(models.Model):
         verbose_name_plural = 'Contrato de Aluguel'
 
     def __str__(self):
-        imovel = str(self.imovel)
         locatario = str(self.locatario)
         return locatario
 
@@ -121,14 +121,15 @@ class Financeiro_do_Contrato(models.Model):
 
     contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
     vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
-    vencimento_real = models.DateField ("Vencimento Real", max_length=20, null=True, blank=True)
-    pagamento = models.DateField("Data Pagamento", null=True, blank=True)
+    vencimento_real = models.DateField ("Vencimento real", max_length=20, null=True, blank=True)
+    data_pagamento = models.DateField("Data pagamento", null=True, blank=True)
     parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
     valor = models.DecimalField("Valor", max_digits=50, decimal_places=2, null=True, blank=True)
     multa = models.DecimalField("Multa", max_digits=50, decimal_places=2, null=True, blank=True)
     juros = models.DecimalField("Juros", max_digits=50, decimal_places=2, null=True, blank=True)
     valor_total = models.DecimalField("Valor total", max_digits=50, decimal_places=2, null=True, blank=True)
     valor_pago = models.DecimalField("Valor pago", max_digits=50, decimal_places=2, null=True, blank=True)
+    saldo = models.DecimalField("Saldo", max_digits=50, decimal_places=2, null=True, blank=True)
     comissao = models.DecimalField("Comissão", max_digits=50, decimal_places=2, null=True, blank=True)
     repasse = models.DecimalField("Comissão",max_digits=50, decimal_places=2, null=True, blank=True)
 

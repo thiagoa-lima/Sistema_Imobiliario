@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block titulo %}
-<title>Alugueis a receber</title>
+<title>Alugueis recebidos</title>
 {% endblock %}
 
 {% block conteudo %}
@@ -11,9 +11,9 @@
 <div class="container">
 
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Alugueis a receber</h2> 
-        <a href="" class="btn btn-primary btn-bg">
-            Novo contrato</a>
+        <h2>Alugueis recebidos</h2> 
+        <!-- <a href="" class="btn btn-primary btn-bg">
+            Novo contrato</a> -->
     </div>
 
     <hr>
@@ -25,7 +25,11 @@
                     <th>Parcela</th>
                     <th>Locatário</th>
                     <th>Vencimento</th>
+                    <th>Pagamento</th>
                     <th>Valor</th>
+                    <th>Multa</th>
+                    <th>Juros</th>
+                    <th>Valor Pago</th>
                     <th>Opções</th>
                 </tr>
             </thead> 
@@ -36,11 +40,15 @@
                     <td>{{ alugueis_a_receber.parcela }}</td>
                     <td>{{ alugueis_a_receber.contrato }}</td>
                     <td>{{ alugueis_a_receber.vencimento|date:'d/m/Y'}}</td>
+                    <td>{{ alugueis_a_receber.data_pagamento|date:'d/m/Y' }}</td>
                     <td>{{ alugueis_a_receber.valor }}</td>
+                    <td>{{ alugueis_a_receber.multa }}</td>
+                    <td>{{ alugueis_a_receber.juros }}</td>
+                    <td>{{ alugueis_a_receber.valor_total }}</td>
                     
                     <td>
-                        <a href="{% url 'financeiro-do-contrato-editar' alugueis_a_receber.pk %}" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <a href="{% url 'financeiro-do-contrato-editar' alugueis_a_receber.pk %}" class="btn btn-success btn-sm" title="Baixar">
+                            <i class="fa fa-check" aria-hidden="true"></i>
                         </a> 
                         <a href="#" class="btn btn-danger btn-sm" title="Excluir">
                             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -76,10 +84,21 @@
             $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
 
             $('#tabela').DataTable({
-                "order": [[2, 'asc']], // CRESCENTE
-                // "order": [[2, 'desc']], DECRESCENTE
+                "order": [[2, 'asc']], // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
                 "pageLength": 50,
                 "bSort": true,
+                "columnDefs": [
+                    // Largura das colunas
+                    { width: '1%', targets: [0] },
+                    { width: '12%', targets: [4] },
+                    
+                    // Alinhamento das colunas
+                    { className: "dt-center", targets: [0, 4] }, // DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+                    // { className: "dt-right", targets: [4] },
+
+                    { bSortable: false, targets: [0, 1, 3, 4] },
+
+                ],
                 "language":{
                     "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
                 }
