@@ -31,11 +31,6 @@ def Lista_parcela_aluguel(request, pk):
     print("")
     print("Quantidade de dias para repasse:  {}".format(dias_para_repasse))
     print("")
-
-
-    locatario = Aluguel.objects.get(id=pk).locatario_id
-    proprietario = Aluguel.objects.get(id=pk).proprietario_id
-
  
     if request.method == 'POST':
         num_parcelas = None
@@ -110,9 +105,7 @@ def Lista_parcela_aluguel(request, pk):
                             saldo_aluguel = valor_da_parcela,
                             vencimento_repasse = vencimento_repasse,
                             saldo_repasse = repasse_primeira_parcela,
-
-                            # locatario = locatario,
-                            # proprietario = proprietario,   
+                            valor_repassado = 0
                         )
                 else:
                     nova_parcela = Financeiro_do_Contrato.objects.create(
@@ -130,13 +123,12 @@ def Lista_parcela_aluguel(request, pk):
                             saldo_aluguel = valor_da_parcela,
                             vencimento_repasse = vencimento_repasse,
                             saldo_repasse = repasse_primeira_parcela,
-                            # locatario = locatario,
-                            # proprietario = proprietario,
+                            valor_repassado = 0
                         )
 
             i += 1
 
-    return render(request, 'contratos/aluguel/lista_financeiro.html', context)
+    return render(request, 'contratos/aluguel/financeiro/lista_a_receber.html', context)
 
 # ===================================================================================
 # ------ CREATE ---------------------------------------------------------------------
@@ -211,9 +203,6 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-
-# -----------------------------------------------------------------------------------
-
 class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Administracao
@@ -229,10 +218,6 @@ class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
         
         return context
-
-# -----------------------------------------------------------------------------------
-
-
 
 # ===================================================================================
 # ------ LIST -----------------------------------------------------------------------
@@ -310,7 +295,10 @@ class Baixa_de_Repasse_Aluguel(LoginRequiredMixin, UpdateView):
     model = Financeiro_do_Contrato
     form_class = forms.Baixa_de_Repasse_Aluguel_Form
     template_name = 'despesas/repasses/form_baixa_de_repasse.html'
-    success_url = reverse_lazy('despesas-alugueis-repassar-listar')
+
+    # Método que guarda o ID do formulário que está sendo atualizado
+    def get_success_url(self) -> str:
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
     
     # Atualizar os campos do formulário
     def get_context_data(self, *args, **kwargs):

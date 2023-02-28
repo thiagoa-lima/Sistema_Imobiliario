@@ -39,8 +39,8 @@
                     <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
                     <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
                     <td>
-                        <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}" class="btn btn-success btn-sm" title="Financeiro">
-                            <i class="fas fa-money-bill-wave    "></i>
+                        <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}" class="btn btn-secondary btn-sm" title="Detalhes">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
                         </a>
                         <a href="{% url 'contrato-aluguel-editar' Aluguel.pk %}" class="btn btn-warning btn-sm" title="Editar">
                             <i class="fa fa-pencil" aria-hidden="true"></i>

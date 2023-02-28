@@ -91,8 +91,8 @@ class Aluguel(models.Model):
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=True, blank=True)
     regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=True, blank=True)
     dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
-    taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
-    taxa_admin_anual = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
+    taxa_admin_mensal = models.CharField("Tx adm mensal (%)", max_length=20, null=True, blank=True)
+    taxa_admin_anual = models.CharField("Tx adm anual (%)", max_length=20, null=True, blank=True)
 
 
     class Meta():
@@ -107,8 +107,6 @@ class Financeiro_do_Contrato(models.Model):
 
     parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
     contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
-    locatario = models.CharField("Locatario", max_length=20, null=True, blank=True)
-    proprietario = models.CharField("Proprietario", max_length=20, null=True, blank=True)
     vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
     vencimento_real = models.DateField ("Vencimento real", max_length=20, null=True, blank=True)
     data_pagamento = models.DateField("Data pagamento", null=True, blank=True)
