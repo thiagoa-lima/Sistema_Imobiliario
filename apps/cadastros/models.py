@@ -116,8 +116,17 @@ class ClientePJ(Clientes):
         return str(self.nome)
 
 class Imoveis(models.Model):
-    
-    # choices
+
+    # Choices
+    repasse_garantido_choices = (
+        ('Não possui', 'Não possui'), 
+        ('Todo contrato', 'Garantir por todo contrato'),
+    )
+
+    dia_do_repasse_choices = (
+        ('DIAS CORRIDOS', 'Dias corridos após o vencimento do aluguel') ,
+    )  
+
     tipo_imovel_choices = [
         ('Casa', 'Casa'),
         ('Apartamento', 'Apartamento'),
@@ -132,12 +141,17 @@ class Imoveis(models.Model):
     cep = models.CharField('CEP', max_length=9, null=False, blank=False)
     endereco = models.CharField('Endereço', max_length=200, default=None, null=False, blank=False)
     numero = models.CharField('Número', max_length=10, default=None, null=False, blank=False)
-    complemento = models.CharField('Complemento', max_length=10, null=True, blank=True)
+    complemento = models.CharField('Complemento', max_length=50, null=True, blank=True)
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
     cidade = models.CharField('Cidade', max_length=100, default=None, null=False, blank=False)
     uf = models.CharField('UF', max_length=2, default=None, null=False, blank=False)
     taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
     taxa_admin_anual = models.CharField("Tx Adm Anual (%)", max_length=20, null=True, blank=True)
+
+    # Dados do repasse
+    repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=False, blank=False)
+    regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
+    dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Imóvel'

@@ -95,6 +95,7 @@
                         <th>Juros</th>
                         <th>Valor total</th>
                         <th>Valor pago</th>
+                        <th>Saldo</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
@@ -104,12 +105,13 @@
                         <td>{{ parcela.parcela }}</td>
                         <td>{{ parcela.vencimento|date:'d/m/Y' }}</td>
                         <td>{{ parcela.vencimento_real|date:'d/m/Y' }}</td>
-                        <td>{{ parcela.valor }}</td>
-                        <td>{{ parcela.pagamento|date:'d/m/Y' }}</td>
+                        <td>{{ parcela.valor_aluguel }}</td>
+                        <td>{{ parcela.data_pagamento|date:'d/m/Y' }}</td>
                         <td>{{ parcela.multa }}</td>
                         <td>{{ parcela.juros }}</td>
                         <td>{{ parcela.valor_total }}</td>
                         <td>{{ parcela.valor_pago }}</td>
+                        <td>{{ parcela.saldo_aluguel }}</td>
                         <td>
                             <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                 <i class="fa fa-check" aria-hidden="true"></i>

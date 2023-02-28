@@ -9,18 +9,7 @@ from apps.cadastros.models import Imoveis
 from dateutil.relativedelta import relativedelta
 from django.dispatch import receiver
 
-
 class Administracao(models.Model):
-
-    # Choices
-    repasse_garantido_choices = (
-        ('Não possui', 'Não possui'), 
-        ('Todo contrato', 'Garantir por todo contrato'),
-    )
-    dia_do_repasse_choices = (
-        ('DIAS UTEIS', 'Dias úteis após o vencimento do aluguel') ,
-        ('DIAS CORRIDOS', 'Dias corridos após o vencimento do aluguel') ,
-    )
 
     # Dados iniciais
     proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
@@ -32,11 +21,7 @@ class Administracao(models.Model):
     prazo_contrato = models.IntegerField("Prazo", default=36,validators=[MinValueValidator(0)])
     data_final = models.DateField("Data Final", max_length=10, null=False, blank=False)
     
-    # Dados do repasse
-    repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=False, blank=False)
-    regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
-    dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
-
+   
     class Meta():
         verbose_name = 'Contrato de Administração'
         verbose_name_plural = 'Contrato de Administração'
@@ -109,6 +94,7 @@ class Aluguel(models.Model):
     taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
     taxa_admin_anual = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
 
+
     class Meta():
         verbose_name = 'Contrato de Aluguel'
         verbose_name_plural = 'Contrato de Aluguel'
@@ -116,22 +102,28 @@ class Aluguel(models.Model):
     def __str__(self):
         locatario = str(self.locatario)
         return locatario
-
+    
 class Financeiro_do_Contrato(models.Model):
 
+    parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
     contrato = models.ForeignKey(Aluguel, on_delete=models.PROTECT, verbose_name='Locatário e Imóvel', related_name='contrato +')
+    locatario = models.CharField("Locatario", max_length=20, null=True, blank=True)
+    proprietario = models.CharField("Proprietario", max_length=20, null=True, blank=True)
     vencimento = models.DateField("Vencimento", max_length=10, null=True, blank=True)
     vencimento_real = models.DateField ("Vencimento real", max_length=20, null=True, blank=True)
     data_pagamento = models.DateField("Data pagamento", null=True, blank=True)
-    parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
-    valor = models.DecimalField("Valor", max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_aluguel = models.DecimalField("Valor do Aluguel", max_digits=50, decimal_places=2, null=True, blank=True)
     multa = models.DecimalField("Multa", max_digits=50, decimal_places=2, null=True, blank=True)
     juros = models.DecimalField("Juros", max_digits=50, decimal_places=2, null=True, blank=True)
     valor_total = models.DecimalField("Valor total", max_digits=50, decimal_places=2, null=True, blank=True)
     valor_pago = models.DecimalField("Valor pago", max_digits=50, decimal_places=2, null=True, blank=True)
-    saldo = models.DecimalField("Saldo", max_digits=50, decimal_places=2, null=True, blank=True)
+    saldo_aluguel = models.DecimalField("Saldo", max_digits=50, decimal_places=2, null=True, blank=True)
+    vencimento_repasse = models.DateField("Vcto do repasse", max_length=10, null=True, blank=True)
+    data_repasse = models.DateField("Data do repasse", max_length=10, null=True, blank=True)
     comissao = models.DecimalField("Comissão", max_digits=50, decimal_places=2, null=True, blank=True)
-    repasse = models.DecimalField("Comissão",max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_repasse = models.DecimalField("Valor do Repasse",max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_repassado = models.DecimalField("Valor repassado", max_digits=50, decimal_places=2, null=True, blank=True)
+    saldo_repasse = models.DecimalField("Saldo a repassar", max_digits=50, decimal_places=2, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Financeiro'

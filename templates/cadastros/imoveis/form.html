@@ -65,6 +65,19 @@
         </div>
 
         <div class="row mt-4">
+            <h5>Informações do repasse</h5>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.repasse_garantido|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.regra_do_repasse|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.dias_para_repasse|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="row mt-4">
             <h5 >Taxas administrativas</h5>
             <div class="form-group col-md-3 mb-2">
                 {{ form.taxa_admin_mensal|as_crispy_field }}

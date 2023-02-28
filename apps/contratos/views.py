@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Administracao, Aluguel, Financeiro_do_Contrato
+from .models import Administracao, Aluguel, Financeiro_do_Contrato, Imoveis
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -13,9 +13,30 @@ def Lista_parcela_aluguel(request, pk):
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
     parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
+    
     context['contratos'] = contratos
     context['parcelas'] = parcelas 
 
+    # Váriavel para conferir os atributos do contrato
+    # contrato_todos_os_dados = Aluguel.objects.get(id=pk)
+    # print(contrato_todos_os_dados.__dict__)
+
+    # Váriavel para buscar o imóvel do contrato
+    imovel = Aluguel.objects.get(id=pk).imovel_id
+    print(imovel)
+    
+    # Váriavel para buscar da classe Imóveis a quantidade de dias para repasse
+    dias_para_repasse = Imoveis.objects.get(id=imovel).dias_para_repasse
+    dias_para_repasse = int(dias_para_repasse)
+    print("")
+    print("Quantidade de dias para repasse:  {}".format(dias_para_repasse))
+    print("")
+
+
+    locatario = Aluguel.objects.get(id=pk).locatario_id
+    proprietario = Aluguel.objects.get(id=pk).proprietario_id
+
+ 
     if request.method == 'POST':
         num_parcelas = None
 
@@ -46,8 +67,7 @@ def Lista_parcela_aluguel(request, pk):
 
         comissao_demais_parcelas = valor_da_parcela * taxa_demais_parcelas / 100
         repasse_demais_parcelas = valor_da_parcela - comissao_demais_parcelas
-        
-  
+
         # ----------------------------------------------------------------------------
         # INCLUSÃO DAS NOVAS PARCELAS NO BANCO DE DADOS
         # ----------------------------------------------------------------------------
@@ -61,6 +81,8 @@ def Lista_parcela_aluguel(request, pk):
 
                 vencimento = (vencimento_primeira_parcela + relativedelta(months=+i))
 
+                vencimento_repasse = (vencimento + relativedelta(days=+dias_para_repasse))
+
                 if datetime.date.weekday(vencimento) == 6:
                     vencimento_real = (vencimento + relativedelta(days=+1))
                 elif datetime.date.weekday(vencimento) == 5:
@@ -72,36 +94,45 @@ def Lista_parcela_aluguel(request, pk):
                 # EFETUA OS LANÇAMENTOS NO BANCO DE DADOS
                 # --------------------------------------------------------------------
 
-                if i == 1:
+                if i == 0:
                     nova_parcela = Financeiro_do_Contrato.objects.create(
                             parcela = primeira_parcela + i, 
                             contrato_id = pk,
                             vencimento = vencimento,
-                            valor = valor_da_parcela,
+                            valor_aluguel = valor_da_parcela,
                             multa = 0,
                             juros = 0,
                             valor_total = valor_da_parcela,
                             vencimento_real = vencimento_real,
                             comissao = comissao_primeira_parcela,
-                            repasse = repasse_primeira_parcela,
+                            valor_repasse = repasse_primeira_parcela,
                             valor_pago = 0,
-                            saldo = valor_da_parcela,
+                            saldo_aluguel = valor_da_parcela,
+                            vencimento_repasse = vencimento_repasse,
+                            saldo_repasse = repasse_primeira_parcela,
+
+                            # locatario = locatario,
+                            # proprietario = proprietario,   
                         )
                 else:
                     nova_parcela = Financeiro_do_Contrato.objects.create(
                             parcela = primeira_parcela + i, 
                             contrato_id = pk,
                             vencimento = vencimento,
-                            valor = valor_da_parcela,
+                            valor_aluguel = valor_da_parcela,
                             multa = 0,
                             juros = 0,
                             valor_total = valor_da_parcela,
                             vencimento_real = vencimento_real,
                             comissao = comissao_demais_parcelas,
-                            repasse = repasse_demais_parcelas,
+                            valor_repasse = repasse_demais_parcelas,
                             valor_pago = 0,
-                            saldo = valor_da_parcela,
-                    )
+                            saldo_aluguel = valor_da_parcela,
+                            vencimento_repasse = vencimento_repasse,
+                            saldo_repasse = repasse_primeira_parcela,
+                            # locatario = locatario,
+                            # proprietario = proprietario,
+                        )
 
             i += 1
 
@@ -179,24 +210,7 @@ class AluguelUpdate(LoginRequiredMixin, UpdateView):
         
         return context
 
-class Baixa_de_Parcela(LoginRequiredMixin, UpdateView):
-    login_url = reverse_lazy('login')
-    model = Financeiro_do_Contrato
-    fields = '__all__'
-    template_name = 'contratos/aluguel/baixa_de_parcela.html'
 
-    # Método que guarda o ID do formulário que está sendo atualizado
-    def get_success_url(self) -> str:
-        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
-
-    # Método que atualiza os campos do formulário
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        context['titulo'] = "Baixar Parcela de Aluguel"
-        context['botao'] = "Baixar Parcela"
-        
-        return context
 
 # -----------------------------------------------------------------------------------
 
@@ -258,5 +272,51 @@ class Receita_Alugueis_Recebidos_List(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(saldo = 0)
+    
+class Baixa_de_Parcela_Aluguel(LoginRequiredMixin, UpdateView):
+    
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Parcela_Aluguel_Form
+    template_name = 'contratos/aluguel/baixa_de_parcela.html'
 
+    # Método que guarda o ID do formulário que está sendo atualizado
+    def get_success_url(self) -> str:
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
 
+    # Método que atualiza os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Baixar Parcela"
+        
+        return context
+
+# ===================================================================================
+# ------ DESPESAS REPASSE -----------------------------------------------------------
+# ===================================================================================
+
+def Despesa_Alugueis_a_Repassar_List(request):
+    context = {}
+    parcelas = Financeiro_do_Contrato.objects.filter()
+
+    context['parcelas'] = parcelas
+
+    return render(request, 'despesas/repasses/lista_alugueis_a_repassar.html', context)
+
+class Baixa_de_Repasse_Aluguel(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Repasse_Aluguel_Form
+    template_name = 'despesas/repasses/form_baixa_de_repasse.html'
+    success_url = reverse_lazy('despesas-alugueis-repassar-listar')
+    
+    # Atualizar os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar repasse de aluguel"
+        context['botao'] = "Salvar"
+        
+        return context

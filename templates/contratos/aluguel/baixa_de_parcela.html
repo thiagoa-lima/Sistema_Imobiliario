@@ -14,9 +14,9 @@
 
 {% block conteudo %}
 <div class="container">
-    <h1 class="mt-4">
+    <h2 class="mt-4">
         {{ titulo }}
-    </h1>
+    </h2>
 
     <p class="lead">
         <!-- Preencha todos os campos obrigatórios -->
@@ -30,17 +30,15 @@
 
         <div class="row">
             <h5></h5>
-             <div hidden class="form-group col-md-10 mb-2" >
+             <div hidden class="form-group col-md-5 mb-2" >
                 {{ form.contrato|as_crispy_field }}
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                Dados Gerais
-                <hr>
-                <div class="row mt-4">                        
-                    <div class="form-group col-md-2 mb-2">
+                <div class="row mt-2">                        
+                    <div class="form-group col-md-3 mb-2">
                         {{ form.parcela|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-3 mb-2">
@@ -49,12 +47,15 @@
                     <div class="form-group col-md-3 mb-2">
                         {{ form.vencimento_real|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-4 mb-2">
-                        {{ form.data_pagamento|as_crispy_field }}
-                    </div>
                     <div class="form-group col-md-3 mb-2">
-                        {{ form.valor|as_crispy_field }}
+                        {{ form.valor_aluguel|as_crispy_field }}
                     </div>
+                </div>
+                <hr>
+                <div class="row mt-0"> 
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.data_pagamento|as_crispy_field }}
+                    </div>                       
                     <div class="form-group col-md-3 mb-2">
                         {{ form.multa|as_crispy_field }}
                     </div> 
@@ -64,11 +65,12 @@
                     <div class="form-group col-md-3 mb-2">
                         {{ form.valor_total|as_crispy_field }}
                     </div>
+   
                     <div class="form-group col-md-3 mb-2">
                         {{ form.valor_pago|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-3 mb-2">
-                        {{ form.saldo|as_crispy_field }}
+                        {{ form.saldo_aluguel|as_crispy_field }}
                     </div>
                 </div>
             </div>
@@ -108,7 +110,14 @@
             return false
             }
 
+            // VALIDA A DATA DO REPASSE
+            var date = document.querySelector("#id_data_pagamento").value;
+            if (date == "") {
+                alert("Não é possível baixar essa parcela. Verifique a data .")
+                return false
+            }
         }
+        
 
         $(document).ready(function() {
 
@@ -135,8 +144,8 @@
             $('#id_multa').attr('readonly','readonly')
             $('#id_juros').attr('readonly','readonly')
             $('#id_valor_total').attr('readonly','readonly')
-            $('#id_valor').attr('readonly','readonly')
-            $('#id_saldo').attr('readonly','readonly')
+            $('#id_valor_aluguel').attr('readonly','readonly')
+            $('#id_saldo_aluguel').attr('readonly','readonly')
             
             // =============================================================
             // ------ CALCULA MULTA E JUROS --------------------------------
@@ -170,7 +179,7 @@
                 if (data_pagamento_formatado > vencimento_real_formatado){ 
                     
                     // CALCULA A MULTA E JUROS
-                    let valor = document.querySelector('#id_valor').value
+                    let valor = document.querySelector('#id_valor_aluguel').value
                     let multa = parseFloat(valor * .1).toFixed(2) 
                     let juros_por_dia =  0.000333333 * parseFloat(valor)
                     let juros_total = parseFloat(juros_por_dia * dias_de_atraso).toFixed(2)
@@ -210,7 +219,7 @@
                 console.log(saldo)
 
                 // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
-                $("#id_saldo").val(parseFloat(saldo).toFixed(2))
+                $("#id_saldo_aluguel").val(parseFloat(saldo).toFixed(2))
             
             });
 
@@ -224,7 +233,7 @@
                 console.log(saldo)
 
                 // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
-                $("#id_saldo").val(parseFloat(saldo).toFixed(2))
+                $("#id_saldo_aluguel").val(parseFloat(saldo).toFixed(2))
             
             });
         });
