@@ -120,7 +120,7 @@
                                 <td>{{ parcela.valor_pago }}</td>
                                 <td>{{ parcela.saldo_aluguel }}</td>
                                 <td>
-                                    <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
+                                    <a href="{% url 'financeiro-do-contrato-aluguel-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </a>
                                     {% if  parcela.saldo_aluguel  == 0 or parcela.saldo_repasse == 0 %}

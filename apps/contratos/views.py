@@ -258,8 +258,7 @@ class Receita_Alugueis_Recebidos_List(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(saldo = 0)
     
-class Baixa_de_Parcela_Aluguel(LoginRequiredMixin, UpdateView):
-    
+class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     form_class = forms.Baixa_de_Parcela_Aluguel_Form
@@ -278,8 +277,7 @@ class Baixa_de_Parcela_Aluguel(LoginRequiredMixin, UpdateView):
         
         return context
 
-
-class Financeiro_do_Contrato_Aluguel_EXCLUR(LoginRequiredMixin, DeleteView):
+class Financeiro_do_Contrato_Aluguel_DELETE(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     template_name = 'padrao/form-excluir.html'
@@ -300,11 +298,30 @@ def Despesa_Alugueis_a_Repassar_List(request):
 
     return render(request, 'despesas/repasses/lista_alugueis_a_repassar.html', context)
 
-class Baixa_de_Repasse_Aluguel(LoginRequiredMixin, UpdateView):
+class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Parcela_Aluguel_Form
+    template_name = 'contratos/aluguel/detalhes/baixa_de_parcela.html'
+
+    # Método que guarda o ID do formulário que está sendo atualizado
+    def get_success_url(self) -> str:
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
+
+    # Método que atualiza os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Baixar Parcela"
+        
+        return context
+
+class Financeiro_do_Contrato_Repasse_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     form_class = forms.Baixa_de_Repasse_Aluguel_Form
-    template_name = 'despesas/repasses/form_baixa_de_repasse.html'
+    template_name = 'contratos/aluguel/detalhes/baixa_de_repasse.html'
 
     # Método que guarda o ID do formulário que está sendo atualizado
     def get_success_url(self) -> str:

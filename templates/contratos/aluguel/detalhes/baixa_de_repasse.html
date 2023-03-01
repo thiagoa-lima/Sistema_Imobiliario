@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h2 class="mt-4">
+        {{ titulo }}
+    </h2>
+
+    <p class="lead">
+        <!-- Preencha todos os campos obrigatórios -->
+    </p>
+
+    <hr>
+
+    <form name="form" action="" onsubmit="return validateForm()" method="post">
+
+        {% csrf_token %}
+
+        <div class="row">
+            <h5></h5>
+             <div hidden class="form-group col-md-5 mb-2" >
+                {{ form.contrato|as_crispy_field }}
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                Dados da parcela
+                <hr>
+                <div class="row mt-4">                        
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.parcela|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.vencimento_repasse|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2 required">
+                        {{ form.data_repasse|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.valor_aluguel|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.comissao|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.valor_repasse|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.valor_repassado|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-2">
+                        {{ form.saldo_repasse|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+        <button type="reset" class="btn btn-danger mt-4">
+            Cancelar         
+        </button>
+    </form>
+
+    
+</div>
+{% endblock %}
+{% block scripts %}
+    <script>
+
+        // =============================================================
+        // ------ FUNÇÃO PARA VALIDAR DATA ----------=------------------
+        // =============================================================
+
+        function checarData(data) {
+            return data instanceof Date && !isNaN(data);
+        }
+
+        // =============================================================
+        // ------ VALIDA O FORMULÁRIO ANTES DE ENVIAR ------------------
+        // =============================================================
+
+        function validateForm(){
+            
+            var saldo = document.querySelector('#id_saldo_repasse').value
+            var date = document.querySelector("#id_data_repasse").value;
+            var valor_repassado = document.querySelector("#id_valor_repassado").value;
+            
+            // VERIFICA SE OS CAMPOS VALOR REPASSADO E DATA ESTÃO EM BRANCO
+            if (valor_repassado == "" && date == "") { 
+                // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
+                $("#id_valor_repassado").val(0)
+                return true
+            }
+         
+            if (valor_repassado == 0 && date == "") { 
+                return true
+            }
+
+            if (saldo > 0 || saldo < 0 ) {
+                alert("ERRO: Não é possível baixar a parcela.")
+                return false
+            }  
+        }
+
+        $(document).ready(function() {
+
+            $("#id_data_repasse").change(function() {
+            var date = document.querySelector("#id_data_repasse").value;
+           
+            var list_date = date.split('/');
+            var string = list_date[1] + '-' + list_date[0] + '-' +list_date[2];
+            var format_date = new Date(string)
+            
+         
+            console.log(checarData(format_date))
+
+            });
+
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
+            
+            $('#id_data_repasse').datepicker({dateFormat:'dd/mm/yy'});
+
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+        
+            $('#id_data_repasse').mask('00/00/0000');
+
+            // =============================================================
+            // ------ DESABILITA CAMPOS ------------------------------------
+            // =============================================================
+            
+            $('#id_contrato').attr('readonly','readonly')
+            $('#id_parcela').attr('readonly','readonly')
+            $('#id_vencimento_repasse').attr('readonly','readonly')
+            $('#id_valor_aluguel').attr('readonly','readonly')
+            $('#id_comissao').attr('readonly','readonly')
+            $('#id_valor_repasse').attr('readonly','readonly')
+            $('#id_saldo_repasse').attr('readonly','readonly')
+
+            // =============================================================
+            // ------ CALCULA O SALDO --------------------------------------
+            // =============================================================
+
+            // APÓS ATUALIZAÇÃO DO VALOR REPASSADO  
+            $("#id_valor_repassado").change(function() {
+                var repasse = document.querySelector('#id_valor_repasse').value
+                var valor_repassado = document.querySelector("#id_valor_repassado").value
+                
+                var saldo = repasse - valor_repassado
+
+                // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
+                $("#id_saldo_repasse").val(parseFloat(saldo).toFixed(2))
+            
+            });
+        });
+    </script>
+{% endblock %}

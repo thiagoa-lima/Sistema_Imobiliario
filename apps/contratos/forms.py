@@ -30,4 +30,4 @@ class Baixa_de_Parcela_Aluguel_Form(forms.ModelForm):
 class Baixa_de_Repasse_Aluguel_Form(forms.ModelForm):
     class Meta:
         model = models.Financeiro_do_Contrato
-        fields = ['parcela', 'vencimento_repasse', 'valor_repasse', 'valor_aluguel', 'comissao', 'data_repasse', 'valor_repassado', 'saldo_repasse']
+        fields = ['contrato', 'parcela', 'vencimento_repasse', 'valor_repasse', 'valor_aluguel', 'comissao', 'data_repasse', 'valor_repassado', 'saldo_repasse']

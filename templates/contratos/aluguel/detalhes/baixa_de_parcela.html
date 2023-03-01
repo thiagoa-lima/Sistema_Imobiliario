@@ -101,19 +101,29 @@
         // =============================================================
         
         function validateForm(){
+            var date = document.querySelector("#id_data_pagamento").value;
             var valor_pago = document.querySelector("#id_valor_pago").value
             var valor_total = document.querySelector('#id_valor_total').value
-            
             var saldo = valor_total - valor_pago
-            if (saldo > 0 || saldo < 0 ) {
-                alert("Não é possível baixar essa parcela. Verifique o saldo.")
-            return false
+
+            // VERIFICA SE OS CAMPOS VALOR REPASSADO E DATA ESTÃO EM BRANCO
+            if (valor_pago == "" && date == "") { 
+                // EDITA O CAMPO "SALDO" APÓS ATUALIZAÇÃO
+                $("#id_valor_pago").val(0)
+                return true
+            }
+            
+            if (valor_pago == 0 && date == "") { 
+                return true
             }
 
-            // VALIDA A DATA DO REPASSE
-            var date = document.querySelector("#id_data_pagamento").value;
-            if (date == "") {
-                alert("Não é possível baixar essa parcela. Verifique a data .")
+            if (valor_pago != 0 && date == "") { 
+                alert("ERRO: Não é possível baixar a parcela.")
+                return false
+            }
+
+            if (saldo > 0 || saldo < 0 ) {
+                alert("ERRO: Não é possível baixar a parcela.")
                 return false
             }
         }
@@ -125,7 +135,8 @@
             // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
             // =============================================================
             
-            $('#id_data_pagamento ').datepicker({dateFormat:'dd/mm/yy'});
+            $('#id_data_pagamento').datepicker({dateFormat:'dd/mm/yy'});
+            // $('#id_valor_pago').datepicker({dateFormat:'dd/mm/yy'});
 
             // =============================================================
             // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
@@ -191,16 +202,11 @@
                     $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
 
                 } else {
-                    // CALCULA A MULTA E JUROS
-                    let valor = document.querySelector('#id_valor').value
-                    let multa = 0.00
-                    let juros_por_dia =  0
-                    let juros_total = 0
-                    let valor_total = parseFloat(multa) + parseFloat(valor) + parseFloat(juros_total)
-                    
-                    $("#id_multa").val(parseFloat(multa).toFixed(2))
-                    $("#id_juros").val(parseFloat(juros_total).toFixed(2))
-                    $("#id_valor_total").val(parseFloat(valor_total).toFixed(2))
+                    // CALCULA A MULTA E JUROS 
+                    let valor = document.querySelector('#id_valor_aluguel').value                   
+                    $("#id_multa").val(parseFloat(0).toFixed(2))
+                    $("#id_juros").val(parseFloat(0).toFixed(2))
+                    $("#id_valor_total").val(parseFloat(valor).toFixed(2))
                 }
             });
 
