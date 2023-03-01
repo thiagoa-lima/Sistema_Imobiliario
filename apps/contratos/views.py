@@ -128,7 +128,7 @@ def Lista_parcela_aluguel(request, pk):
 
             i += 1
 
-    return render(request, 'contratos/aluguel/financeiro/lista_a_receber.html', context)
+    return render(request, 'contratos/aluguel/detalhes/lista_a_receber.html', context)
 
 # ===================================================================================
 # ------ CREATE ---------------------------------------------------------------------
@@ -263,7 +263,7 @@ class Baixa_de_Parcela_Aluguel(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     form_class = forms.Baixa_de_Parcela_Aluguel_Form
-    template_name = 'contratos/aluguel/baixa_de_parcela.html'
+    template_name = 'contratos/aluguel/detalhes/baixa_de_parcela.html'
 
     # Método que guarda o ID do formulário que está sendo atualizado
     def get_success_url(self) -> str:
@@ -277,6 +277,16 @@ class Baixa_de_Parcela_Aluguel(LoginRequiredMixin, UpdateView):
         context['botao'] = "Baixar Parcela"
         
         return context
+
+
+class Financeiro_do_Contrato_Aluguel_EXCLUR(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'padrao/form-excluir.html'
+
+    # Método que guarda o ID do formulário que está sendo atualizado
+    def get_success_url(self) -> str:
+        return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
 
 # ===================================================================================
 # ------ DESPESAS REPASSE -----------------------------------------------------------
@@ -308,3 +318,5 @@ class Baixa_de_Repasse_Aluguel(LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
         
         return context
+    
+

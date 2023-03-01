@@ -123,12 +123,17 @@
                                     <a href="{% url 'financeiro-do-contrato-editar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </a>
-                                    <!-- <a href="" class="btn btn-warning btn-sm" title="Editar">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>  -->
-                                    <a href="" class="btn btn-danger btn-sm" title="Excluir">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                    {% if  parcela.saldo_aluguel  == 0 or parcela.saldo_repasse == 0 %}
+
+                                        <a href="#" class="btn btn-dark btn-sm" title="Excluir">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    
+                                    {% else %}
+                                        <a href="{% url 'financeiro-do-contrato-aluguel-excluir' parcela.pk %}" class="btn btn-danger btn-sm" title="Excluir">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    {% endif %}
                                 </td>
                             {% endfor %}
                         </tbody>
@@ -168,9 +173,17 @@
                                     <a href="{% url 'despesas-alugueis-repassar-baixar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm" title="Excluir">
+
+                                {% if  parcela.saldo_aluguel  == 0 or parcela.saldo_repasse == 0 %}
+                                    <a href="#" class="btn btn-dark btn-sm" title="Excluir">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
+                                {% else %}
+                                    <a href="#" class="btn btn-danger btn-sm" title="Excluir">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
+     
                                 </td>
                             {% endfor %}
                         </tbody>

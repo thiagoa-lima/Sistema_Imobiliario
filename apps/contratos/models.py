@@ -128,9 +128,11 @@ class Financeiro_do_Contrato(models.Model):
         verbose_name_plural = 'Financeiro do Contrato'
 
     def __str__(self):
-        imovel = str(self.imovel)
-        locatario = str(self.locatario)
-        return locatario + ': ' + imovel
+        parcela = str(self.parcela) 
+        valor_aluguel = str(self.valor_aluguel)
+        return parcela + "ª parcela no valor de R$" + valor_aluguel
+    
+
 
 
   
