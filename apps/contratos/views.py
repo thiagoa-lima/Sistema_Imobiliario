@@ -9,7 +9,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.utils.dateparse import parse_date
 
-def Lista_parcela_aluguel(request, pk):  
+def Contrato_Aluguel_DETALHES(request, pk):  
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
     parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
@@ -128,7 +128,7 @@ def Lista_parcela_aluguel(request, pk):
 
             i += 1
 
-    return render(request, 'contratos/aluguel/detalhes/lista_a_receber.html', context)
+    return render(request, 'contratos/aluguel/detalhes/detalhes.html', context)
 
 # ===================================================================================
 # ------ CREATE ---------------------------------------------------------------------
@@ -150,58 +150,11 @@ class AdministracaoCreate(LoginRequiredMixin, CreateView):
         
         return context
 
-class AluguelCreate(LoginRequiredMixin, CreateView):
-    login_url = reverse_lazy('login')
-    form_class = forms.AluguelForm
-    model = Aluguel
-    template_name = 'contratos/aluguel/form.html'
-    success_url = reverse_lazy('contrato-aluguel-listar')
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        context['titulo'] = "Novo contrato de aluguel"
-        context['botao'] = "Cadastrar"
-        
-        return context
-
-# ===================================================================================
-# ------ DELETE ---------------------------------------------------------------------
-# ===================================================================================
-
-class AluguelDelete(LoginRequiredMixin, DeleteView):
-    login_url = reverse_lazy('login')
-    model = Aluguel
-    template_name = 'padrao/form-excluir.html'
-    success_url = reverse_lazy('contrato-aluguel-listar')
-
-
 class AdministracaoDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Administracao
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('contrato-administracao-listar')
-
-# ===================================================================================
-# ------ UPDATE ---------------------------------------------------------------------
-# ===================================================================================
-
-class AluguelUpdate(LoginRequiredMixin, UpdateView):
-    login_url = reverse_lazy('login')
-    model = Aluguel
-    form_class = forms.AluguelForm
-    template_name = 'contratos/aluguel/form.html'
-    success_url = reverse_lazy('contrato-aluguel-listar')
-    
-    # Atualizar os campos do formulário
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-
-        context['titulo'] = "Editar contrato de aluguel"
-        context['botao'] = "Salvar"
-        
-        return context
-
 
 class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
@@ -219,30 +172,17 @@ class AdministracaoUpdate(LoginRequiredMixin, UpdateView):
         
         return context
 
-# ===================================================================================
-# ------ LIST -----------------------------------------------------------------------
-# ===================================================================================
-
 class AdministracaoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Administracao
     template_name = 'contratos/administracao/lista.html'
 
-class AluguelList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
-    model = Aluguel
-    template_name = 'contratos/aluguel/lista.html'
 
-class Financeiro_do_ContratoList(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
-    model = Financeiro_do_Contrato
-    template_name = 'contratos/financeiro/lista.html'
-   
 # ===================================================================================
 # ------ RECEITAS - ALUGUEIS --------------------------------------------------------
 # ===================================================================================
 
-class Receita_Alugueis_a_Receber_List(LoginRequiredMixin, ListView):
+class Alugueis_a_Receber_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     template_name = 'receitas/alugueis/lista - alugueis a receber.html'
@@ -250,14 +190,17 @@ class Receita_Alugueis_a_Receber_List(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(valor_pago = 0)
 
-class Receita_Alugueis_Recebidos_List(LoginRequiredMixin, ListView):
+class Alugueis_a_Recebidos_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
     template_name = 'receitas/alugueis/lista - alugueis recebidos.html'
 
     def get_queryset(self):
-        return Financeiro_do_Contrato.objects.filter(saldo = 0)
-    
+        return Financeiro_do_Contrato.objects.filter(saldo_aluguel = 0)
+
+# ===================================================================================
+# ------ FINANCEIRO DO CONTRATO -----------------------------------------------------
+# ===================================================================================
 class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
@@ -337,3 +280,48 @@ class Financeiro_do_Contrato_Repasse_UPDATE(LoginRequiredMixin, UpdateView):
         return context
     
 
+# ===================================================================================
+# ------ CONTRATO DE ALUGUEL --------------------------------------------------------
+# ===================================================================================
+
+class Contrato_Aluguel_CREATE(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    form_class = forms.AluguelForm
+    model = Aluguel
+    template_name = 'contratos/aluguel/form.html'
+    success_url = reverse_lazy('contrato-aluguel-listar')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Novo contrato de aluguel"
+        context['botao'] = "Cadastrar"
+        
+        return context
+    
+class Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Aluguel
+    form_class = forms.AluguelForm
+    template_name = 'contratos/aluguel/form.html'
+    success_url = reverse_lazy('contrato-aluguel-listar')
+    
+    # Atualizar os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Editar contrato de aluguel"
+        context['botao'] = "Salvar"
+        
+        return context
+    
+class Contrato_Aluguel_DELETE(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = Aluguel
+    template_name = 'padrao/form-excluir.html'
+    success_url = reverse_lazy('contrato-aluguel-listar')
+
+class Contrato_Aluguel_LIST(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Aluguel
+    template_name = 'contratos/aluguel/lista.html'

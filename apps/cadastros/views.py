@@ -176,16 +176,16 @@ class ImoveisDelete(LoginRequiredMixin, DeleteView):
 # ------ SAÍDA DE CHAVES ------------------------------------------------------------
 # ===================================================================================
 
-class Saida_de_Chaves_List(LoginRequiredMixin, ListView):
+class Saida_de_Chaves_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
-    template_name = 'cadastros/imoveis/chaves/lista1.html'
+    template_name = 'cadastros/saida_de_chaves/lista1.html'
 
-class Saida_de_Chaves_Create(LoginRequiredMixin, CreateView):
+class Saida_de_Chaves_CREATE(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     form_class = forms.Saida_de_Chaves_Form
-    template_name = 'cadastros/imoveis/chaves/form.html'
+    template_name = 'cadastros/saida_de_chaves/form.html'
     success_url = reverse_lazy('listar-saida-chaves')
     
     def get_context_data(self, *args, **kwargs):
@@ -196,11 +196,11 @@ class Saida_de_Chaves_Create(LoginRequiredMixin, CreateView):
         
         return context 
 
-class Saida_de_Chaves_Update(LoginRequiredMixin, UpdateView):
+class Saida_de_Chaves_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     form_class = forms.Saida_de_Chaves_Form
-    template_name = 'cadastros/imoveis/chaves/form.html'
+    template_name = 'cadastros/saida_de_chaves/form.html'
     success_url = reverse_lazy('listar-saida-chaves')
 
     def get_context_data(self, *args, **kwargs):
@@ -211,7 +211,7 @@ class Saida_de_Chaves_Update(LoginRequiredMixin, UpdateView):
         
         return context 
     
-class Saida_de_Chaves_Delete(LoginRequiredMixin, DeleteView):
+class Saida_de_Chaves_DELETE(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     template_name = 'padrao/form-excluir.html'

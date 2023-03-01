@@ -1,13 +1,12 @@
 from django.urls import path
 from .views import IndexView, SobreView, BootView
 
-from .views import Clientes_List, Saida_de_Chaves_List, ImoveisList
-from .views import Clientes_PF_Create, Clientes_PJ_Create, Saida_de_Chaves_Create, ImoveisCreate
-from .views import Clientes_PF_Update, Clientes_PJ_Update, ImoveisUpdate, Saida_de_Chaves_Update
-from .views import Saida_de_Chaves_Delete, Clientes_Delete, ImoveisDelete
-
+from .views import Clientes_List, ImoveisList
+from .views import Clientes_PF_Create, Clientes_PJ_Create, ImoveisCreate
+from .views import Clientes_PF_Update, Clientes_PJ_Update, ImoveisUpdate 
+from .views import Clientes_Delete, ImoveisDelete
 from .views import Saida_de_Chaves_por_Imovel
-
+from .views import Saida_de_Chaves_LIST, Saida_de_Chaves_CREATE, Saida_de_Chaves_UPDATE, Saida_de_Chaves_DELETE
 from apps.cadastros import views
 
 
@@ -43,10 +42,10 @@ urlpatterns = [
     # ------ CONTROLE DE CHAVES ----------------------------------------------------------------
     # ==========================================================================================
 
-    path('chaves/', Saida_de_Chaves_List.as_view(), name='listar-saida-chaves'),
-    path('chaves/cadatrar/', Saida_de_Chaves_Create.as_view(), name='cadastrar-saida-chaves'),
-    path('chaves/editar/<int:pk>', Saida_de_Chaves_Update.as_view(), name='editar-saida-chaves'),
-    path('chaves/excluir/<int:pk>', Saida_de_Chaves_Delete.as_view(), name='excluir-saida-chaves'),
+    path('chaves/', Saida_de_Chaves_LIST.as_view(), name='listar-saida-chaves'),
+    path('chaves/cadatrar/', Saida_de_Chaves_CREATE.as_view(), name='cadastrar-saida-chaves'),
+    path('chaves/editar/<int:pk>', Saida_de_Chaves_UPDATE.as_view(), name='editar-saida-chaves'),
+    path('chaves/excluir/<int:pk>', Saida_de_Chaves_DELETE.as_view(), name='excluir-saida-chaves'),
     
     path('imoveis/chaves/<int:pk>', views.Saida_de_Chaves_por_Imovel, name='listar-controle-chaves'),
 ]
