@@ -179,7 +179,7 @@ class ImoveisDelete(LoginRequiredMixin, DeleteView):
 class Saida_de_Chaves_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
-    template_name = 'cadastros/saida_de_chaves/lista1.html'
+    template_name = 'cadastros/saida_de_chaves/lista.html'
 
 class Saida_de_Chaves_CREATE(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
@@ -232,4 +232,4 @@ def Saida_de_Chaves_por_Imovel(request,pk):
             observacao = cliente,
         )
     
-    return render(request, 'cadastros/imoveis/chaves/lista.html', context)
+    return render(request, 'cadastros/imoveis/chaves.html', context)

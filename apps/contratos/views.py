@@ -182,18 +182,18 @@ class AdministracaoList(LoginRequiredMixin, ListView):
 # ------ RECEITAS - ALUGUEIS --------------------------------------------------------
 # ===================================================================================
 
-class Alugueis_a_Receber_LIST(LoginRequiredMixin, ListView):
+class Receitas_a_Receber_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
-    template_name = 'receitas/alugueis/lista - alugueis a receber.html'
+    template_name = 'receitas/a receber/lista.html'
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(valor_pago = 0)
 
-class Alugueis_a_Recebidos_LIST(LoginRequiredMixin, ListView):
+class Receitas_Recebidas_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
-    template_name = 'receitas/alugueis/lista - alugueis recebidos.html'
+    template_name = 'receitas/recebidas/lista.html'
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(saldo_aluguel = 0)
@@ -239,7 +239,7 @@ def Despesa_Alugueis_a_Repassar_List(request):
 
     context['parcelas'] = parcelas
 
-    return render(request, 'despesas/repasses/lista_alugueis_a_repassar.html', context)
+    return render(request, 'despesas/a repassar/lista.html', context)
 
 class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')

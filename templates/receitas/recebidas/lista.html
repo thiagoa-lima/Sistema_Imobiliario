@@ -22,6 +22,7 @@
         <table class="table table-striped" id="tabela">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Parcela</th>
                     <th>Locatário</th>
                     <th>Vencimento</th>
@@ -37,17 +38,18 @@
             <tbody>
                 {% for alugueis_a_receber in object_list %}
                 <tr>
+                    <td>{{ alugueis_a_receber.id }}</td>
                     <td>{{ alugueis_a_receber.parcela }}</td>
                     <td>{{ alugueis_a_receber.contrato }}</td>
                     <td>{{ alugueis_a_receber.vencimento|date:'d/m/Y'}}</td>
                     <td>{{ alugueis_a_receber.data_pagamento|date:'d/m/Y' }}</td>
-                    <td>{{ alugueis_a_receber.valor }}</td>
+                    <td>{{ alugueis_a_receber.valor_aluguel }}</td>
                     <td>{{ alugueis_a_receber.multa }}</td>
                     <td>{{ alugueis_a_receber.juros }}</td>
                     <td>{{ alugueis_a_receber.valor_total }}</td>
                     
                     <td>
-                        <a href="{% url 'financeiro-do-contrato-editar' alugueis_a_receber.pk %}" class="btn btn-success btn-sm" title="Baixar">
+                        <a href="{% url 'financeiro-do-contrato-editar' alugueis_a_receber.pk %}" class="btn btn-primary btn-sm" title="Editar">
                             <i class="fa fa-check" aria-hidden="true"></i>
                         </a> 
                         <a href="#" class="btn btn-danger btn-sm" title="Excluir">
@@ -84,19 +86,20 @@
             $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
 
             $('#tabela').DataTable({
-                "order": [[2, 'asc']], // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
+                "order": [[0, 'desc']], // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
                 "pageLength": 50,
                 "bSort": true,
                 "columnDefs": [
                     // Largura das colunas
                     { width: '1%', targets: [0] },
-                    { width: '12%', targets: [4] },
+                    { width: '10%', targets: [9] },
                     
                     // Alinhamento das colunas
-                    { className: "dt-center", targets: [0, 4] }, // DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
-                    // { className: "dt-right", targets: [4] },
+                    { className: "dt-center", targets: [0,1,3,4,9] }, // DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+                    { className: "dt-right", targets: [5,6,7,8] },
 
-                    { bSortable: false, targets: [0, 1, 3, 4] },
+                    // Ordem 
+                    { bSortable: false, targets: [1,3,5,6,7,8,9], },
 
                 ],
                 "language":{
