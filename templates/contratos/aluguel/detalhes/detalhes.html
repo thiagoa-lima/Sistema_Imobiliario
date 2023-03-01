@@ -172,19 +172,9 @@
                                 <td>
                                     <a href="{% url 'despesas-alugueis-repassar-baixar' parcela.pk %}" class="btn btn-primary btn-sm" title="Baixar Parcela">
                                         <i class="fa fa-check" aria-hidden="true"></i>
-                                    </a>
-
-                                {% if  parcela.saldo_aluguel  == 0 or parcela.saldo_repasse == 0 %}
-                                    <a href="#" class="btn btn-dark btn-sm" title="Excluir">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                {% else %}
-                                    <a href="#" class="btn btn-danger btn-sm" title="Excluir">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                {% endif %}
-     
+                                    </a>     
                                 </td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -331,12 +321,12 @@
                 "bSort": false,
                 "columnDefs": [
                     // Largura das colunas
-                    // { width: '5%', targets: [0] },
+                    // { width: '5%', targets: [7] },
 
                     // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-left" | CENTRO: "dt-center"
                     { className: "dt-left", targets: [0] },
-                    { className: "dt-center", targets: [1,2] },
-                    { className: "dt-right", targets: [3,4,5,6,7] },
+                    { className: "dt-center", targets: [1,2,7] },
+                    { className: "dt-right", targets: [3,4,5,6] },
 
                     // Opção de não ordenar
                     // { bSortable: false, targets: [0,1,2,] },

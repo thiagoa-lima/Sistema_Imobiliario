@@ -4,7 +4,7 @@ from .views import Despesa_Alugueis_a_Repassar_List
 
 from .views import Financeiro_do_Contrato_Aluguel_DELETE, Financeiro_do_Contrato_Aluguel_UPDATE, Financeiro_do_Contrato_Repasse_UPDATE
 from .views import Contrato_Aluguel_CREATE, Contrato_Aluguel_UPDATE, Contrato_Aluguel_DELETE, Contrato_Aluguel_LIST, Contrato_Aluguel_DETALHES
-from .views import Receitas_a_Receber_LIST, Receitas_Recebidas_LIST
+from .views import Receitas_a_Receber_LIST, Receitas_a_Receber_UPDATE, Receitas_Recebidas_LIST, Receitas_Recebidas_UPDATE
 from apps.contratos import views
 
 # app_name = 'contratos'
@@ -26,10 +26,14 @@ urlpatterns = [
     path('contratos/aluguel/detalhes/parcela/editar/<int:pk>', Financeiro_do_Contrato_Aluguel_UPDATE.as_view(), name='financeiro-do-contrato-aluguel-editar'),
     path('contratos/aluguel/detalhes/parcela/excluir/<int:pk>', Financeiro_do_Contrato_Aluguel_DELETE.as_view(), name='financeiro-do-contrato-aluguel-excluir'),
     path('contratos/aluguel/detalhes/repasse/editar/<int:pk>', Financeiro_do_Contrato_Repasse_UPDATE.as_view(), name='financeiro-do-contrato-editar'),
-    # path('contratos/aluguel/detalhes/repasse/excluir/<int:pk>', .as_view(), name='financeiro-do-contrato-aluguel-excluir'),
 
-    path('receitas/a-receber/', Receitas_a_Receber_LIST.as_view(), name='receitas-a-receber-listar' ),
+    # RECEITAS - A RECEBER
+    path('receitas/a-receber/', Receitas_a_Receber_LIST.as_view(), name='receitas-a-receber-listar'),
+    path('receitas/a-receber/editar<int:pk>', Receitas_a_Receber_UPDATE.as_view(), name='receitas-a-receber-editar'),
+
+    # RECEITAS - RECEBIDAS
     path('receitas/recebidas/', Receitas_Recebidas_LIST.as_view(), name='receitas-recebidas-listar' ),
+    path('receitas/recebidas/editar<int:pk>', Receitas_Recebidas_UPDATE.as_view(), name='receitas-recebidas-editar'),
 
     path('despesas/alugueis/repasses/', views.Despesa_Alugueis_a_Repassar_List, name='despesas-alugueis-repassar-listar'),
     path('despesas/alugueis/repasses/baixar/<int:pk>', Financeiro_do_Contrato_Repasse_UPDATE.as_view(), name='despesas-alugueis-repassar-baixar'),

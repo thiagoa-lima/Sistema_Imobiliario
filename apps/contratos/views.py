@@ -189,6 +189,22 @@ class Receitas_a_Receber_LIST(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(valor_pago = 0)
+    
+class Receitas_a_Receber_UPDATE(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Parcela_Aluguel_Form
+    template_name = 'receitas/baixa_de_parcela.html'
+    success_url = reverse_lazy('receitas-a-receber-listar')
+
+    # Método que atualiza os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Baixar Parcela"
+        
+        return context
 
 class Receitas_Recebidas_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
@@ -197,6 +213,22 @@ class Receitas_Recebidas_LIST(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Financeiro_do_Contrato.objects.filter(saldo_aluguel = 0)
+
+class Receitas_Recebidas_UPDATE(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Parcela_Aluguel_Form
+    template_name = 'receitas/baixa_de_parcela.html'
+    success_url = reverse_lazy('receitas-recebidas-listar')
+
+    # Método que atualiza os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Baixar Parcela"
+        
+        return context
 
 # ===================================================================================
 # ------ FINANCEIRO DO CONTRATO -----------------------------------------------------
