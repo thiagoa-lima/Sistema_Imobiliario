@@ -265,13 +265,14 @@ class Financeiro_do_Contrato_Aluguel_DELETE(LoginRequiredMixin, DeleteView):
 # ------ DESPESAS REPASSE -----------------------------------------------------------
 # ===================================================================================
 
-def Despesa_Alugueis_a_Repassar_List(request):
-    context = {}
-    parcelas = Financeiro_do_Contrato.objects.filter()
+class Despesas_a_Repassar_LIST(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'despesas/a repassar/lista.html'
 
-    context['parcelas'] = parcelas
+    def get_queryset(self):
+        return Financeiro_do_Contrato.objects.filter(saldo_repasse = 0)
 
-    return render(request, 'despesas/a repassar/lista.html', context)
 
 class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
