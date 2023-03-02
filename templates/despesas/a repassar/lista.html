@@ -45,12 +45,9 @@
                     <td>{{ alugueis_a_repassar.valor_repasse }}</td>
                     
                     <td>
-                        <a href="#" class="btn btn-primary btn-sm" title="Baixar">
+                        <a href="{% url 'despesas-a-repassar-editar' alugueis_a_repassar.pk %}" class="btn btn-primary btn-sm" title="Baixar">
                             <i class="fa fa-check" aria-hidden="true"></i>
                         </a> 
-                        <a href="#" class="btn btn-danger btn-sm" title="Excluir">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
                     </td>
                 </tr>
                 {% empty %}
@@ -82,7 +79,9 @@
             $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
 
             $('#tabela').DataTable({
-                "order": [[2, 'asc']], // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
+                "order": [
+                    [3, 'asc'] // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
+                ], 
                 "pageLength": 50,
                 "bSort": true,
                 "columnDefs": [

@@ -8,6 +8,6 @@ urlpatterns = [
     path('cadastrar/usuarios/', UsuariosCreate.as_view(), name='cadastrar-usuarios'),
     path('editar/usuarios/<int:pk>', UsuariosUpdate.as_view(), name='editar-usuario'),
     path('excluir/usuarios/<int:pk>', UsuariosUpdate.as_view(), name='excluir-usuario'),
-    path('listar/usuarios/', UsuariosList.as_view(), name='listar-usuarios'),
+    path('usuarios/', UsuariosList.as_view(), name='usuarios-listar'),
 
 ]

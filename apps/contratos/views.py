@@ -233,6 +233,7 @@ class Receitas_Recebidas_UPDATE(LoginRequiredMixin, UpdateView):
 # ===================================================================================
 # ------ FINANCEIRO DO CONTRATO -----------------------------------------------------
 # ===================================================================================
+
 class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
@@ -260,20 +261,7 @@ class Financeiro_do_Contrato_Aluguel_DELETE(LoginRequiredMixin, DeleteView):
     # Método que guarda o ID do formulário que está sendo atualizado
     def get_success_url(self) -> str:
         return reverse_lazy('financeiro-do-contrato-listar', kwargs={'pk': self.object.contrato_id})
-
-# ===================================================================================
-# ------ DESPESAS REPASSE -----------------------------------------------------------
-# ===================================================================================
-
-class Despesas_a_Repassar_LIST(LoginRequiredMixin, ListView):
-    login_url = reverse_lazy('login')
-    model = Financeiro_do_Contrato
-    template_name = 'despesas/a repassar/lista.html'
-
-    def get_queryset(self):
-        return Financeiro_do_Contrato.objects.filter(saldo_repasse = 0)
-
-
+    
 class Financeiro_do_Contrato_Aluguel_UPDATE(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Financeiro_do_Contrato
@@ -311,7 +299,35 @@ class Financeiro_do_Contrato_Repasse_UPDATE(LoginRequiredMixin, UpdateView):
         context['botao'] = "Salvar"
         
         return context
-    
+
+# ===================================================================================
+# ------ DESPESAS REPASSE -----------------------------------------------------------
+# ===================================================================================
+
+class Despesas_a_Repassar_LIST(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'despesas/a repassar/lista.html'
+
+    def get_queryset(self):
+        return Financeiro_do_Contrato.objects.filter(valor_repassado = 0)
+
+
+class Despesas_a_Repassar_UPDATE(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    form_class = forms.Baixa_de_Repasse_Aluguel_Form
+    template_name = 'contratos/aluguel/detalhes/baixa_de_repasse.html'
+    success_url = reverse_lazy('despesas-a-repassar-listar')
+
+    # Método que atualiza os campos do formulário
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['titulo'] = "Baixar Parcela de Aluguel"
+        context['botao'] = "Baixar Parcela"
+        
+        return context
 
 # ===================================================================================
 # ------ CONTRATO DE ALUGUEL --------------------------------------------------------

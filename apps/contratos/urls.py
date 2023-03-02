@@ -3,13 +3,15 @@ from .views import AdministracaoList, AdministracaoCreate, AdministracaoUpdate, 
 from .views import Financeiro_do_Contrato_Aluguel_DELETE, Financeiro_do_Contrato_Aluguel_UPDATE, Financeiro_do_Contrato_Repasse_UPDATE
 from .views import Contrato_Aluguel_CREATE, Contrato_Aluguel_UPDATE, Contrato_Aluguel_DELETE, Contrato_Aluguel_LIST, Contrato_Aluguel_DETALHES
 from .views import Receitas_a_Receber_LIST, Receitas_a_Receber_UPDATE, Receitas_Recebidas_LIST, Receitas_Recebidas_UPDATE
-from .views import Despesas_a_Repassar_LIST
+from .views import Despesas_a_Repassar_LIST, Despesas_a_Repassar_UPDATE
 
 from apps.contratos import views
 
 # app_name = 'contratos'
 
 urlpatterns = [
+    
+    # CONTRATO DE ADMINITRAÇÃO (CRUD) 
     path('contratos/administracao/', AdministracaoList.as_view(), name='contrato-administracao-listar'),
     path('contratos/administracao/cadastrar', AdministracaoCreate.as_view(), name='contrato-administracao-cadastrar'),
     path('contratos/administracao/editar/<int:pk>', AdministracaoUpdate.as_view(), name='contrato-administracao-editar'),
@@ -37,6 +39,6 @@ urlpatterns = [
 
     # DESPESAS - A REPASSAR
     path('despesas/alugueis/repasses/', Despesas_a_Repassar_LIST.as_view(), name='despesas-a-repassar-listar'),
-    path('despesas/alugueis/repasses/baixar/<int:pk>', Financeiro_do_Contrato_Repasse_UPDATE.as_view(), name='despesas-alugueis-repassar-baixar'),
+    path('despesas/alugueis/repasses/baixar/<int:pk>', Despesas_a_Repassar_UPDATE.as_view(), name='despesas-a-repassar-editar'),
 
 ]
