@@ -52,13 +52,6 @@
                         <a href="{% url 'receitas-a-receber-editar' alugueis_a_receber.pk %}" class="btn btn-primary btn-sm" title="Baixar">
                             <i class="fa fa-check" aria-hidden="true"></i>
                         </a> 
-
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3">
-                        Nenhum contrato registrado
                     </td>
                 </tr>
                 {% endfor %}
