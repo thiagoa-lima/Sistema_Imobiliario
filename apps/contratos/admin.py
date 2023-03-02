@@ -4,9 +4,9 @@ from apps.contratos.models import Administracao, Financeiro_do_Contrato, Aluguel
 
 @admin.register(Administracao)
 class AdministracaoAdmin(admin.ModelAdmin):
-    list_display = ('proprietario', 'imovel', 'data_inicial')
+    list_display = ('imovel', 'data_inicial')
     # search_fields = ('proprietario',)
-    list_filter = ('proprietario', )
+    # list_filter = ('proprietario', )
     list_per_page = 20
 
 @admin.register(Financeiro_do_Contrato)

@@ -12,13 +12,14 @@ from django.dispatch import receiver
 class Administracao(models.Model):
 
     # Dados iniciais
-    proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
-    imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
+    # proprietario = models.ForeignKey(Clientes, on_delete=models.PROTECT, default=None, verbose_name='Proprietário', related_name='Clientes_proprietario +')
+    # imovel = ChainedForeignKey(Imoveis, on_delete=models.PROTECT, default=None, chained_field="proprietario", chained_model_field="proprietario", show_all=False, auto_choose=True,sort=True)
+    imovel = models.OneToOneField(Imoveis, on_delete=models.PROTECT)
     valor_aluguel = models.CharField("Valor do aluguel", default=None, max_length=20)
     taxa_admin_mensal = models.CharField("Tx Adm Mensal", default=10, max_length=20)
     taxa_admin_anual = models.CharField("Tx Adm Anual", default=50, max_length=20)
     data_inicial = models.DateField("Data Inicial", max_length=10, null=False, blank=False, default=None)
-    prazo_contrato = models.IntegerField("Prazo", default=36,validators=[MinValueValidator(0)])
+    prazo_contrato = models.IntegerField("Prazo", default=3,validators=[MinValueValidator(0)])
     data_final = models.DateField("Data Final", max_length=10, null=False, blank=False)
     
    
