@@ -19,9 +19,9 @@ from django.shortcuts import get_object_or_404
 # ===================================================================================
 
 class UsuariosCreate(CreateView):
-    template_name = "padrao/form.html"
+    template_name = "usuarios/form.html"
     form_class = UsuariosForm
-    success_url = reverse_lazy('listar-usuarios')
+    success_url = reverse_lazy('usuarios-listar')
 
     # O método abaixo é chamado quando submete um formulário
     def form_valid(self, form):
@@ -45,9 +45,9 @@ class UsuariosCreate(CreateView):
 # ===================================================================================
 
 class UsuariosUpdate(UpdateView):
-    template_name = "padrao/form.html"
+    template_name = "usuarios/form.html"
     form_class = UsuariosForm
-    success_url = reverse_lazy('listar-usuarios')
+    success_url = reverse_lazy('usuarios-listar')
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
     def get_context_data(self, *args, **kwargs):
@@ -74,4 +74,4 @@ class ClientesDelete(LoginRequiredMixin, DeleteView):
 class UsuariosList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = User
-    template_name = 'usuarios/listas/usuarios.html'
+    template_name = 'usuarios/lista.html'

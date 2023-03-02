@@ -40,14 +40,6 @@
                     <td>{{ saida_de_chaves.data_retirada|date:'d/m/Y' }} {{ saida_de_chaves.hora_retirada }}</td>
                     <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }} {{ saida_de_chaves.hora_devolucao }}</td>
                 </tr>
-                {% empty %}
-    
-                <tr>
-                    <td colspan="3">
-                        Nenhum saída de chaves registrada para esse imóvel
-                    </td>
-                </tr>
-    
                 {% endfor %}
             </tbody>
         </table>

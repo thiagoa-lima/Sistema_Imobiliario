@@ -13,7 +13,7 @@
     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
         <h2>Usuários</h2> 
         
-        <a href="{% url 'cadastrar-usuarios' %}" class="btn btn-primary btn-bg">Cadastrar usuário</a>
+        <a href="{% url 'usuarios-cadastrar' %}" class="btn btn-primary btn-bg">Cadastrar usuário</a>
 
     </div>
 
@@ -40,7 +40,7 @@
                 <td>{{ User.username }}</td>
                 <td>{{ User.email }}</td>
                 <td>
-                    <a href="{% url 'editar-usuario' User.pk %}" class="btn btn-warning btn-sm" title="Editar">
+                    <a href="{% url 'usuarios-editar' User.pk %}" class="btn btn-warning btn-sm" title="Editar">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a> 
                     <a href="{% url 'excluir-usuario' User.pk %}" class="btn btn-danger btn-sm" title="Excluir">

@@ -11,165 +11,186 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container">
-    <h2 class="mt-4">
-        {{ titulo }}
-    </h2>
-
-    <p class="lead">
-        Preencha todos os campos obrigatórios
-    </p>
-
-    <hr>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div>
-                <h5>Informações Iniciais</h4>
-            </div>
-         
-            <div hidden class="form-group col-md-3 mb-2" >
-                {{ form.tipo_cliente|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cpf|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.nome|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.sexo|as_crispy_field }}
-            </div>
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2 class="mt-2">
+                {{ titulo }}
+            </h2>
         </div>
 
-        <div class="row mt-4">
-            <div>
-                <h5>Contatos</h4>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.email_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.email_2|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_2|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_3|as_crispy_field }}
-            </div>
-        </div>
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Informações Iniciais</h5>
+                        <hr>
+                        <div class="row">
+                            <div hidden class="form-group col-md-3 mb-2">
+                                {{ form.tipo_cliente|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cpf|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.nome|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.sexo|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row mt-4">
-            <div>
-                <h5>Filiação</h4>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.pai|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.mae|as_crispy_field }}
-            </div>
-        </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Contatos</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.email_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.email_2|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_2|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_3|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row mt-4">
-            <div>
-                <h5>Documentos</h4>
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.rg|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.orgao_expedidor|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.data_expedicao|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.nascimento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.estado_civil|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.nacionalidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.naturalidade|as_crispy_field }}
-            </div>
-        </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Filiação</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.pai|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.mae|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row mt-4">
-            <div>
-                <h5>Dados do cônjuge</h4>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Documentos</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.rg|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.orgao_expedidor|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.data_expedicao|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.nascimento|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.estado_civil|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.nacionalidade|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.naturalidade|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Dados do cônjuge</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.nome_conjunge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cpf_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.rg_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.orgao_expedidor_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.data_expedicao_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-2">
+                                {{ form.sexo_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.profissao_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.telefone_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.celular_conjuge|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.email_conjuge|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Endereço Residencial</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cep|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-7 mb-2">
+                                {{ form.endereco|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-2">
+                                {{ form.numero|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.complemento|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.bairro|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cidade|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-2">
+                                {{ form.uf|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.nome_conjunge|as_crispy_field }}
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
             </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cpf_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.rg_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.orgao_expedidor_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.data_expedicao_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-2">
-                {{ form.sexo_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.profissao_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.telefone_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.celular_conjuge|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.email_conjuge|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div>
-                <h5>Endereço residencial</h4>
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cep|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-7 mb-2">
-                {{ form.endereco|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-2">
-                {{ form.numero|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.complemento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.bairro|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-2">
-                {{ form.uf|as_crispy_field }}
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
-        </button>
-    </form>
+        </form>
+    </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -177,48 +198,48 @@
 <script>
     // Script para mascara
     var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
-    spOptions = {
-    onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
 
     $(document).ready(function () {
 
         // =============================================================
         // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
         // =============================================================
-        
-        $('#id_data_expedicao').datepicker({dateFormat:'dd/mm/yy'});
-        $('#id_nascimento').datepicker({dateFormat:'dd/mm/yy'});
-        $('#id_data_expedicao_conjuge').datepicker({dateFormat:'dd/mm/yy'});
-        
+
+        $('#id_data_expedicao').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#id_nascimento').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#id_data_expedicao_conjuge').datepicker({ dateFormat: 'dd/mm/yy' });
+
         // =============================================================
         // ------ CAMPO PADRÃO -----------------------------------------
         // =============================================================
 
         tipo_cliente = 'PF'
         $("#id_tipo_cliente").val(tipo_cliente)
-        
+
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS
         // =============================================================
-        
-        $('#id_cpf').mask('000.000.000-00', {reverse: true, placeholder: "___.___.___-__"});
+
+        $('#id_cpf').mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__" });
         $('#id_telefone_1').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_2').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
 
-        $('#id_data_expedicao').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
-        $('#id_data_expedicao_conjuge').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_data_expedicao').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_nascimento').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_cpf_conjuge').mask('000.000.000-00', { reverse: true, placeholder: "000.000.000-00" });
+        $('#id_data_expedicao_conjuge').mask('00/00/0000', { placeholder: "__/__/____" });
         $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_cep').mask('00000-000');
-     
+
         // =============================================================
         // ------ BUSCAR CEP AUTOMATICAMENTE
         // =============================================================
@@ -232,7 +253,7 @@
         }
 
         //Quando o campo cep perde o foco.
-        $("#id_cep").change(function() {
+        $("#id_cep").change(function () {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
@@ -244,7 +265,7 @@
                 var validacep = /^[0-9]{8}$/;
 
                 //Valida o formato do CEP.
-                if(validacep.test(cep)) {
+                if (validacep.test(cep)) {
 
                     //Preenche os campos com "..." enquanto consulta webservice.
                     $("#id_endereco").val("buscando...");
@@ -253,7 +274,7 @@
                     $("#id_uf").val("buscando...");
 
                     //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                         if (!("erro" in dados)) {
                             //Atualiza os campos com os valores da consulta.
@@ -279,7 +300,7 @@
                 //cep sem valor, limpa formulário.
                 limpa_formulário_cep();
             }
-        }); 
+        });
         // =============================================================
         // ------ FIM BUSCAR CEP AUTOMATICAMENTE
         // =============================================================

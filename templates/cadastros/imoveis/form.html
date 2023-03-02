@@ -10,122 +10,136 @@
 </title>
 {% endblock %}
 
-
 {% block conteudo %}
-<div class="container">
-    <h2 class="mt-4">
-        {{ titulo }}
-    </h2>
-
-    <p class="lead">
-        Preencha todos os campos obrigatórios
-    </p>
-
-    <hr>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div>
-                <h5>Informações Iniciais</h4>
-            </div>
-            <div class="form-group col-md-7 mb-0">
-                {{ form.proprietario|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-5 mb-0">
-                {{ form.tipo|as_crispy_field }}
-            </div>
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2 class="mt-2">
+                {{ titulo }}
+            </h2>
         </div>
 
-        <div class="row mt-4">
-            <div>
-                <h5>Endereço</h4>
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.cep|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-8 mb-0">
-                {{ form.endereco|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-0">
-                {{ form.numero|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.complemento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.bairro|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-0">
-                {{ form.cidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-1 mb-0">
-                {{ form.uf|as_crispy_field }}
-            </div>   
-        </div>
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Informações Iniciais</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-7 mb-0">
+                                {{ form.proprietario|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-5 mb-0">
+                                {{ form.tipo|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Endereço</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-2 mb-0">
+                                {{ form.cep|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-8 mb-0">
+                                {{ form.endereco|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-0">
+                                {{ form.numero|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.complemento|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-0">
+                                {{ form.bairro|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.cidade|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-1 mb-0">
+                                {{ form.uf|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row mt-4">
-            <h5>Informações do repasse</h5>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.repasse_garantido|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-0">
-                {{ form.regra_do_repasse|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-0">
-                {{ form.dias_para_repasse|as_crispy_field }}
-            </div>
-        </div>
-        
-        <div class="row mt-4">
-            <h5 >Taxas administrativas</h5>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.taxa_admin_mensal|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.taxa_admin_anual|as_crispy_field }}
-            </div> 
-        </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Repasse</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-0">
+                                {{ form.repasse_garantido|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.regra_do_repasse|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-0">
+                                {{ form.dias_para_repasse|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
-        </button>
-
-    </form>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Taxas Administrativas</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.taxa_admin_mensal|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.taxa_admin_anual|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 
-
-
-
 <script>
     // Script para mascara
     var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
-    spOptions = {
-    onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
 
-    $(document).ready(function () { 
+    $(document).ready(function () {
 
         // =============================================================
         // ------ SELECT2 ----------------------------------------------
         // =============================================================
-        $('.select2').select2({theme: 'bootstrap-5'});
-        
+        $('.select2').select2({ theme: 'bootstrap-5' });
+
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS
         // =============================================================
-        
+
         $('#id_cep').mask('00000-000');
-        $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
-        $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
-     
+        $('#id_taxa_admin_mensal').mask('##0,00%', { reverse: true });
+        $('#id_taxa_admin_anual').mask('##0,00%', { reverse: true });
+
         // =============================================================
         // ------ BUSCAR CEP AUTOMATICAMENTE
         // =============================================================
@@ -139,7 +153,7 @@
         }
 
         //Quando o campo cep perde o foco.
-        $("#id_cep").change(function() {
+        $("#id_cep").change(function () {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
@@ -151,7 +165,7 @@
                 var validacep = /^[0-9]{8}$/;
 
                 //Valida o formato do CEP.
-                if(validacep.test(cep)) {
+                if (validacep.test(cep)) {
 
                     //Preenche os campos com "..." enquanto consulta webservice.
                     $("#id_endereco").val("buscando...");
@@ -160,7 +174,7 @@
                     $("#id_uf").val("buscando...");
 
                     //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                         if (!("erro" in dados)) {
                             //Atualiza os campos com os valores da consulta.
@@ -186,7 +200,7 @@
                 //cep sem valor, limpa formulário.
                 limpa_formulário_cep();
             }
-        }); 
+        });
         // =============================================================
         // ------ FIM BUSCAR CEP AUTOMATICAMENTE
         // =============================================================

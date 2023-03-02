@@ -4,368 +4,385 @@
 
 {% load crispy_forms_tags %}
 
-
 {% block titulo %}
 <title>
     {{ titulo }}
 </title>
 {% endblock %}
 
-
 {% block conteudo %}
-<div class="container">
-    <h2 class="mt-4">
-        {{ titulo }}
-    </h2>
-
-    <p class="lead">
-        Preencha todos os campos obrigatórios
-    </p>
-
-    <hr>
-
-    <form action="" method="post">
-
-        {% csrf_token %}
-
-        <div class="row">
-            <h5>Imóvel</h5>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.proprietario|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.imovel|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.finalidade|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row mt-4">
-            <h5 >Locatário e garantia</h5>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.locatario|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.garantia|as_crispy_field }}
-            </div> 
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2 class="mt-2">
+                {{ titulo }}
+            </h2>
         </div>
 
-        <div id="detalhes_garantia" class="card  mt-0" >
-            <div class="card-body ">
-                <div class="row">
-                    <h6>DETALHES</h6>
-                    <hr>
-                    <div id="data_inicial_garantia" class="form-group col-md-4 mb-2">
-                        {{ form.data_inicial_garantia|as_crispy_field }}
-                    </div> 
-                    <div id="data_final_garantia" class="form-group col-md-4 mb-2">
-                        {{ form.data_final_garantia|as_crispy_field }}
-                    </div> 
-                    <div id="valor_garantia" class="form-group col-md-4 mb-2">
-                        {{ form.valor_garantia|as_crispy_field }}
-                    </div> 
-                    <div id="fiador" class="form-group col-md-6 mb-2">
-                        {{ form.fiador|as_crispy_field }}
-                    </div> 
-                    <div id="seguradora" class="form-group col-md-6 mb-2">
-                        {{ form.seguradora|as_crispy_field }}
-                    </div> 
-                    <div id="banco_garantia" class="form-group col-md-6 mb-2">
-                        {{ form.banco_garantia|as_crispy_field }}
-                    </div> 
-                    <div id="apolice_garantia" class="form-group col-md-6 mb-2">
-                        {{ form.apolice_garantia|as_crispy_field }}
-                    </div> 
-                    <div id="observacao_garantia" class="form-group col-md-12 mb-2">
-                        {{ form.observacao_garantia|as_crispy_field }}
-                    </div> 
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Imóvel</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.proprietario|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.imovel|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.finalidade|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div> 
-        </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Locatário e garantia</h5>
+                        <hr>
+                        <div class="row">
 
-        <div class="row mt-4">
-            <h5 >Dados do contrato</h5>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.data_inicial|as_crispy_field }}
+
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.locatario|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.garantia|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="detalhes_garantia" class="card  mt-3">
+                    <div class="card-body ">
+                        <h5>Detalhes</h5>
+                        <hr>
+                        <div class="row">
+                            <div id="data_inicial_garantia" class="form-group col-md-4 mb-2">
+                                {{ form.data_inicial_garantia|as_crispy_field }}
+                            </div>
+                            <div id="data_final_garantia" class="form-group col-md-4 mb-2">
+                                {{ form.data_final_garantia|as_crispy_field }}
+                            </div>
+                            <div id="valor_garantia" class="form-group col-md-4 mb-2">
+                                {{ form.valor_garantia|as_crispy_field }}
+                            </div>
+                            <div id="fiador" class="form-group col-md-6 mb-2">
+                                {{ form.fiador|as_crispy_field }}
+                            </div>
+                            <div id="seguradora" class="form-group col-md-6 mb-2">
+                                {{ form.seguradora|as_crispy_field }}
+                            </div>
+                            <div id="banco_garantia" class="form-group col-md-6 mb-2">
+                                {{ form.banco_garantia|as_crispy_field }}
+                            </div>
+                            <div id="apolice_garantia" class="form-group col-md-6 mb-2">
+                                {{ form.apolice_garantia|as_crispy_field }}
+                            </div>
+                            <div id="observacao_garantia" class="form-group col-md-12 mb-2">
+                                {{ form.observacao_garantia|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Período e valor</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.data_inicial|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.prazo_contrato|as_crispy_field }}
+                            </div>
+                            <fieldset readonly class="form-group col-md-3 mb-2">
+                                {{ form.data_final|as_crispy_field }}
+                            </fieldset>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.valor_contrato|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Taxas de administração</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.taxa_admin_mensal|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.taxa_admin_anual|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.prazo_contrato|as_crispy_field }}
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
             </div>
-            <fieldset readonly class="form-group col-md-3 mb-2">
-                {{ form.data_final|as_crispy_field }}
-            </fieldset>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.valor_contrato|as_crispy_field }}
-            </div>   
-        </div>
-        
-        <div class="row mt-4">
-            <h5 >Taxas administrativas</h5>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.taxa_admin_mensal|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.taxa_admin_anual|as_crispy_field }}
-            </div> 
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
-        </button>
-
-        <button type="reset" class="btn btn-danger mt-4">
-            Cancelar         
-        </button>
-    </form>
-
-    
+        </form>
+    </div>
 </div>
+
 {% endblock %}
 {% block scripts %}
 
-    <script>
-        $(document).ready(function() {
+<script>
 
-            // =============================================================
-            // ------ SELECT2 ----------------------------------------------
-            // =============================================================
+    $(document).ready(function () {
 
-            $('.select2').select2({theme: 'bootstrap-5'});
-        
-            // =============================================================
-            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
-            // =============================================================
-        
-            $('#id_data_inicial').mask('00/00/0000');
-            $('#id_data_final').mask('00/00/0000');
-            $('#id_valor_contrato').mask("000.000.000.000.000,00", {reverse: true});
-            $('#id_valor_garantia').mask("000.000.000.000.000,00", {reverse: true});
-            $('#id_taxa_admin_mensal').mask('##0,00%', {reverse: true});
-            $('#id_taxa_admin_anual').mask('##0,00%', {reverse: true});
+        // =============================================================
+        // ------ SELECT2 ----------------------------------------------
+        // =============================================================
 
-            // =============================================================
-            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
-            // =============================================================
-            
-            $('#id_data_inicial ').datepicker({dateFormat:'dd/mm/yy'});
-            $('#id_data_inicial_garantia ').datepicker({dateFormat:'dd/mm/yy'});
-            $('#id_data_final_garantia ').datepicker({dateFormat:'dd/mm/yy'});
+        $('.select2').select2({ theme: 'bootstrap-5' });
 
-            // =============================================================
-            // ------ CAMPOS SOMENTE LEITURA -------------------------------
-            // =============================================================
-            
-            $('#id_data_final').prop('readonly', true)
-            
-            // =============================================================
-            // ------ VERIFICA OS DETALHES DA GARANTIA ---------------------
-            // =============================================================
-            
-            $("#id_garantia").ready(function() {
+        // =============================================================
+        // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+        // =============================================================
 
-                
-                garantia = document.querySelector('#id_garantia').value
-                console.log(garantia)
+        $('#id_data_inicial').mask('00/00/0000');
+        $('#id_data_final').mask('00/00/0000');
+        $('#id_valor_contrato').mask("000.000.000.000.000,00", { reverse: true });
+        $('#id_valor_garantia').mask("000.000.000.000.000,00", { reverse: true });
+        $('#id_taxa_admin_mensal').mask('##0,00%', { reverse: true });
+        $('#id_taxa_admin_anual').mask('##0,00%', { reverse: true });
 
-                if (garantia == "Não possui") {
-                    detalhes_garantia.style.display = 'none'
-                }
-                if (garantia == "Fiador") {
-                    detalhes_garantia.style.display = 'block'
+        // =============================================================
+        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+        // =============================================================
 
-                    data_inicial_garantia.style.display = 'none'
-                    data_final_garantia.style.display = 'none'
-                    valor_garantia.style.display = 'none'
-                    fiador.style.display = 'block'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'none'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'none'
-                }
-                if (garantia == "Caução") {
-                    detalhes_garantia.style.display = 'block'
+        $('#id_data_inicial ').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#id_data_inicial_garantia ').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#id_data_final_garantia ').datepicker({ dateFormat: 'dd/mm/yy' });
 
-                    data_inicial_garantia.style.display = 'none'
-                    data_final_garantia.style.display = 'none'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'none'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'block'
-                }
-                if (garantia == "Título de capitalização") {
-                    detalhes_garantia.style.display = 'block'
+        // =============================================================
+        // ------ CAMPOS SOMENTE LEITURA -------------------------------
+        // =============================================================
 
-                    data_inicial_garantia.style.display = 'block'
-                    data_final_garantia.style.display = 'block'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'block'
-                    apolice_garantia.style.display = 'block'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'block'
-                }
-                
-                if (garantia == "Seguro fiança") {
-                    detalhes_garantia.style.display = 'block'
+        $('#id_data_final').prop('readonly', true)
 
-                    data_inicial_garantia.style.display = 'block'
-                    data_final_garantia.style.display = 'block'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'block'
-                    seguradora.style.display = 'block'
-                    observacao_garantia.style.display = 'block'
-                }
-            });
+        // =============================================================
+        // ------ VERIFICA OS DETALHES DA GARANTIA ---------------------
+        // =============================================================
 
-            // =============================================================
-            // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
-            // =============================================================
+        $("#id_garantia").ready(function () {
 
-            $("#id_data_inicial").change(function() {
-                
-                data_inicial = document.querySelector('#id_data_inicial').value
-                periodo_contrato = document.querySelector('#id_prazo_contrato').value
 
-                if (periodo_contrato == "" || data_inicial == "") {
-                    $("#id_data_final").val(null)
-                }
-                else {
-                    // FORMATA A DATA INICIAL
-                    var data_inicial = document.querySelector("#id_data_inicial").value;
-                    var arr_data_inicial = data_inicial.split('/');
-                    var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' +arr_data_inicial[2];
-                    var data_inicial_formatada = new Date(stringFormatada);
-                    
-                    // PEGA O PRAZO PARA CALCULAR A DATA FINAL
-                    prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
-                    prazo_do_contrato = parseInt(prazo_do_contrato)
+            garantia = document.querySelector('#id_garantia').value
+            console.log(garantia)
 
-                    // CALCULA A DATA FINAL
-                    data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
-                    data_final = new Date(data_final)
+            if (garantia == "Não possui") {
+                detalhes_garantia.style.display = 'none'
+            }
+            if (garantia == "Fiador") {
+                detalhes_garantia.style.display = 'block'
 
-                    // FORMATA A DATA PARA STRING NOVAMENTE 
-                    function adicionaZero(numero){
-                        if (numero <= 9) 
-                            return "0" + numero;
-                        else
-                            return numero; 
-                    }
+                data_inicial_garantia.style.display = 'none'
+                data_final_garantia.style.display = 'none'
+                valor_garantia.style.display = 'none'
+                fiador.style.display = 'block'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'none'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'none'
+            }
+            if (garantia == "Caução") {
+                detalhes_garantia.style.display = 'block'
 
-                    data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth()+1).toString()) + "/" + data_final.getFullYear());
-                    
-                    // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
-                    $("#id_data_final").val(data_final_string)
-                }
-            }); 
+                data_inicial_garantia.style.display = 'none'
+                data_final_garantia.style.display = 'none'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'none'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'block'
+            }
+            if (garantia == "Título de capitalização") {
+                detalhes_garantia.style.display = 'block'
 
-            // =============================================================
-            // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
-            // =============================================================
+                data_inicial_garantia.style.display = 'block'
+                data_final_garantia.style.display = 'block'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'block'
+                apolice_garantia.style.display = 'block'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'block'
+            }
 
-            $("#id_prazo_contrato").change(function() {
-                
-                data_inicial = document.querySelector('#id_data_inicial').value
-                periodo_contrato = document.querySelector('#id_prazo_contrato').value
+            if (garantia == "Seguro fiança") {
+                detalhes_garantia.style.display = 'block'
 
-                if (periodo_contrato == "" || data_inicial == "") {
-                    $("#id_data_final").val(null)
-                }
-                else {
-                    // FORMATA A DATA INICIAL
-                    var data_inicial = document.querySelector("#id_data_inicial").value;
-                    var arr_data_inicial = data_inicial.split('/');
-                    var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' +arr_data_inicial[2];
-                    var data_inicial_formatada = new Date(stringFormatada);
-                    
-                    // PEGA O PRAZO PARA CALCULAR A DATA FINAL
-                    prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
-                    prazo_do_contrato = parseInt(prazo_do_contrato)
-
-                    // CALCULA A DATA FINAL
-                    data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
-                    data_final = new Date(data_final)
-
-                    // FORMATA A DATA PARA STRING NOVAMENTE 
-                    function adicionaZero(numero){
-                        if (numero <= 9) 
-                            return "0" + numero;
-                        else
-                            return numero; 
-                    }
-                    
-                    data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth()+1).toString()) + "/" + data_final.getFullYear());
-                    
-                    // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
-                    $("#id_data_final").val(data_final_string)
-                }
-            });
-            
-            // =============================================================
-            // ------ FAZ APARECER OS DETALHES DA GARANTIA -----------------
-            // =============================================================
-
-            $("#id_garantia").change(function() {
-                garantia = document.querySelector('#id_garantia').value
-                console.log(garantia)
-
-                if (garantia == "Não possui") {
-                    detalhes_garantia.style.display = 'none'
-                }
-                if (garantia == "Fiador") {
-                    detalhes_garantia.style.display = 'block'
-
-                    data_inicial_garantia.style.display = 'none'
-                    data_final_garantia.style.display = 'none'
-                    valor_garantia.style.display = 'none'
-                    fiador.style.display = 'block'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'none'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'none'
-                }
-                if (garantia == "Caução") {
-                    detalhes_garantia.style.display = 'block'
-
-                    data_inicial_garantia.style.display = 'none'
-                    data_final_garantia.style.display = 'none'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'none'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'block'
-                }
-                if (garantia == "Título de capitalização") {
-                    detalhes_garantia.style.display = 'block'
-
-                    data_inicial_garantia.style.display = 'block'
-                    data_final_garantia.style.display = 'block'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'block'
-                    apolice_garantia.style.display = 'block'
-                    seguradora.style.display = 'none'
-                    observacao_garantia.style.display = 'block'
-                }
-                
-                if (garantia == "Seguro fiança") {
-                    detalhes_garantia.style.display = 'block'
-
-                    data_inicial_garantia.style.display = 'block'
-                    data_final_garantia.style.display = 'block'
-                    valor_garantia.style.display = 'block'
-                    fiador.style.display = 'none'
-                    banco_garantia.style.display = 'none'
-                    apolice_garantia.style.display = 'block'
-                    seguradora.style.display = 'block'
-                    observacao_garantia.style.display = 'block'
-                }
-            });
+                data_inicial_garantia.style.display = 'block'
+                data_final_garantia.style.display = 'block'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'block'
+                seguradora.style.display = 'block'
+                observacao_garantia.style.display = 'block'
+            }
         });
-    </script>
+
+        // =============================================================
+        // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
+        // =============================================================
+
+        $("#id_data_inicial").change(function () {
+
+            data_inicial = document.querySelector('#id_data_inicial').value
+            periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+            if (periodo_contrato == "" || data_inicial == "") {
+                $("#id_data_final").val(null)
+            }
+            else {
+                // FORMATA A DATA INICIAL
+                var data_inicial = document.querySelector("#id_data_inicial").value;
+                var arr_data_inicial = data_inicial.split('/');
+                var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' + arr_data_inicial[2];
+                var data_inicial_formatada = new Date(stringFormatada);
+
+                // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                // CALCULA A DATA FINAL
+                data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                data_final = new Date(data_final)
+
+                // FORMATA A DATA PARA STRING NOVAMENTE 
+                function adicionaZero(numero) {
+                    if (numero <= 9)
+                        return "0" + numero;
+                    else
+                        return numero;
+                }
+
+                data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth() + 1).toString()) + "/" + data_final.getFullYear());
+
+                // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                $("#id_data_final").val(data_final_string)
+            }
+        });
+
+        // =============================================================
+        // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
+        // =============================================================
+
+        $("#id_prazo_contrato").change(function () {
+
+            data_inicial = document.querySelector('#id_data_inicial').value
+            periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+            if (periodo_contrato == "" || data_inicial == "") {
+                $("#id_data_final").val(null)
+            }
+            else {
+                // FORMATA A DATA INICIAL
+                var data_inicial = document.querySelector("#id_data_inicial").value;
+                var arr_data_inicial = data_inicial.split('/');
+                var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' + arr_data_inicial[2];
+                var data_inicial_formatada = new Date(stringFormatada);
+
+                // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                // CALCULA A DATA FINAL
+                data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                data_final = new Date(data_final)
+
+                // FORMATA A DATA PARA STRING NOVAMENTE 
+                function adicionaZero(numero) {
+                    if (numero <= 9)
+                        return "0" + numero;
+                    else
+                        return numero;
+                }
+
+                data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth() + 1).toString()) + "/" + data_final.getFullYear());
+
+                // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                $("#id_data_final").val(data_final_string)
+            }
+        });
+
+        // =============================================================
+        // ------ FAZ APARECER OS DETALHES DA GARANTIA -----------------
+        // =============================================================
+
+        $("#id_garantia").change(function () {
+            garantia = document.querySelector('#id_garantia').value
+            console.log(garantia)
+
+            if (garantia == "Não possui") {
+                detalhes_garantia.style.display = 'none'
+            }
+            if (garantia == "Fiador") {
+                detalhes_garantia.style.display = 'block'
+
+                data_inicial_garantia.style.display = 'none'
+                data_final_garantia.style.display = 'none'
+                valor_garantia.style.display = 'none'
+                fiador.style.display = 'block'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'none'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'none'
+            }
+            if (garantia == "Caução") {
+                detalhes_garantia.style.display = 'block'
+
+                data_inicial_garantia.style.display = 'none'
+                data_final_garantia.style.display = 'none'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'none'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'block'
+            }
+            if (garantia == "Título de capitalização") {
+                detalhes_garantia.style.display = 'block'
+
+                data_inicial_garantia.style.display = 'block'
+                data_final_garantia.style.display = 'block'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'block'
+                apolice_garantia.style.display = 'block'
+                seguradora.style.display = 'none'
+                observacao_garantia.style.display = 'block'
+            }
+
+            if (garantia == "Seguro fiança") {
+                detalhes_garantia.style.display = 'block'
+
+                data_inicial_garantia.style.display = 'block'
+                data_final_garantia.style.display = 'block'
+                valor_garantia.style.display = 'block'
+                fiador.style.display = 'none'
+                banco_garantia.style.display = 'none'
+                apolice_garantia.style.display = 'block'
+                seguradora.style.display = 'block'
+                observacao_garantia.style.display = 'block'
+            }
+        });
+    });
+</script>
 {% endblock %}

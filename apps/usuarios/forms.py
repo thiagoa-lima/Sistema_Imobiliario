@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # importar um formulário padrão para criação de usuários
 from django.contrib.auth.forms import UserCreationForm
-
 from django.core.exceptions import ValidationError
 
 class UsuariosForm(UserCreationForm):

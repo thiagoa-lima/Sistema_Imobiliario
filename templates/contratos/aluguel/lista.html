@@ -34,7 +34,11 @@
                 {% for Aluguel in object_list %}
                 <tr>
                     <td>{{ Aluguel.pk }}</td>
-                    <td>{{ Aluguel.locatario }}</td>
+                    <td>
+                        <a href="{% url 'editar-clientes-pf' Aluguel.locatario.pk %}" class="text-black">
+                            {{ Aluguel.locatario }}
+                        </a>
+                    </td>
                     <td>{{ Aluguel.imovel }}</td>
                     <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
                     <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>

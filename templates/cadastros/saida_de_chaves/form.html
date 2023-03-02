@@ -12,35 +12,33 @@
 
 
 {% block conteudo %}
-<div class="container">
-    <h2 class="mt-4">
-        {{ titulo }}
-    </h2>
-
-    <p class="lead">
-        Preencha todos os campos obrigatórios
-    </p>
-
-    <hr>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div>
-                <h5></h4>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.imovel|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.cliente|as_crispy_field }}
-            </div>
-            <!-- <div class='form-group'>
-                <i class="fa fa-key" aria-hidden="true"></i>
-            </div> -->
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2 class="mt-2">
+                {{ titulo }}
+            </h2>
         </div>
 
-                <div class="row mt-2 mb-1">
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Dados da empresa</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.imovel|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.cliente|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
                     <div class="form-group col-md-6 mb-2">
                         <div class="card">
                             <div class="card-body">
@@ -54,7 +52,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                     <div class="form-group col-md-6 mb-2">
                         <div class="card">
@@ -69,84 +67,93 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
-  
 
-        <div class="form-group col-md-12 mb-2">
-            {{ form.observacao|as_crispy_field }}
-        </div> 
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Comentários do cliente</h5>
+                        <hr>
+                        <div class="form-group col-md-12 mb-2">
+                            {{ form.observacao|as_crispy_field }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 
-        <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
-        </button>
+    {{ form.media }}
+    {{ form.as }}
 
-    </form>
-</div>
+    {% endblock %}
 
-{{ form.media }}
-{{ form.as }} 
-
-{% endblock %}
-
-{% block scripts %}
+    {% block scripts %}
 
 
 
 
-<script>
-    // Script para mascara
-    var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-    },
-    spOptions = {
-    onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
+    <script>
+        // Script para mascara
+        var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+            spOptions = {
+                onKeyPress: function (val, e, field, options) {
+                    field.mask(SPMaskBehavior.apply({}, arguments), options);
+                }
+            };
 
-    $(document).ready(function () { 
+        $(document).ready(function () {
 
-        // =============================================================
-        // ------ SELECT2 ----------------------------------------------
-        // =============================================================
-        
-        $('.select2').select2({theme: 'bootstrap-5'});
+            // =============================================================
+            // ------ SELECT2 ----------------------------------------------
+            // =============================================================
 
-        // =============================================================
-        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
-        // =============================================================
+            $('.select2').select2({ theme: 'bootstrap-5' });
 
-        $('#id_data_retirada').datepicker({dateFormat:'dd/mm/yy'});
-        $('#id_data_devolucao').datepicker({dateFormat:'dd/mm/yy'});
+            // =============================================================
+            // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+            // =============================================================
 
-        // =============================================================
-        // ------ INCLUÍNDO AS HORAS -----------------------------------
-        // =============================================================
+            $('#id_data_retirada').datepicker({ dateFormat: 'dd/mm/yy' });
+            $('#id_data_devolucao').datepicker({ dateFormat: 'dd/mm/yy' });
 
-        $('#id_data_retirada').change(function () { 
-            now = new Date()
-            hora_retirada = (now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
-            $("#id_hora_retirada").val(hora_retirada)
+            // =============================================================
+            // ------ INCLUÍNDO AS HORAS -----------------------------------
+            // =============================================================
+
+            $('#id_data_retirada').change(function () {
+                now = new Date()
+                hora_retirada = (now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
+                $("#id_hora_retirada").val(hora_retirada)
+            });
+
+            $('#id_data_devolucao').change(function () {
+                now = new Date()
+                hora_retirada = (now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
+                $("#id_hora_devolucao").val(hora_retirada)
+            });
+
+            // =============================================================
+            // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
+            // =============================================================
+
+            $('#id_data_retirada').mask('00/00/0000');
+            $('#id_data_devolucao').mask('00/00/0000');
+            // $('#id_hora_retirada').mask('00:00:00');
+            // $('#id_hora_devolucao').mask('00:00:00');
+
         });
 
-        $('#id_data_devolucao').change(function () { 
-            now = new Date()
-            hora_retirada = (now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds())
-            $("#id_hora_devolucao").val(hora_retirada)
-        });
-
-        // =============================================================
-        // ------ MÁSCARA DE ENTRADA DE DADOS --------------------------
-        // =============================================================
-        
-        $('#id_data_retirada').mask('00/00/0000');
-        $('#id_data_devolucao').mask('00/00/0000');
-        // $('#id_hora_retirada').mask('00:00:00');
-        // $('#id_hora_devolucao').mask('00:00:00');
-        
-    });
-
-</script>
-{% endblock %}
+    </script>
+    {% endblock %}

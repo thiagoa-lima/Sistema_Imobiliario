@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+
+{% block conteudo %}
+<div class="container">
+    <h2 class="mt-4">
+        {{ titulo }}
+    </h2>
+
+    <p class="lead">
+        Preencha todos os campos obrigatórios
+    </p>
+
+    <hr>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+        
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary mt-4">
+            {{ botao }}
+        </button>
+
+    </form>
+</div>
+{% endblock %}

@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ alugueis_a_repassar.pk }}</td>
                     <td>{{ alugueis_a_repassar.parcela }}</td>
-                    <td>{{ alugueis_a_repassar.proprietario }}</td>
+                    <td>{{ alugueis_a_repassar.contrato.proprietario }}</td>
                     <td>{{ alugueis_a_repassar.vencimento_repasse|date:'d/m/Y'}}</td>
                     <td>{{ alugueis_a_repassar.valor_aluguel }}</td>
                     <td>{{ alugueis_a_repassar.comissao }}</td>

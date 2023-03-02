@@ -11,122 +11,138 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container">
-    <h2 class="mt-4">
-        {{ titulo }}
-    </h2>
-
-    <p class="lead">
-        Preencha todos os campos obrigatórios
-    </p>
-
-    <hr>
-
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div>
-                <h5>Dados da empresa</h4>
-            </div>
-            <div hidden class="form-group col-md-3 mb-2 ">
-                {{ form.tipo_cliente|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cnpj|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-5 mb-2">
-                {{ form.nome|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.nome_fantasia|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.inscricao_estadual|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.data_abertura|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.situacao|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.data_situacao|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.porte|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.natureza_juridica|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div>
-                <h5>Endereço</h4>
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cep|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-7 mb-2">
-                {{ form.endereco|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-2">
-                {{ form.numero|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.complemento|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.bairro|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-3 mb-2">
-                {{ form.cidade|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-2 mb-2">
-                {{ form.uf|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div>
-                <h5>Contatos</h4>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.email_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-6 mb-2">
-                {{ form.email_2|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_2|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.telefone_3|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div>
-                <h5>Sócio / Procurador</h4>
-            </div>
-            <div class="form-group col-md-8 mb-2">
-                {{ form.responsavel_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.tipo_responsavel_1|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-8 mb-2">
-                {{ form.responsavel_2|as_crispy_field }}
-            </div>
-            <div class="form-group col-md-4 mb-2">
-                {{ form.tipo_responsavel_2|as_crispy_field }}
-            </div>
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2 class="mt-2">
+                {{ titulo }}
+            </h2>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-4">
-            {{ botao }}
-        </button>
-    </form>
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Dados da empresa</h5>
+                        <hr>
+                        <div class="row">
+                            <div hidden class="form-group col-md-3 mb-2 ">
+                                {{ form.tipo_cliente|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cnpj|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-5 mb-2">
+                                {{ form.nome|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.nome_fantasia|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.inscricao_estadual|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.data_abertura|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.situacao|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.data_situacao|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.porte|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.natureza_juridica|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Endereço</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cep|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-7 mb-2">
+                                {{ form.endereco|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-2">
+                                {{ form.numero|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.complemento|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.bairro|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-3 mb-2">
+                                {{ form.cidade|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-2 mb-2">
+                                {{ form.uf|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Contatos</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.email_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.email_2|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_2|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.telefone_3|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>Sócio / Procurador</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="form-group col-md-8 mb-2">
+                                {{ form.responsavel_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.tipo_responsavel_1|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-8 mb-2">
+                                {{ form.responsavel_2|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-2">
+                                {{ form.tipo_responsavel_2|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
@@ -137,23 +153,23 @@
 <script>
     // Script para mascara
     var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
     },
-    spOptions = {
-    onKeyPress: function(val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
+        spOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+            }
+        };
 
     $(document).ready(function () {
-        
+
         // =============================================================
         // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
         // =============================================================
 
-        $('#id_data_abertura').datepicker({dateFormat:'dd/mm/yy'});
-        $('#id_data_situacao').datepicker({dateFormat:'dd/mm/yy'});
-        
+        $('#id_data_abertura').datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#id_data_situacao').datepicker({ dateFormat: 'dd/mm/yy' });
+
         // =============================================================
         // ------ CAMPO PADRÃO PARA CADASTRO PJ ------------------------
         // =============================================================
@@ -164,29 +180,29 @@
         // =============================================================
         // ------ SELECT2 ----------------------------------------------
         // =============================================================
-        
-        $('.select2').select2({theme: 'bootstrap-5'});
-        
+
+        $('.select2').select2({ theme: 'bootstrap-5' });
+
         // =============================================================
         // ------ MÁSCARA DE ENTRADA DE DADOS
         // =============================================================.
 
-        $('#id_cnpj').mask('00.000.000/0000-00', {reverse: true});
+        $('#id_cnpj').mask('00.000.000/0000-00', { reverse: true });
         $('#id_telefone_1').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_2').mask(SPMaskBehavior, spOptions);
         $('#id_telefone_3').mask(SPMaskBehavior, spOptions);
-        $('#id_data_abertura').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#id_data_situacao').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_data_abertura').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_data_situacao').mask('00/00/0000', { placeholder: "__/__/____" });
         $('#id_cep').mask('00000-000');
         $('#id_celular').mask(SPMaskBehavior, spOptions);
         $('#id_telefone').mask(SPMaskBehavior, spOptions);
         $('#id_celular').mask(SPMaskBehavior, spOptions);
-        $('#id_nascimento').mask('00/00/0000', {placeholder: "__/__/____"});
-        $('#id_cpf_conjuge').mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
-        $('#id_data_expedicao_conjuge').mask('00/00/0000', {placeholder: "__/__/____"});
+        $('#id_nascimento').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_cpf_conjuge').mask('000.000.000-00', { reverse: true, placeholder: "000.000.000-00" });
+        $('#id_data_expedicao_conjuge').mask('00/00/0000', { placeholder: "__/__/____" });
         $('#id_telefone_conjuge').mask(SPMaskBehavior, spOptions);
         $('#id_celular_conjuge').mask(SPMaskBehavior, spOptions);
-     
+
         // =============================================================
         // ------ API DE BUSCA: CEP ------------------------------------
         // =============================================================
@@ -200,7 +216,7 @@
         }
 
         //Quando o campo cep perde o foco.
-        $("#id_cep").change(function() {
+        $("#id_cep").change(function () {
 
             //Nova variável "cep" somente com dígitos.
             var cep = $(this).val().replace(/\D/g, '');
@@ -212,7 +228,7 @@
                 var validacep = /^[0-9]{8}$/;
 
                 //Valida o formato do CEP.
-                if(validacep.test(cep)) {
+                if (validacep.test(cep)) {
 
                     //Preenche os campos com "..." enquanto consulta webservice.
                     $("#id_endereco").val("buscando...");
@@ -221,7 +237,7 @@
                     $("#id_uf").val("buscando...");
 
                     //Consulta o webservice viacep.com.br/
-                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
 
                         if (!("erro" in dados)) {
                             //Atualiza os campos com os valores da consulta.
@@ -247,26 +263,26 @@
                 //cep sem valor, limpa formulário.
                 limpa_formulário_cep();
             }
-        }); 
+        });
 
         // =============================================================
         // ------ API DE BUSCA: CNPJ -----------------------------------
         // =============================================================      
 
-        $("#id_cnpj").change(function(){
+        $("#id_cnpj").change(function () {
 
             //Nova variável "cnpj" somente com dígitos.
             cnpj = document.querySelector('#id_cnpj').value.replace(/\D/g, '')
 
             // Se o CNPJ for diferente de vazio, consome API
-            if (cnpj != ""){
+            if (cnpj != "") {
                 $.ajax({
                     'url': 'https://receitaws.com.br/v1/cnpj/' + cnpj,
                     'type': "GET",
                     'dataType': 'jsonp',
-                    'success': function(dados){
-    
-                        if(dados.nome == undefined) {
+                    'success': function (dados) {
+
+                        if (dados.nome == undefined) {
                             // DADOS DA EMPRESA
                             $("#id_nome").val('CNPJ INVÁLIDO');
                             $("#id_nome_fantasia").val('');
@@ -283,9 +299,9 @@
                             $("#id_numero").val('');
                             $("#id_bairro").val('');
                             $("#id_cidade").val('');
-                            $("#id_uf").val(''); 
-    
-                        } else  {
+                            $("#id_uf").val('');
+
+                        } else {
                             // DADOS DA EMPRESA
                             $("#id_nome").val(dados.nome);
                             $("#id_nome_fantasia").val(dados.fantasia);
@@ -303,19 +319,19 @@
                             $("#id_bairro").val(dados.bairro);
                             $("#id_cidade").val(dados.municipio);
                             $("#id_uf").val(dados.uf);
-                            
+
                             situacao = dados.situacao
                             console.log(situacao)
-    
+
                             classe = document.querySelector('#id_cnpj')
 
-                            if (situacao != 'ATIVA'){
-                                
+                            if (situacao != 'ATIVA') {
+
                             }
-                        }    
+                        }
                     }
                 })
-            // Se o CNPJ for igual a vazio, não consome API e anula todos os campos
+                // Se o CNPJ for igual a vazio, não consome API e anula todos os campos
             } else {
                 // DADOS DA EMPRESA
                 $("#id_nome").val('');
@@ -335,7 +351,7 @@
                 $("#id_cidade").val('');
                 $("#id_uf").val('');
             }
-        }); 
+        });
     });
 </script>
 {% endblock %}
