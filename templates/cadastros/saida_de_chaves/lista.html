@@ -42,8 +42,7 @@
                             <td>{{ saida_de_chaves.cliente }}</td>
                             <td>{{ saida_de_chaves.data_retirada|date:'d/m/Y' }} {{ saida_de_chaves.hora_retirada }}
                             </td>
-                            <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }} {{ saida_de_chaves.hora_devolucao
-                                }}
+                            <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }} {{ saida_de_chaves.hora_devolucao }}
                             </td>
                             <td>
                                 <a href="{% url 'editar-saida-chaves' saida_de_chaves.pk %}"
@@ -91,8 +90,8 @@
             ],
             "columnDefs": [
                 // Largura das colunas
-                { width: '0%', targets: [0] },
-                { width: '10%', targets: [5] },
+                // { width: '0%', targets: [0] },
+                // { width: '10%', targets: [5] },
 
                 // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
                 { className: "dt-center", targets: [0, 3, 4, 5] },

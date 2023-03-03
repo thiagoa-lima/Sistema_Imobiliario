@@ -75,8 +75,22 @@
         $('#tabela').DataTable({
             "pageLength": 50,
             "bSort": true,
+            
+            "columnDefs": [
+            // Largura das colunas
+            // { width: '5%', targets: [0,1] },
+            // { width: '10%', targets: [3] },
+
+            // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+            { className: "dt-center", targets: [0] },
+            { className: "dt-right", targets: [] },
+
+            // Opção de não ordenar
+            { bSortable: false, targets: [] },
+
+            ],
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json",
             }
         });
     });
