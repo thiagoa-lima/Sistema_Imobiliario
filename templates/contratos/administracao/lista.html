@@ -8,58 +8,67 @@
 
 {% block conteudo %}
 
-<div class="container">
+<div class="container mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mt-2">
+                    Contratos de administração
+                </h2>
+                <div>
+                    <a href="{% url 'contrato-administracao-cadastrar' %}" class="btn btn-primary btn-bg">Novo contrato</a>
+                </div>
+            </div>
+        </div>
+        <hr>
 
-    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Contratos de administração</h2> 
-        <a href="{% url 'contrato-administracao-cadastrar' %}" class="btn btn-primary btn-bg">Novo contrato</a>
-    </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="tabela">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imóvel</th>
+                            <th>Proprietário</th>
+                            <th>Data inicial</th>
+                            <th>Data final</th>
+                            <th>Repasse garantido</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
 
-    <hr>
-
-    <div class="table-resposive">  
-        <table class="table table-striped" id="tabela">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Imóvel</th>
-                    <th>Proprietário</th>
-                    <th>Data inicial</th>
-                    <th>Data final</th>
-                    <th>Repasse garantido</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for Administracao in object_list %}
-                <tr>
-                    <td>{{ Administracao.pk }}</td>
-                    <td>{{ Administracao }}</td>
-                    <td>{{ Administracao.proprietario }}</td>
-                    <td>{{ Administracao.data_inicial|date:"d/m/Y" }}</td>
-                    <td>{{ Administracao.data_final|date:"d/m/Y" }}</td>
-                    <td>{{ Administracao.repasse_garantido }}</td>
-                    <td>
-                        <a href="{% url 'contrato-administracao-editar' Administracao.pk %}" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a> 
-                        <a href="{% url 'contrato-administracao-excluir' Administracao.pk %}" class="btn btn-danger btn-sm" title="Excluir">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    <tbody>
+                        {% for Administracao in object_list %}
+                        <tr>
+                            <td>{{ Administracao.pk }}</td>
+                            <td>{{ Administracao }}</td>
+                            <td>{{ Administracao.proprietario }}</td>
+                            <td>{{ Administracao.data_inicial|date:"d/m/Y" }}</td>
+                            <td>{{ Administracao.data_final|date:"d/m/Y" }}</td>
+                            <td>{{ Administracao.repasse_garantido }}</td>
+                            <td>
+                                <a href="{% url 'contrato-administracao-editar' Administracao.pk %}"
+                                    class="btn btn-warning btn-sm" title="Editar">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a href="{% url 'contrato-administracao-excluir' Administracao.pk %}"
+                                    class="btn btn-danger btn-sm" title="Excluir">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <!-- Importação da Datatables que serve para formatar a tabela da lista -->
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" 
-    type="text/javascript" >
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript">
 </script>
 
 <script>
@@ -68,8 +77,8 @@
         $('#tabela').DataTable({
             "pageLength": 50,
             "bSort": true,
-            "language":{
-                "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
             }
         });
     });

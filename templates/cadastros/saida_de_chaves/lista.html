@@ -7,92 +7,104 @@
 {% endblock %}
 
 {% block conteudo %}
+<div class="container mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mt-2">
+                    Saída de chaves
+                </h2>
+                <div>
+                    <a href="{% url 'cadastrar-saida-chaves' %}" class="btn btn-primary btn-bg">Nova Saída</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="tabela">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imóvel</th>
+                            <th>Cliente</th>
+                            <th>Saída</th>
+                            <th>Retorno</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
 
-<div class="container">
+                    <tbody>
+                        {% for saida_de_chaves in object_list %}
+                        <tr>
+                            <td>{{ saida_de_chaves.pk }}</td>
+                            <td>{{ saida_de_chaves.imovel}}</td>
+                            <td>{{ saida_de_chaves.cliente }}</td>
+                            <td>{{ saida_de_chaves.data_retirada|date:'d/m/Y' }} {{ saida_de_chaves.hora_retirada }}
+                            </td>
+                            <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }} {{ saida_de_chaves.hora_devolucao
+                                }}
+                            </td>
+                            <td>
+                                <a href="{% url 'editar-saida-chaves' saida_de_chaves.pk %}"
+                                    class="btn btn-warning btn-sm" title="Editar">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a href="{% url 'excluir-saida-chaves' saida_de_chaves.pk %}"
+                                    class="btn btn-danger btn-sm" title="Excluir">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
 
-    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Saída de chaves</h2> 
-        <a href="{% url 'cadastrar-saida-chaves' %}" class="btn btn-primary btn-bg">Nova Saída</a>
-    </div>
-
-    <hr>
-
-    <div class="table-resposive">  
-        <table class="table table-striped" id="tabela">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Imóvel</th>
-                    <th>Cliente</th>
-                    <th>Saída</th>
-                    <th>Retorno</th>
-                    <th>Opções</th>
-                </tr>
-            </thead>
-            
-            <tbody>
-                {% for saida_de_chaves in object_list %}
-                <tr>
-                    <td>{{ saida_de_chaves.pk }}</td>
-                    <td>{{ saida_de_chaves.imovel}}</td>
-                    <td>{{ saida_de_chaves.cliente }}</td>
-                    <td>{{ saida_de_chaves.data_retirada|date:'d/m/Y' }} {{ saida_de_chaves.hora_retirada }}</td>
-                    <td>{{ saida_de_chaves.data_devolucao|date:'d/m/Y' }} {{ saida_de_chaves.hora_devolucao }}</td>
-                    <td>
-                        <a href="{% url 'editar-saida-chaves' saida_de_chaves.pk %}" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a> 
-                        <a href="{% url 'excluir-saida-chaves' saida_de_chaves.pk %}" class="btn btn-danger btn-sm" title="Excluir">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <!-- Importação da Datatables que serve para formatar a tabela da lista -->
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript" ></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript"></script>
 
 <!-- Importação da Datatables que serve para ordenar por data -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript" language="javascript" ></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"  type="text/javascript" language="javascript" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"
+    language="javascript"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js" type="text/javascript"
+    language="javascript"></script>
 
 <script>
 
     $(document).ready(function () {
         // ORDENAR POR DATA 
-        $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm:ss' );    //Formatação com Hora
-            $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
+        $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');    //Formatação com Hora
+        $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
 
-            $('#tabela').DataTable({
-                "pageLength": 50,
-                "bSort": true,
-                "order": [
-                    [0, 'desc'] // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
-                ], 
-                "columnDefs": [
-                    // Largura das colunas
-                    { width: '0%', targets: [0] },
-                    { width: '10%', targets: [5] },
-                    
-                    // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
-                    { className: "dt-center", targets: [0,3,4,5] },
-                   
-                    // Opção de não ordenar
-                    { bSortable: false, targets: [5] },
+        $('#tabela').DataTable({
+            "pageLength": 50,
+            "bSort": true,
+            "order": [
+                [0, 'desc'] // CRESCENTE: 'asc' | DECRESCENTE: 'desc'
+            ],
+            "columnDefs": [
+                // Largura das colunas
+                { width: '0%', targets: [0] },
+                { width: '10%', targets: [5] },
 
-                ],
-                "language":{
-                    "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
-                }
-            });
+                // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+                { className: "dt-center", targets: [0, 3, 4, 5] },
+
+                // Opção de não ordenar
+                { bSortable: false, targets: [5] },
+
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
+            }
+        });
     });
 
 </script>

@@ -8,104 +8,117 @@
 
 {% block conteudo %}
 
-<div class="container">
-    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-        <h2>Contratos de Aluguel</h2> 
-        <a href="{% url 'contrato-aluguel-cadastrar' %}" class="btn btn-primary btn-bg">
-            Novo contrato</a>
-    </div>
+<div class="container mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mt-2">
+                    Contratos de aluguel
+                </h2>
+                <div>
+                    <a href="{% url 'contrato-aluguel-cadastrar' %}" class="btn btn-primary btn-bg">
+                        Novo contrato</a>
+                </div>
+            </div>
+        </div>
 
-    <hr>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="tabela">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Locatário</th>
+                            <th>Imóvel</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
 
-    <div class="table-resposive">  
-        <table class="table table-striped" id="tabela">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Locatário</th>
-                    <th>Imóvel</th>
-                    <th>Início</th>
-                    <th>Fim</th>
-                    <th>Opções</th>
-                </tr>
-            </thead> 
-
-            <tbody>
-                {% for Aluguel in object_list %}
-                <tr>
-                    <td>{{ Aluguel.pk }}</td>
-                    <td>
-                        <a href="{% url 'editar-clientes-pf' Aluguel.locatario.pk %}" class="text-black">
-                            {{ Aluguel.locatario }}
-                        </a>
-                    </td>
-                    <td>{{ Aluguel.imovel }}</td>
-                    <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
-                    <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
-                    <td>
-                        <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}" class="btn btn-secondary btn-sm" title="Detalhes">
-                            <i class="fa fa-cogs" aria-hidden="true"></i>
-                        </a>
-                        <a href="{% url 'contrato-aluguel-editar' Aluguel.pk %}" class="btn btn-warning btn-sm" title="Editar">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </a> 
-                        <a href="{% url 'contrato-aluguel-excluir' Aluguel.pk %}" class="btn btn-danger btn-sm" title="Excluir">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    <tbody>
+                        {% for Aluguel in object_list %}
+                        <tr>
+                            <td>{{ Aluguel.pk }}</td>
+                            <td>
+                                <a href="{% url 'editar-clientes-pf' Aluguel.locatario.pk %}" class="text-black">
+                                    {{ Aluguel.locatario }}
+                                </a>
+                            </td>
+                            <td>{{ Aluguel.imovel }}</td>
+                            <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
+                            <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
+                            <td>
+                                <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}"
+                                    class="btn btn-secondary btn-sm" title="Detalhes">
+                                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                                </a>
+                                <a href="{% url 'contrato-aluguel-editar' Aluguel.pk %}" class="btn btn-warning btn-sm"
+                                    title="Editar">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                <a href="{% url 'contrato-aluguel-excluir' Aluguel.pk %}" class="btn btn-danger btn-sm"
+                                    title="Excluir">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-    <!-- Importação da Datatables que serve para formatar a tabela da lista -->
-    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript" ></script>
+<!-- Importação da Datatables que serve para formatar a tabela da lista -->
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript"></script>
 
-    <!-- Importação da Datatables que serve para ordenar por data -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript" language="javascript" ></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js"  type="text/javascript" language="javascript" ></script>
+<!-- Importação da Datatables que serve para ordenar por data -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"
+    language="javascript"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js" type="text/javascript"
+    language="javascript"></script>
 
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-            // ORDENAR POR DATA 
-            $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm:ss' );    //Formatação com Hora
-            $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
+        // ORDENAR POR DATA 
+        $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');    //Formatação com Hora
+        $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
 
-            $('#tabela').DataTable({
-                "pageLength": 50,
-                "bSort": true,
-                "columnDefs": [
-                    // Largura das colunas
-                    { width: '5%', targets: [0] },
-                    { width: '20%', targets: [1] },
-                    { width: '30%', targets: [2] },
-                    { width: '7%', targets: [3,4] },
-                    { width: '13%', targets: [5] },
+        $('#tabela').DataTable({
+            "pageLength": 50,
+            "bSort": true,
+            "columnDefs": [
+                // Largura das colunas
+                { width: '5%', targets: [0] },
+                { width: '20%', targets: [1] },
+                { width: '30%', targets: [2] },
+                { width: '7%', targets: [3, 4] },
+                { width: '13%', targets: [5] },
 
-                    // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
-                    { className: "dt-center", targets: [0,3,4,5] },
-                    // { className: "dt-right", targets: [6] },
+                // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+                { className: "dt-center", targets: [0, 3, 4, 5] },
+                // { className: "dt-right", targets: [6] },
 
-                   
-                    // Opção de não ordenar
-                    { bSortable: false, targets: [1,2,3,4,5] },
 
-                ],
+                // Opção de não ordenar
+                { bSortable: false, targets: [1, 2, 3, 4, 5] },
 
-                "order": [
-                    // Ordenar as colunas - CRESCENTE: 'asc' | DECRESCENTE: 'desc'
-                    [0, 'desc']
-                ], 
+            ],
 
-                "language":{
-                    "url":"//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
-                }
-            });
+            "order": [
+                // Ordenar as colunas - CRESCENTE: 'asc' | DECRESCENTE: 'desc'
+                [0, 'desc']
+            ],
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
+            }
         });
-    </script>
+    });
+</script>
 {% endblock %}
