@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+
+{% block titulo %}
+<title>
+    {{ titulo }}
+</title>
+{% endblock %}
+
+{% block conteudo %}
+<div class="container-fluid mt-3">
+    <div class="card border-top">
+        <div class="card-header">
+            <h2>
+                {{ titulo }}
+            </h2>
+        </div>
+
+        <form action="" method="post">
+            <div class="card-body">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.first_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.last_name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.password1|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-6 mb-2">
+                        {{ form.password2|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">
+                    {{ botao }}
+                </button>
+                <button type="submit" class="btn btn-danger">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+
+    

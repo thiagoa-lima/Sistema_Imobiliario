@@ -153,6 +153,7 @@ class AdministracaoCreate(LoginRequiredMixin, CreateView):
 class AdministracaoDelete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Administracao
+    form_class = forms.AdministracaoForm
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('contrato-administracao-listar')
 
@@ -374,3 +375,13 @@ class Contrato_Aluguel_LIST(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Aluguel
     template_name = 'contratos/aluguel/lista.html'
+
+class Detalhes_Contrato_Aluguel_LIST(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Financeiro_do_Contrato
+    template_name = 'contratos/aluguel/detalhes/detalhes copy.html'
+
+    def get_queryset(self):
+        return Financeiro_do_Contrato.objects.filter(contrato_id=self.kwargs['pk']) 
+
+

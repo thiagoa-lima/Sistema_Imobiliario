@@ -41,14 +41,27 @@
                         <tr>
                             <td>{{ Aluguel.pk }}</td>
                             <td>
+                                {% if Aluguel.locatario.tipo_cliente == 'PF' %}
                                 <a href="{% url 'editar-clientes-pf' Aluguel.locatario.pk %}" class="text-black">
                                     {{ Aluguel.locatario }}
                                 </a>
+                                {% else %}
+                                <a href="{% url 'editar-clientes-pj' Aluguel.locatario.pk %}" class="text-black">
+                                    {{ Aluguel.locatario }}
+                                </a>
+                                {% endif %}
                             </td>
                             <td>{{ Aluguel.imovel }}</td>
                             <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
                             <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
                             <td>
+
+
+                                
+                                <a href="{% url 'detalhes-teste' Aluguel.pk %}"
+                                    class="btn btn-secondary btn-sm" title="teste">
+                                    <i class="" aria-hidden="true"></i>
+                                </a>
                                 <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}"
                                     class="btn btn-secondary btn-sm" title="Detalhes">
                                     <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -94,11 +107,7 @@
             "bSort": true,
             "columnDefs": [
                 // Largura das colunas
-                // { width: '5%', targets: [0] },
-                // { width: '20%', targets: [1] },
-                // { width: '30%', targets: [2] },
-                // { width: '7%', targets: [3, 4] },
-                // { width: '13%', targets: [5] },
+                { width: '13%', targets: [5] },
 
                 // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
                 { className: "dt-center", targets: [0, 3, 4, 5] },

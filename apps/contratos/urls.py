@@ -4,6 +4,8 @@ from .views import Financeiro_do_Contrato_Aluguel_DELETE, Financeiro_do_Contrato
 from .views import Contrato_Aluguel_CREATE, Contrato_Aluguel_UPDATE, Contrato_Aluguel_DELETE, Contrato_Aluguel_LIST, Contrato_Aluguel_DETALHES
 from .views import Receitas_a_Receber_LIST, Receitas_a_Receber_UPDATE, Receitas_Recebidas_LIST, Receitas_Recebidas_UPDATE
 from .views import Despesas_a_Repassar_LIST, Despesas_a_Repassar_UPDATE
+from .views import Detalhes_Contrato_Aluguel_LIST
+
 
 from apps.contratos import views
 
@@ -24,6 +26,8 @@ urlpatterns = [
     path('contratos/aluguel/excluir/<int:pk>', Contrato_Aluguel_DELETE.as_view(), name='contrato-aluguel-excluir'),
 
     # CONTRATO DE ALUGUEL (DETALHES)
+    path('contratos/aluguel/detalhes/teste/<int:pk>', Detalhes_Contrato_Aluguel_LIST.as_view(), name='detalhes-teste' ),
+
     path('contratos/aluguel/detalhes/<int:pk>', views.Contrato_Aluguel_DETALHES, name='financeiro-do-contrato-listar' ),
     path('contratos/aluguel/detalhes/parcela/editar/<int:pk>', Financeiro_do_Contrato_Aluguel_UPDATE.as_view(), name='financeiro-do-contrato-aluguel-editar'),
     path('contratos/aluguel/detalhes/parcela/excluir/<int:pk>', Financeiro_do_Contrato_Aluguel_DELETE.as_view(), name='financeiro-do-contrato-aluguel-excluir'),

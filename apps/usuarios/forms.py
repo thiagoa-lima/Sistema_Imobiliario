@@ -4,19 +4,18 @@ from django import forms
 from django.contrib.auth.models import User
 
 # importar um formulário padrão para criação de usuários
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ValidationError
 
 class UsuariosForm(UserCreationForm):
-
-    # campos abaixo criados para tornar obeigatórios
+    # campos abaixo criados para tornar obrigatórios
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField()
     last_name = forms.CharField()
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', ]
+        fields = ['first_name', 'last_name', 'username', 'email',]
 
     # função criada para incluir o verbose name
     def __init__(self, *args, **kwargs):
@@ -30,3 +29,22 @@ class UsuariosForm(UserCreationForm):
         if User.objects.filter(email=valida_email).exists():
             raise ValidationError("Esse email já está cadastro no nosso sistema")
         return valida_email
+
+class Usuarios_Update_Form(UserChangeForm):
+    # campos abaixo criados para tornar obrigatórios
+    email = forms.EmailField(max_length=100)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', ]
+
+    # função criada para incluir o verbose name
+    def __init__(self, *args, **kwargs):
+        super(Usuarios_Update_Form, self).__init__(*args, **kwargs)
+        self.fields['first_name'].label = "Nome"
+        self.fields['last_name'].label = "Sobrenome"
+    
+
+

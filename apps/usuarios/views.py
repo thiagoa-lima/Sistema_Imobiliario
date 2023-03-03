@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.views.generic.list import ListView # usada para fazer listas
 
 # importa as classes do forms.py
-from .forms import UsuariosForm
+from .forms import UsuariosForm, Usuarios_Update_Form
 
 # importa o reverse_lazy para direcionar qual url quer ir
 from django.urls import reverse_lazy
@@ -18,18 +18,12 @@ from django.shortcuts import get_object_or_404
 # CREATE ('C' CRUD)
 # ===================================================================================
 
-class UsuariosCreate(CreateView):
-    template_name = "usuarios/form.html"
+class UsuariosCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
+    model = User
+    template_name = "usuarios/form-cadastrar.html"
     form_class = UsuariosForm
     success_url = reverse_lazy('usuarios-listar')
-
-    # O método abaixo é chamado quando submete um formulário
-    def form_valid(self, form):
-        grupo = get_object_or_404(Group, name='admin')
-        url = super().form_valid(form)
-        self.object.groups.add(grupo)
-        self.object.save()
-        return url
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
     def get_context_data(self, *args, **kwargs):
@@ -44,9 +38,11 @@ class UsuariosCreate(CreateView):
 # UPDATE ('U' CRUD)
 # ===================================================================================
 
-class UsuariosUpdate(UpdateView):
-    template_name = "usuarios/form.html"
-    form_class = UsuariosForm
+class UsuariosUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    model = User
+    form_class = Usuarios_Update_Form
+    template_name = "usuarios/form-editar.html"
     success_url = reverse_lazy('usuarios-listar')
 
     # O método abaixo serve para alterar os campos dentro dos formulários. Incluir também no form.html
@@ -62,10 +58,11 @@ class UsuariosUpdate(UpdateView):
 # DELETE ('D' - CRUD)
 # ===================================================================================
 
-class ClientesDelete(LoginRequiredMixin, DeleteView):
-    form_class = UsuariosForm
-    template_name = 'padrao/form-excluir.html'
-    success_url = reverse_lazy('excluir-usuarios')
+class UsuariosDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
+    model = User
+    template_name = 'usuarios/form-excluir.html'
+    success_url = reverse_lazy('usuarios-listar')
 
 # ===================================================================================
 # LIST
