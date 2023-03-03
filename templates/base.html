@@ -2,229 +2,272 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
 
-        {% block titulo %}
-            <title>Dashboard - SB Admin</title>
-        {% endblock%}        
-         
-        <!-- Importação do Datepicker (calendário de data) -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-        <!-- Importação do Select2 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    {% block titulo %}
+    <title>Dashboard - SB Admin</title>
+    {% endblock%}
 
-        <!-- Importação do data-tables -->
-        <link href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css" rel="stylesheet" type="text/css" /> 
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        
-        <!-- Importação do bootstrap -->
-        <link href={% static "css/styles.css" %} rel="stylesheet" />
-    </head>
+    <!-- Importação do Datepicker (calendário de data) -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
 
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href={% url 'index' %}>Gestão Imobiliária</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            </div>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+    <!-- Importação do Select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
-                {%  if request.user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user fa-fw"></i>
-                        {{ request.user.email }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="fa fa-user" aria-hidden="True"></i>
-                                Meus dados
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a class="dropdown-item" href="{% url 'logout' %}">
-                                <i class="fa fa-lock" aria-hidden="True"></i>
-                                Atividades
-                            </a>
-                        </li>
+    <!-- Importação do data-tables -->
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.13.2/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
+    <!-- Importação do bootstrap -->
+    <link href={% static "css/styles.css" %} rel="stylesheet" />
+</head>
 
-                        <li>
-                            <a class="dropdown-item" href="{% url 'logout' %}">
-                                <i class="fa fa-sign-out" aria-hidden="True"></i>
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                {% else %}
-                <a class="nav-link" href="{% url 'login' %}">
-                    <i class="fa fa-sign-in" aria-hidden="True"></i>
-                    Entrar
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href={% url 'index' %}>Gestão Imobiliária</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        </div>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
+            {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                    {{ request.user.email }}
                 </a>
-                {% endif %}
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading"></div>
-                            <!-- <a class="nav-link" href="index.html">
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#!">
+                            <i class="fa fa-user" aria-hidden="True"></i>
+                            Meus dados
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{% url 'logout' %}">
+                            <i class="fa fa-lock" aria-hidden="True"></i>
+                            Atividades
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{% url 'logout' %}">
+                            <i class="fa fa-sign-out" aria-hidden="True"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {% else %}
+            <a class="nav-link" href="{% url 'login' %}">
+                <i class="fa fa-sign-in" aria-hidden="True"></i>
+                Entrar
+            </a>
+            {% endif %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-gear fa-fw"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="fa fa-building " aria-hidden="True"></i>
+                                </div>
+                                <div>
+                                    Empresa
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{% url 'usuarios-listar' %}">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <i class="fa fa-users " aria-hidden="True"></i>
+                                </div>
+                                <div>
+                                    Usuários
+                                </div>
+                            </div>
+                        </a>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading"></div>
+                        <!-- <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a> -->
-                           
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Cadastros
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'listar-clientes' %}">Clientes</a>
-                                    <a class="nav-link" href="{% url 'listar-imoveis' %}">Imóveis</a>
-                                    <a class="nav-link" href="{% url 'listar-saida-chaves' %}">Saída de Chaves</a>
-                                </nav>
-                            </div>
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#contratos" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                                Contratos
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="contratos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'contrato-administracao-listar' %}">Administração</a>
-                                    <a class="nav-link" href="{% url 'contrato-aluguel-listar' %}">Aluguel</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#receitas" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
-                                
-                                Receitas
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="receitas" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'receitas-a-receber-listar' %}">A receber</a>
-                                    <a class="nav-link" href="{% url 'receitas-recebidas-listar' %}">Recebidas</a>
-                                </nav>
-                            </div>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#despesas" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"> <i class="fas fa-money-check-alt"></i></div>                                
-                                Despesas
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="despesas" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{% url 'despesas-a-repassar-listar' %}">A repassar</a>
-                                </nav>
-                            </div>
-                            <hr>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#erro" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
-                                Error
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="rro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="401.html">401 Page</a>
-                                    <a class="nav-link" href="404.html">404 Page</a>
-                                    <a class="nav-link" href="500.html">500 Page</a>
-                                </nav>
-                            </div>
-                            <hr>
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#Administrativo" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Administrativo
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="Administrativo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Empresa</a>
-                                    <a class="nav-link" href="{% url 'usuarios-listar' %}">Usuários</a>
-                                </nav>
-                            </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Cadastros
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'listar-clientes' %}">Clientes</a>
+                                <a class="nav-link" href="{% url 'listar-imoveis' %}">Imóveis</a>
+                                <a class="nav-link" href="{% url 'listar-saida-chaves' %}">Saída de Chaves</a>
+                            </nav>
                         </div>
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                {% block conteudo%}
-                {% endblock %}
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#contratos"
+                            aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                            Contratos
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="contratos" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'contrato-administracao-listar' %}">Administração</a>
+                                <a class="nav-link" href="{% url 'contrato-aluguel-listar' %}">Aluguel</a>
+                            </nav>
                         </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#receitas"
+                            aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-line"></i></div>
+
+                            Receitas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="receitas" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'receitas-a-receber-listar' %}">A receber</a>
+                                <a class="nav-link" href="{% url 'receitas-recebidas-listar' %}">Recebidas</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#despesas"
+                            aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"> <i class="fas fa-money-check-alt"></i></div>
+                            Despesas
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="despesas" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'despesas-a-repassar-listar' %}">A repassar</a>
+                            </nav>
+                        </div>
+                        <hr>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#erro"
+                            aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book"></i></div>
+                            Error
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="rro" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="401.html">401 Page</a>
+                                <a class="nav-link" href="404.html">404 Page</a>
+                                <a class="nav-link" href="500.html">500 Page</a>
+                            </nav>
+                        </div>
+                        <hr>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </nav>
         </div>
 
-        <!-- NÃO ALTERAR A ORDEM -->
-        
-        <!-- Adição do JQuery--> 
-        <script src={% static "js/jquery-3.6.3.min.js" %}></script>
-        
-        <!-- Adição do Bootstrap--> 
-        <script src={% static "js/scripts.js" %}></script>
-        
-        <!-- Adição do Bootstrap--> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
-        <!-- Importação do Datepicker (calendário de data) -->
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-        <!-- Adição do Data-tables--> 
-        <script src={% static "js/datatables-simple-demo.js" %}></script>
+        <div id="layoutSidenav_content">
+            {% block conteudo%}
+            {% endblock %}
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<!-- NÃO ALTERAR A ORDEM -->
+
+<!-- Adição do JQuery-->
+<script src={% static "js/jquery-3.6.3.min.js" %}></script>
+
+<!-- Adição do Bootstrap-->
+<script src={% static "js/scripts.js" %}></script>
+
+<!-- Adição do Bootstrap-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+<!-- Importação do Datepicker (calendário de data) -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<!-- Adição do Data-tables-->
+<script src={% static "js/datatables-simple-demo.js" %}></script>
 
 
-        <!-- Adição do mascara--> 
-        <script src={% static 'js/jquery.mask.js' %} type="text/javascript"></script>
+<!-- Adição do mascara-->
+<script src={% static 'js/jquery.mask.js' %} type="text/javascript"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> 
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
-        <!-- Adição do smart-select -->
-        <script src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
-        <script src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+<!-- Adição do smart-select -->
+<script src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+<script src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
 
-        <!-- Adição do Select2 -->
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Adição do Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        {% block scripts %}
-            <!-- Bloco destinado aos scripts para cada página -->
-        {% endblock %}
-    </body>
-</html>
+{% block scripts %}
+<!-- Bloco destinado aos scripts para cada página -->
+{% endblock %}
