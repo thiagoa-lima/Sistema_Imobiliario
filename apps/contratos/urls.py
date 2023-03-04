@@ -45,4 +45,5 @@ urlpatterns = [
     path('despesas/alugueis/repasses/', Despesas_a_Repassar_LIST.as_view(), name='despesas-a-repassar-listar'),
     path('despesas/alugueis/repasses/baixar/<int:pk>', Despesas_a_Repassar_UPDATE.as_view(), name='despesas-a-repassar-editar'),
 
+    path('teste_index', views.index_teste, name='teste_index'),
 ]

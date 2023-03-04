@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from .models import Administracao, Aluguel, Financeiro_do_Contrato, Imoveis
+from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -382,6 +382,8 @@ class Detalhes_Contrato_Aluguel_LIST(LoginRequiredMixin, ListView):
     template_name = 'contratos/aluguel/detalhes/detalhes copy.html'
 
     def get_queryset(self):
-        return Financeiro_do_Contrato.objects.filter(contrato_id=self.kwargs['pk']) 
-
-
+        return Financeiro_do_Contrato.objects.filter(contrato_id=self.kwargs['pk'])
+    
+def index_teste(request):
+    imoveis = Aluguel.objects.all()
+    return render(request, "index_teste.html", {'imoveis': imoveis})

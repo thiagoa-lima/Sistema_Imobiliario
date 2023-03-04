@@ -102,7 +102,9 @@ class Aluguel(models.Model):
 
     def __str__(self):
         locatario = str(self.locatario)
-        return locatario
+        return "Contrato de aluguel entre o " + locatario
+    
+
     
 class Financeiro_do_Contrato(models.Model):
 

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<title>Alugueis a receber</title>
+{% endblock %}
+
+{% block conteudo %}
+    {% for imovel in imoveis %}
+        <p>
+            <a href="{{ imovel.get_absolute_url }}" class="href">{{ imovel.imovel.proprietario }}</a>
+        </p>
+    {% endfor %}
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
