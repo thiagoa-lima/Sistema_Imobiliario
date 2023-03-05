@@ -25,11 +25,6 @@ class SobreView(TemplateView):
 class BootView(TemplateView):
     template_name = 'boot.html'
 
-class ClientesView(TemplateView):
-    template_name = 'padrao/form.html'
-
-
-
 # ===================================================================================
 # ------ CLIENTES - CLASSE PAI ------------------------------------------------------
 # ===================================================================================
@@ -130,12 +125,12 @@ class Clientes_PJ_Delete(LoginRequiredMixin, DeleteView):
 # ------ IMÓVEIS --------------------------------------------------------------------
 # ===================================================================================
 
-class ImoveisList(LoginRequiredMixin, ListView):
+class Imoveis_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Imoveis
     template_name = 'cadastros/imoveis/lista.html'
 
-class ImoveisCreate(LoginRequiredMixin, CreateView):
+class Imoveis_Create(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Imoveis
     form_class = forms.ImoveisForm
@@ -150,7 +145,7 @@ class ImoveisCreate(LoginRequiredMixin, CreateView):
         
         return context 
   
-class ImoveisUpdate(LoginRequiredMixin, UpdateView):
+class Imoveis_Update(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Imoveis
     form_class = forms.ImoveisForm
@@ -165,7 +160,7 @@ class ImoveisUpdate(LoginRequiredMixin, UpdateView):
         
         return context 
     
-class ImoveisDelete(LoginRequiredMixin, DeleteView):
+class Imoveis_Delete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = Imoveis
@@ -176,12 +171,12 @@ class ImoveisDelete(LoginRequiredMixin, DeleteView):
 # ------ SAÍDA DE CHAVES ------------------------------------------------------------
 # ===================================================================================
 
-class Saida_de_Chaves_LIST(LoginRequiredMixin, ListView):
+class Saida_de_Chaves_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     template_name = 'cadastros/saida_de_chaves/lista.html'
 
-class Saida_de_Chaves_CREATE(LoginRequiredMixin, CreateView):
+class Saida_de_Chaves_Create(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     form_class = forms.Saida_de_Chaves_Form
@@ -196,7 +191,7 @@ class Saida_de_Chaves_CREATE(LoginRequiredMixin, CreateView):
         
         return context 
 
-class Saida_de_Chaves_UPDATE(LoginRequiredMixin, UpdateView):
+class Saida_de_Chaves_Update(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     form_class = forms.Saida_de_Chaves_Form
@@ -211,13 +206,13 @@ class Saida_de_Chaves_UPDATE(LoginRequiredMixin, UpdateView):
         
         return context 
     
-class Saida_de_Chaves_DELETE(LoginRequiredMixin, DeleteView):
+class Saida_de_Chaves_Delete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = Saida_de_Chaves
     template_name = 'padrao/form-excluir.html'
     success_url = reverse_lazy('listar-saida-chaves')
 
-def Saida_de_Chaves_por_Imovel(request,pk): 
+def Saida_de_Chaves_por_Imovel(request, pk): 
     context = {}
     imoveis = Imoveis.objects.filter(pk=pk)
     chaves = Saida_de_Chaves.objects.filter(imovel_id=pk)
