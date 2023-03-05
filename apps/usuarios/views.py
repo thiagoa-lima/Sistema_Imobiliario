@@ -18,7 +18,7 @@ from django.shortcuts import get_object_or_404
 # CREATE ('C' CRUD)
 # ===================================================================================
 
-class UsuariosCreate(LoginRequiredMixin, CreateView):
+class Usuarios_Create(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     model = User
     template_name = "usuarios/form-cadastrar.html"
@@ -38,7 +38,7 @@ class UsuariosCreate(LoginRequiredMixin, CreateView):
 # UPDATE ('U' CRUD)
 # ===================================================================================
 
-class UsuariosUpdate(LoginRequiredMixin, UpdateView):
+class Usuarios_Update(LoginRequiredMixin, UpdateView):
     login_url = reverse_lazy('login')
     model = User
     form_class = Usuarios_Update_Form
@@ -58,7 +58,7 @@ class UsuariosUpdate(LoginRequiredMixin, UpdateView):
 # DELETE ('D' - CRUD)
 # ===================================================================================
 
-class UsuariosDelete(LoginRequiredMixin, DeleteView):
+class Usuarios_Delete(LoginRequiredMixin, DeleteView):
     login_url = reverse_lazy('login')
     model = User
     template_name = 'usuarios/form-excluir.html'
@@ -68,7 +68,7 @@ class UsuariosDelete(LoginRequiredMixin, DeleteView):
 # LIST
 # ===================================================================================
 
-class UsuariosList(LoginRequiredMixin, ListView):
+class Usuarios_List(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = User
     template_name = 'usuarios/lista.html'
