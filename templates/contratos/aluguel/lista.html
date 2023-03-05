@@ -86,48 +86,5 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Importação da Datatables que serve para formatar a tabela da lista -->
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript"></script>
 
-<!-- Importação da Datatables que serve para ordenar por data -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js" type="text/javascript"
-    language="javascript"></script>
-<script src="https://cdn.datatables.net/plug-ins/1.10.10/sorting/datetime-moment.js" type="text/javascript"
-    language="javascript"></script>
-
-<script>
-    $(document).ready(function () {
-
-        // ORDENAR POR DATA 
-        $.fn.dataTable.moment('DD/MM/YYYY HH:mm:ss');    //Formatação com Hora
-        $.fn.dataTable.moment('DD/MM/YYYY');    //Formatação sem Hora
-
-        $('#tabela').DataTable({
-            "pageLength": 50,
-            "bSort": true,
-            "columnDefs": [
-                // Largura das colunas
-                // { width: '13%', targets: [5] },
-
-                // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
-                { className: "dt-center", targets: [0, 3, 4, 5] },
-                // { className: "dt-right", targets: [6] },
-
-
-                // Opção de não ordenar
-                { bSortable: false, targets: [1, 2, 3, 4, 5] },
-
-            ],
-
-            "order": [
-                // Ordenar as colunas - CRESCENTE: 'asc' | DECRESCENTE: 'desc'
-                [0, 'desc']
-            ],
-
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json"
-            }
-        });
-    });
-</script>
 {% endblock %}
