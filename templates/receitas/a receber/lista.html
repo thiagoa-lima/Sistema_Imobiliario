@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block conteudo %}
-<div class="container mt-3">
+<div class="container-fluid mt-3">
     <div class="card border-top">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{ alugueis_a_receber.id }}</td>
                             <td>{{ alugueis_a_receber.parcela }}</td>
-                            <td>{{ alugueis_a_receber.contrato }}</td>
+                            <td>{{ alugueis_a_receber.contrato.locatario }}</td>
                             <td>{{ alugueis_a_receber.vencimento|date:'d/m/Y'}}</td>
                             <td>{{ alugueis_a_receber.vencimento_real|date:'d/m/Y'}}</td>
                             <td>{{ alugueis_a_receber.valor_aluguel }}</td>

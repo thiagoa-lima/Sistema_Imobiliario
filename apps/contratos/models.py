@@ -103,9 +103,7 @@ class Aluguel(models.Model):
     def __str__(self):
         locatario = str(self.locatario)
         return "Contrato de aluguel entre o " + locatario
-    
 
-    
 class Financeiro_do_Contrato(models.Model):
 
     parcela = models.DecimalField("Parcela", max_digits=50, decimal_places=0, null=True, blank=True)
