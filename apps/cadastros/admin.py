@@ -24,7 +24,7 @@ class ClientesAdmin(admin.ModelAdmin):
     class Media:
         js = ('jquery.mask.min.js', "mask.js")
 
-    list_display = ('cpf', 'nome',)
+    list_display = ('cpf', 'nome', 'email')
     search_fields = ('cpf', 'nome',)
     # list_filter = ('qualificacao', )
     list_per_page = 20

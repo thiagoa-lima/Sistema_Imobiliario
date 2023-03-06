@@ -49,8 +49,8 @@ class Clientes_PF_Create(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
     group_required = u'administrador'
     model = ClientePF
-   
-    fields = '__all__'
+    form_class = forms.Clientes_PF_Form
+
     template_name = 'cadastros/clientes/form_PF.html'
     success_url = reverse_lazy('listar-clientes')
 

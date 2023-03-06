@@ -1,5 +1,6 @@
 from django.db import models
 from cpf_field.models import CPFField
+from django.contrib.postgres.fields import ArrayField
 
 
 class Clientes(models.Model):
@@ -25,11 +26,9 @@ class Clientes(models.Model):
     uf = models.CharField('UF', max_length=2, null=True, blank=True)
 
     #CONTATOS
-    email_1 = models.EmailField('E-mail (1)', max_length=50, null=True, blank=True)
-    email_2 = models.EmailField('E-mail (2)', max_length=50, null=True, blank=True)
-    telefone_1 = models.CharField('Telefone', max_length=20, null=True, blank=True)
-    telefone_2 = models.CharField('Telefone', max_length=20, null=True, blank=True)
-    telefone_3 = models.CharField('Telefone', max_length=20, null=True, blank=True)
+    email = ArrayField(models.EmailField("teste", max_length=200, null=True, blank=True), null=True, blank=True, size = 8)
+    telefone = models.CharField('Telefone', max_length=20, null=True, blank=True)
+
 
     # ----------------------------------------------------------------------------
     # ------ FIM DOS ATRIBUTOS ---------------------------------------------------
