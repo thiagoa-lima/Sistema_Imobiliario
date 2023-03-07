@@ -22,7 +22,7 @@ urlpatterns = [
     # CONTRATO DE ALUGUEL (DETALHES)
     path('contratos/aluguel/detalhes/teste/<int:pk>', Detalhes_Contrato_Aluguel_List.as_view(), name='detalhes-teste' ),
 
-    path('contratos/aluguel/detalhes/<int:pk>', views.Contrato_Aluguel_DETALHES, name='financeiro-do-contrato-listar' ),
+    path('contratos/aluguel/detalhes/<int:pk>', views.detalhar_e_gerar_parcelas, name='financeiro-do-contrato-listar' ),
     path('contratos/aluguel/detalhes/parcela/editar/<int:pk>', Financeiro_do_Contrato_Aluguel_Update.as_view(), name='financeiro-do-contrato-aluguel-editar'),
     path('contratos/aluguel/detalhes/parcela/excluir/<int:pk>', Financeiro_do_Contrato_Aluguel_Delete.as_view(), name='financeiro-do-contrato-aluguel-excluir'),
     path('contratos/aluguel/detalhes/repasse/editar/<int:pk>', Financeiro_do_Contrato_Repasse_Update.as_view(), name='financeiro-do-contrato-editar'),

@@ -29,6 +29,13 @@
 
     <!-- Importação do bootstrap -->
     <link href={% static "css/styles.css" %} rel="stylesheet" />
+
+    <!-- Script para evitar o reenvio do formulário, principalmente após gerar as parcelas de aluguel -->
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState (null, null, window.location.href)
+        }
+    </script>
 </head>
 
 <body class="sb-nav-fixed">

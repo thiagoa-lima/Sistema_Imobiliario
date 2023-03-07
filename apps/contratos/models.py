@@ -4,7 +4,6 @@ from smart_selects.db_fields import ChainedForeignKey
 from django.core.validators import *
 from apps.cadastros.models import Imoveis
 
-
 # Módulos importados para alteração automática de datas
 from dateutil.relativedelta import relativedelta
 from django.dispatch import receiver
@@ -132,8 +131,4 @@ class Financeiro_do_Contrato(models.Model):
         parcela = str(self.parcela) 
         valor_aluguel = str(self.valor_aluguel)
         return parcela + "ª parcela no valor de R$" + valor_aluguel
-    
-
-
-
-  
+     

@@ -55,13 +55,6 @@
                             <td>{{ Aluguel.data_inicial|date:'d/m/Y' }}</td>
                             <td>{{ Aluguel.data_final|date:'d/m/Y' }}</td>
                             <td>
-
-
-                                
-                                <a href="{% url 'detalhes-teste' Aluguel.pk %}"
-                                    class="btn btn-secondary btn-sm" title="teste">
-                                    <i class="" aria-hidden="true"></i>
-                                </a>
                                 <a href="{% url 'financeiro-do-contrato-listar' Aluguel.pk %}"
                                     class="btn btn-secondary btn-sm" title="Detalhes">
                                     <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -86,5 +79,35 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Importação da Datatables que serve para formatar a tabela da lista -->
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.2/datatables.min.js" type="text/javascript">
+</script>
 
+<script>
+
+    $(document).ready(function () {
+        $('#tabela').DataTable({
+            "pageLength": 50,
+            "bSort": true,
+            
+            "columnDefs": [
+            // Largura das colunas
+            // { width: '5%', targets: [0,1] },
+            // { width: '10%', targets: [3] },
+
+            // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
+            { className: "dt-center", targets: [0,5] },
+            { className: "dt-right", targets: [] },
+
+            // Opção de não ordenar
+            { bSortable: false, targets: [] },
+
+            ],
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/pt-BR.json",
+            }
+        });
+    });
+
+</script>
 {% endblock %}

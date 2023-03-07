@@ -9,7 +9,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.utils.dateparse import parse_date
 
-def Contrato_Aluguel_DETALHES(request, pk):  
+def detalhar_e_gerar_parcelas(request, pk):
     context = {}
     contratos = Aluguel.objects.filter(id=pk)
     parcelas = Financeiro_do_Contrato.objects.filter(contrato_id=pk)
@@ -28,6 +28,7 @@ def Contrato_Aluguel_DETALHES(request, pk):
     # Váriavel para buscar da classe Imóveis a quantidade de dias para repasse
     dias_para_repasse = Imoveis.objects.get(id=imovel).dias_para_repasse
     dias_para_repasse = int(dias_para_repasse)
+
     print("")
     print("Quantidade de dias para repasse:  {}".format(dias_para_repasse))
     print("")
@@ -39,26 +40,16 @@ def Contrato_Aluguel_DETALHES(request, pk):
         # DECLARAÇÃO VARIÁVEIS
         # ----------------------------------------------------------------------------
 
-        num_parcelas_str = request.POST['num_parcelas']
-        num_parcelas = int(num_parcelas_str)
-
-        primeira_parcela_str = request.POST['primeira_parcela']
-        primeira_parcela = int(primeira_parcela_str)
-
-        vencimento_primeira_parcela_str = request.POST['vencimento_primeira_parcela']
-        vencimento_primeira_parcela = parse_date(vencimento_primeira_parcela_str)
-
-        valor_da_parcela_str = request.POST['valor_da_parcela']
-        valor_da_parcela = float(valor_da_parcela_str)
-        
-        taxa_primeira_parcela_str = request.POST['taxa_primeira_parcela']
-        taxa_primeira_parcela = float(taxa_primeira_parcela_str)
-
-        taxa_demais_parcelas_str = request.POST['taxa_demais_parcelas']
-        taxa_demais_parcelas = float(taxa_demais_parcelas_str)
+        num_parcelas = int(request.POST['num_parcelas'])
+        primeira_parcela = int(request.POST['primeira_parcela'])
+        vencimento_primeira_parcela = parse_date(request.POST['vencimento_primeira_parcela'])
+        valor_da_parcela = float(request.POST['valor_da_parcela'])
+        taxa_primeira_parcela = float(request.POST['taxa_primeira_parcela'])
+        taxa_demais_parcelas = float(request.POST['taxa_demais_parcelas'])
 
         comissao_primeira_parcela = valor_da_parcela * taxa_primeira_parcela / 100
         repasse_primeira_parcela = valor_da_parcela - comissao_primeira_parcela
+        print(comissao_primeira_parcela)
 
         comissao_demais_parcelas = valor_da_parcela * taxa_demais_parcelas / 100
         repasse_demais_parcelas = valor_da_parcela - comissao_demais_parcelas
@@ -75,7 +66,6 @@ def Contrato_Aluguel_DETALHES(request, pk):
                 # --------------------------------------------------------------------
 
                 vencimento = (vencimento_primeira_parcela + relativedelta(months=+i))
-
                 vencimento_repasse = (vencimento + relativedelta(days=+dias_para_repasse))
 
                 if datetime.date.weekday(vencimento) == 6:
@@ -122,17 +112,11 @@ def Contrato_Aluguel_DETALHES(request, pk):
                             valor_pago = 0,
                             saldo_aluguel = valor_da_parcela,
                             vencimento_repasse = vencimento_repasse,
-                            saldo_repasse = repasse_primeira_parcela,
+                            saldo_repasse = repasse_demais_parcelas,
                             valor_repassado = 0
                         )
-
             i += 1
-
     return render(request, 'contratos/aluguel/detalhes/detalhes.html', context)
-
-# ===================================================================================
-# ------ CREATE ---------------------------------------------------------------------
-# ===================================================================================
 
 class Administracao_Create(LoginRequiredMixin, CreateView):
     login_url = reverse_lazy('login')
