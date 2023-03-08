@@ -61,7 +61,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{% url 'usuarios-editar' request.user.pk %}">
                             <i class="fa fa-user" aria-hidden="True"></i>
                             Meus dados
                         </a>

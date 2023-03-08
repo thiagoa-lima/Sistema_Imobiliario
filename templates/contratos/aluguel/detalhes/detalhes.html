@@ -48,29 +48,28 @@
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col">
-                                        <input class="form-control" type="number" id='num_parcelas' name="num_parcelas"
-                                            placeholder="Qtde de parcelas" autocomplete="off">
+                                        <input class="form-control" type="number" id='num_parcelas' name="num_parcelas" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" placeholder="Qtde de parcelas" autocomplete="off">
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" type="number" name="primeira_parcela"
+                                        <input class="form-control" type="number" name="primeira_parcela" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" 
                                             placeholder="Nº da 1ª parcela">
                                     </div>
                                     <div class="col">
-                                        <input class="form-control data" type="date" name="vencimento_primeira_parcela"
+                                        <input class="form-control data" type="date" name="vencimento_primeira_parcela" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" 
                                             placeholder="Vencimento da 1ª parcela">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col">
-                                        <input class="form-control" type="number" min="1" max="100"
-                                            name="taxa_primeira_parcela" placeholder="Tx 1ª parcela (%)">
+                                        <input class="form-control" type="number" min="1" max="100" name="taxa_primeira_parcela" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" 
+                                        placeholder="Tx 1ª parcela (%)">
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" type="number" min="1" max="100"
-                                            name="taxa_demais_parcelas" placeholder="Tx demais parcelas (%)">
+                                        <input class="form-control" type="number" min="1" max="100" name="taxa_demais_parcelas" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" 
+                                        placeholder="Tx demais parcelas (%)">
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" type="number" name="valor_da_parcela"
+                                        <input class="form-control" type="number" name="valor_da_parcela" required oninvalid="this.setCustomValidity('Campo requerido')" onchange="try{setCustomValidity('')}catch(e){}" 
                                             placeholder="Valor">
                                     </div>
                                 </div>
@@ -320,7 +319,7 @@
 
                 // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
                 // { className: "dt-left", targets: [0] },
-                { className: "dt-center", targets: [0,1, 2, 3, 10] },
+                { className: "dt-center", targets: [0, 1, 2, 3, 10] },
                 { className: "dt-right", targets: [4, 5, 6, 7, 8, 9] },
 
                 // Opção de não ordenar
@@ -346,7 +345,7 @@
 
                 // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-left" | CENTRO: "dt-center"
                 // { className: "dt-left", targets: [0] },
-                { className: "dt-center", targets: [0,1, 2, 7] },
+                { className: "dt-center", targets: [0, 1, 2, 7] },
                 { className: "dt-right", targets: [3, 4, 5, 6] },
 
                 // Opção de não ordenar
