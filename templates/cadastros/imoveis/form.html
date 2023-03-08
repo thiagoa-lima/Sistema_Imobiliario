@@ -14,9 +14,22 @@
 <div class="container-fluid mt-3">
     <div class="card border-top">
         <div class="card-header">
-            <h2 class="mt-2">
-                {{ titulo }}
-            </h2>
+            <div class="d-flex align-items-center justify-content-between">
+                <h2 class="mt-2">
+                    {{ titulo }}
+                </h2>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Imprimir
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Contrato de administração</a>
+                      <a class="dropdown-item" href="#">Outra ação</a>
+                      <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+                    </div>
+                  </div>
+            </div>
+
         </div>
 
         <form action="" method="post">
@@ -86,27 +99,38 @@
 
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h5>Taxas Administrativas</h5>
+                        <h5>Dados para contrato</h5>
                         <hr>
                         <div class="row">
-                            <div class="form-group col-md-3 mb-2">
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.valor_aluguel|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
                                 {{ form.taxa_admin_mensal|as_crispy_field }}
                             </div>
-                            <div class="form-group col-md-3 mb-2">
+                            <div class="form-group col-md-4 mb-0">
                                 {{ form.taxa_admin_anual|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.data_inicial|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.prazo_contrato|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ form.data_final|as_crispy_field }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary">
-                    {{ botao }}
-                </button>
-                <button type="submit" class="btn btn-danger">
-                    Cancelar
-                </button>
-            </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                        {{ botao }}
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        Cancelar
+                    </button>
+                </div>
         </form>
     </div>
 </div>
@@ -128,8 +152,22 @@
     $(document).ready(function () {
 
         // =============================================================
+        // ------ CALENDÁRIO NOS CAMPOS DE DATA ------------------------
+        // =============================================================
+
+        $('#id_data_inicial ').datepicker({ dateFormat: 'dd/mm/yy' });
+
+
+        // =============================================================
+        // ------ CAMPOS SOMENTE LEITURA -------------------------------
+        // =============================================================
+
+        $('#id_data_final').prop('readonly', true)
+
+        // =============================================================
         // ------ SELECT2 ----------------------------------------------
         // =============================================================
+        
         $('.select2').select2({ theme: 'bootstrap-5' });
 
         // =============================================================
@@ -137,8 +175,12 @@
         // =============================================================
 
         $('#id_cep').mask('00000-000');
+        $('#id_data_inicial').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_data_final').mask('00/00/0000', { placeholder: "__/__/____" });
+        $('#id_valor_aluguel').mask("000.000.000.000.000,00", { reverse: true });
         $('#id_taxa_admin_mensal').mask('##0,00%', { reverse: true });
         $('#id_taxa_admin_anual').mask('##0,00%', { reverse: true });
+
 
         // =============================================================
         // ------ BUSCAR CEP AUTOMATICAMENTE
@@ -202,8 +244,88 @@
             }
         });
         // =============================================================
-        // ------ FIM BUSCAR CEP AUTOMATICAMENTE
+        // ------ CALCULA DATA FINAL - APÓS DATA INICIAL ---------------
         // =============================================================
+
+        $("#id_data_inicial").change(function () {
+
+            data_inicial = document.querySelector('#id_data_inicial').value
+            periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+            if (periodo_contrato == "" || data_inicial == "") {
+                $("#id_data_final").val(null)
+            }
+            else {
+                // FORMATA A DATA INICIAL
+                var data_inicial = document.querySelector("#id_data_inicial").value;
+                var arr_data_inicial = data_inicial.split('/');
+                var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' + arr_data_inicial[2];
+                var data_inicial_formatada = new Date(stringFormatada);
+
+                // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                // CALCULA A DATA FINAL
+                data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                data_final = new Date(data_final)
+
+                // FORMATA A DATA PARA STRING NOVAMENTE 
+                function adicionaZero(numero) {
+                    if (numero <= 9)
+                        return "0" + numero;
+                    else
+                        return numero;
+                }
+
+                data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth() + 1).toString()) + "/" + data_final.getFullYear());
+
+                // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                $("#id_data_final").val(data_final_string)
+            }
+        });
+
+        // =============================================================
+        // ------ CALCULA DATA FINAL - APÓS PRAZO DO CONTRATO ----------
+        // =============================================================
+
+        $("#id_prazo_contrato").change(function () {
+
+            data_inicial = document.querySelector('#id_data_inicial').value
+            periodo_contrato = document.querySelector('#id_prazo_contrato').value
+
+            if (periodo_contrato == "" || data_inicial == "") {
+                $("#id_data_final").val(null)
+            }
+            else {
+                // FORMATA A DATA INICIAL
+                var data_inicial = document.querySelector("#id_data_inicial").value;
+                var arr_data_inicial = data_inicial.split('/');
+                var stringFormatada = arr_data_inicial[1] + '-' + arr_data_inicial[0] + '-' + arr_data_inicial[2];
+                var data_inicial_formatada = new Date(stringFormatada);
+
+                // PEGA O PRAZO PARA CALCULAR A DATA FINAL
+                prazo_do_contrato = document.querySelector('#id_prazo_contrato').value
+                prazo_do_contrato = parseInt(prazo_do_contrato)
+
+                // CALCULA A DATA FINAL
+                data_final = data_inicial_formatada.setMonth(data_inicial_formatada.getMonth() + prazo_do_contrato) - 1;
+                data_final = new Date(data_final)
+
+                // FORMATA A DATA PARA STRING NOVAMENTE 
+                function adicionaZero(numero) {
+                    if (numero <= 9)
+                        return "0" + numero;
+                    else
+                        return numero;
+                }
+
+                data_final_string = (adicionaZero(data_final.getDate().toString()) + "/" + (adicionaZero(data_final.getMonth() + 1).toString()) + "/" + data_final.getFullYear());
+
+                // EDITA O CAMPO DATA FINAL APÓS ATUALIZAÇÃO
+                $("#id_data_final").val(data_final_string)
+            }
+        });
     });
 
 </script>

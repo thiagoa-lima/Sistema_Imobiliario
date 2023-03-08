@@ -1,6 +1,7 @@
 from django.db import models
 from cpf_field.models import CPFField
 from django.contrib.postgres.fields import ArrayField
+from django.core.validators import *
 
 
 class Clientes(models.Model):
@@ -144,13 +145,19 @@ class Imoveis(models.Model):
     bairro = models.CharField('Bairro', max_length=50, null=True, blank=True)
     cidade = models.CharField('Cidade', max_length=100, default=None, null=False, blank=False)
     uf = models.CharField('UF', max_length=2, default=None, null=False, blank=False)
-    taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
-    taxa_admin_anual = models.CharField("Tx Adm Anual (%)", max_length=20, null=True, blank=True)
 
     # Dados do repasse
     repasse_garantido = models.CharField("Repasse Garantido", max_length=100, default=None, choices=repasse_garantido_choices, null=False, blank=False)
     regra_do_repasse = models.CharField("Regra do repasse", max_length=100, default=None, choices=dia_do_repasse_choices, null=False, blank=False)
     dias_para_repasse = models.IntegerField("Dias para repasse", default=5, null=True, blank=True)
+
+    # Dados para contrato
+    valor_aluguel = models.CharField("Valor do aluguel", default=None, max_length=20)
+    data_inicial = models.DateField("Data Inicial", max_length=10, null=True, blank=True, default=None)
+    prazo_contrato = models.IntegerField("Prazo", default=3,validators=[MinValueValidator(0)])
+    data_final = models.DateField("Data Final", max_length=10, null=True, blank=True)
+    taxa_admin_mensal = models.CharField("Tx Adm Mensal (%)", max_length=20, null=True, blank=True)
+    taxa_admin_anual = models.CharField("Tx Adm Anual (%)", max_length=20, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Imóvel'
