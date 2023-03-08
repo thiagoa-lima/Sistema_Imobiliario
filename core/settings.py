@@ -104,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -148,6 +147,13 @@ USE_DJANGO_JQUERY = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # --------------------------------------------
+
+REST_FRAMEWORK = {
+    'DATE_FORMAT': "%d/%m/%Y",
+    'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
+}
+
+# --------------------------------------------
 # AUTENTICAÇÃO - LOGIN
 # --------------------------------------------
 
@@ -155,9 +161,6 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 
-# --------------------------------------------
-
-REST_FRAMEWORK = {
-    'DATE_FORMAT': "%d/%m/%Y",
-    'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
-}
+AUTHENTICATION_BACKENDS = [
+    'apps.usuarios.backends.EmailOrUsernameBackend',
+]

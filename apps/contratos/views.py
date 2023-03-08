@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from . import forms
@@ -9,6 +10,8 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from django.utils.dateparse import parse_date
 
+
+@login_required(login_url='login')
 def detalhar_e_gerar_parcelas(request, pk):
     context = {}
     contratos = Aluguel.objects.filter(id=pk)

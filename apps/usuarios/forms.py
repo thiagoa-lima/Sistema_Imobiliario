@@ -15,7 +15,7 @@ class UsuariosForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email',]
+        fields = ['first_name', 'last_name', 'email',]
 
     # função criada para incluir o verbose name
     def __init__(self, *args, **kwargs):
@@ -27,7 +27,7 @@ class UsuariosForm(UserCreationForm):
     def clean_email(self):
         valida_email = self.cleaned_data['email']
         if User.objects.filter(email=valida_email).exists():
-            raise ValidationError("Esse email já está cadastro no nosso sistema")
+            raise ValidationError("Esse email já está cadastrado no nosso sistema")
         return valida_email
 
 class Usuarios_Update_Form(UserChangeForm):
@@ -38,7 +38,7 @@ class Usuarios_Update_Form(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email', ]
+        fields = ['first_name', 'last_name', 'email', ]
 
     # função criada para incluir o verbose name
     def __init__(self, *args, **kwargs):

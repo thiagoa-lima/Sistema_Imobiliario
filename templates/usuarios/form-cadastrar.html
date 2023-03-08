@@ -24,16 +24,13 @@
             <div class="card-body">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         {{ form.first_name|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         {{ form.last_name|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-6 mb-2">
-                        {{ form.username|as_crispy_field }}
-                    </div>
-                    <div class="form-group col-md-6 mb-2">
+                    <div class="form-group col-md-4 mb-2">
                         {{ form.email|as_crispy_field }}
                     </div>
                     <div class="form-group col-md-6 mb-2">
