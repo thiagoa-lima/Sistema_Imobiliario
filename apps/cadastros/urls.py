@@ -11,7 +11,7 @@ from apps.cadastros import views
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
-    path('bootstrap/', BootView.as_view(), name='boot'),
+    path('boot/', BootView.as_view(), name='boot'),
     
     # CLIENTES
     path('clientes/', Clientes_List.as_view(), name='listar-clientes'),
