@@ -16,7 +16,7 @@ from braces.views import GroupRequiredMixin
 # ------ PÁGINAS PRINCIPAIS
 # ===================================================================================
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
 class SobreView(TemplateView):
