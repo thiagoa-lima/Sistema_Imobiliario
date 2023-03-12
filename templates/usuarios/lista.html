@@ -16,7 +16,7 @@
                     Usuários
                 </h2>
                 <div>
-                    <a href="{% url 'usuarios-cadastrar' %}" class="btn btn-primary btn-bg">Cadastrar usuário</a>
+                    <a href="{% url 'usuarios-cadastrar' %}" class="btn btn-primary btn-bg">Novo usuário</a>
                 </div>
             </div>
         </div>
@@ -29,8 +29,8 @@
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Sobrenome</th>
-                            <th>Username</th>
                             <th>Email</th>
+                            <th>Ativo</th>
                             <th>Opções</th>
                         </tr>
                     </thead>
@@ -41,8 +41,8 @@
                             <td>{{ User.pk }}</td>
                             <td>{{ User.first_name }}</td>
                             <td>{{ User.last_name }}</td>
-                            <td>{{ User.username }}</td>
                             <td>{{ User.email }}</td>
+                            <td>{{ User.is_active }}</td>
                             <td>
                                 <a href="{% url 'usuarios-editar' User.pk %}" class="btn btn-warning btn-sm"
                                     title="Editar">
@@ -87,12 +87,12 @@
                 // { width: '13%', targets: [5] },
 
                 // Alinhamento das colunas - DIREITA: "dt-right" | ESQUERDA: "dt-center" | CENTRO: "dt-center"
-                { className: "dt-center", targets: [0,5] },
+                { className: "dt-center", targets: [0,4,5] },
                 // { className: "dt-right", targets: [6] },
 
 
                 // Opção de não ordenar
-                { bSortable: false, targets: [1, 2, 3, 4, 5] },
+                { bSortable: false, targets: [1,2,3,4,5] },
 
             ],
 

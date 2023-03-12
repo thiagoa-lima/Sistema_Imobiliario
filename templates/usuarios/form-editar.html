@@ -32,6 +32,12 @@
                     <div class="form-group col-md-4 mb-2">
                         {{ form.email|as_crispy_field }}
                     </div>
+                    <div hidden class="form-group col-md-4 mb-2">
+                        {{ form.username|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-2">
+                        {{ form.is_active|as_crispy_field }}
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -48,9 +54,30 @@
 {% endblock %}
 
 {% block scripts %}
+
 <script>
-    $(document).ready(function() {
-        $('#id_email').attr('readonly','readonly')
+    $(document).ready(function () {
+
+        // =============================================================
+        // ------ CAMPOS SOMENTE LEITURA -------------------------------
+        // =============================================================
+
+        $('#id_username').prop('readonly', true)
+        $('#id_email').prop('readonly', true)
+
+        // =============================================================
+        // ------ ATUALIZA O USERNAME APÓS O CADASTRO DO EMAIL ---------
+        // =============================================================
+
+        // Quando o campo EMAIL é alterado.
+        $("#id_email").change(function () {
+            var email = document.querySelector('#id_email').value
+            console.log(email)
+
+            // Atualiza o campo USERNAME
+            $('#id_username').val(email)
+
+        });
     });
 </script>
 {% endblock %}

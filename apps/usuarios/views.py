@@ -74,6 +74,14 @@ class Usuarios_List(LoginRequiredMixin, ListView):
     model = User
     template_name = 'usuarios/lista.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object_list = context['object_list']
+        for obj in object_list:
+            obj.is_active = 'Sim' if obj.is_active else 'Não'
+        return context
+    
+
 def user_login(request):
     template_name = 'usuarios/login.html'
     if request.method == 'POST':
