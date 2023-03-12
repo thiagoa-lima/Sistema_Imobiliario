@@ -42,16 +42,14 @@
                     <div class="form-group col-md-6 mb-2">
                         {{ form.password2|as_crispy_field }}
                     </div>
-                    <div class="form-group col-md-4 mb-2">
-                        {{ form.is_active|as_crispy_field }}
-                    </div>
+   
                 </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary">
                     {{ botao }}
                 </button>
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger" href="history.back()">
                     Cancelar
                 </button>
             </div>

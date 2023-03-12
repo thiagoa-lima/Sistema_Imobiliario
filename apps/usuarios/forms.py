@@ -12,18 +12,17 @@ class UsuariosForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField()
     last_name = forms.CharField()
-    is_active = forms.BooleanField(null=True, false=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'is_active']
+        fields = ['first_name', 'last_name', 'email', 'username']
 
     # função criada para incluir o verbose name
     def __init__(self, *args, **kwargs):
         super(UsuariosForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].label = "Nome"
         self.fields['last_name'].label = "Sobrenome"
-        self.fields['is_active'].label = "Usuário está ativo?"
+ 
 
     # função criada para validar o campo email
     def clean_email(self):
@@ -38,18 +37,17 @@ class Usuarios_Update_Form(UserChangeForm):
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField()
     last_name = forms.CharField()
-    is_active = forms.BooleanField()
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'is_active']
+        fields = ['first_name', 'last_name', 'email', 'username']
 
     # função criada para incluir o verbose name
     def __init__(self, *args, **kwargs):
         super(Usuarios_Update_Form, self).__init__(*args, **kwargs)
         self.fields['first_name'].label = "Nome"
         self.fields['last_name'].label = "Sobrenome"
-        self.fields['is_active'].label = "Usuário está ativo?"
+    
     
 
 
