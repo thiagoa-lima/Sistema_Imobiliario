@@ -11,6 +11,8 @@ django-crispy-forms = "*"
 python-dateutil = "*"
 django-braces = "*"
 django-select2 = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 
