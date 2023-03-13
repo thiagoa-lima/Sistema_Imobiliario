@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 PASSWORD_RESET_TEMPLATE = 'usuarios/password_reset_form.html'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "emails"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -131,7 +131,6 @@ USE_THOUSAND_SEPARATOR=True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
@@ -173,4 +172,4 @@ AUTHENTICATION_BACKENDS = [
     'apps.usuarios.backends.EmailOrUsernameBackend',
 ]
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
